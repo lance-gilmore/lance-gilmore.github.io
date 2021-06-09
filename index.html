@@ -1,0 +1,650 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+
+<script src="nxt.js"></script>
+<style>
+.editor {
+  position: relative;
+  height: 30rem;
+  padding: 0;
+  border: none;
+  margin: 2rem 0;
+}
+
+.editor .input,
+.editor .highlighted-output {
+  box-sizing: border-box;
+  position: absolute;
+  height: 100%;
+  width: 90%;
+  padding: 0.5em;
+  border: 1px solid black;
+  font-size: 1rem;
+  line-height: 1.3rem;
+  font-family: monospace;
+  white-space: pre;
+  word-wrap: break-word;
+}
+
+.editor .input {
+  z-index: 1;
+  color: transparent;
+  caret-color: black;
+  background-color: transparent;
+}
+
+.editor .highlighted-output {
+  z-index: 0;
+}
+</style>
+<script>
+$(function() {
+  const switch1Port = NXTConstants.sensors.PORT_1;
+  const switch2Port = NXTConstants.sensors.PORT_2;
+  const colourPort = NXTConstants.sensors.PORT_3;
+  const ultrasonicPort = NXTConstants.sensors.PORT_4;
+
+  $('#connectDeviceBtn').click(async function(){
+    await connectDeviceSerial();
+    // TOOD: the stuff below on actual connect eventrunCom
+    $('.view1').addClass('d-none');
+    $('.view2').removeClass('d-none');
+    
+    //runCommandQueue();
+    //getAllInfo();
+    
+  });
+  
+const valueKeyMap = {
+    38:'↑',40:'↓',37:'←',39:'→',32:'spacebar',65:'a',66:'b',67:'c',68:'d',69:'e',70:'f',71:'g',72:'h',73:'i',74:'j',75:'k',76:'l',77:'m',78:'n',79:'o',80:'p',81:'q',82:'r',83:'s',84:'t',85:'u',86:'v',87:'w',88:'x',89:'y',90:'z',49:'1',50:'2',51:'3',52:'4',53:'5',54:'6',55:'7',56:'8',57:'9',48:'0'
+};
+  
+  let keyConfigs = [
+    {
+    name: 'tracks',
+    instructions: 'https://bricksafe.com/files/Kuramapicka1/mindstormnxt-2.0standard/NXT2.0Instructions.pdf',
+    config: [
+      {key: 38, action: 'motorbc',direction:'forward',speed:100},
+      {key: 40, action: 'motorbc',direction:'backward',speed:100},
+      {key: 37, action: 'motorbc',direction:'forwardbackward',speed:100},
+      {key: 39, action: 'motorbc',direction:'backwardforward',speed:100},
+    ]
+    },
+    {
+    name: 'car',
+    instructions: 'http://www.nxtprograms.com/NXT2/race_car/steps.html',
+    config: [
+      {key: 38, action: 'motorbc',direction:'backward',speed:100},
+      {key: 40, action: 'motorbc',direction:'forward',speed:100},
+      {key: 37, action: 'motora',direction:'forward',speed:50},
+      {key: 39, action: 'motora',direction:'backward',speed:50},
+    ]
+    },
+    {
+    name: 'alpha rex',
+    instructions: 'https://bricksafe.com/files/Kuramapicka1/mindstormnxt-2.0standard/NXT2.0Instructions.pdf',
+    config: [
+      {key: 38, action: 'motorbc',direction:'forward',speed:50},
+      {key: 40, action: 'motorbc',direction:'backward',speed:40},
+      {key: 37, action: 'motora',direction:'forward',speed:100},
+      {key: 39, action: 'motora',direction:'backward',speed:100},
+    ]
+    },
+    {
+    name: 'robogator',
+    instructions: 'https://bricksafe.com/files/Kuramapicka1/mindstormnxt-2.0standard/NXT2.0Instructions.pdf',
+    config: [
+      {key: 38, action: 'motorbc',direction:'backward',speed:100},
+      {key: 40, action: 'motorbc',direction:'forward',speed:100},
+      {key: 37, action: 'motorbc',direction:'forwardbackward',speed:100},
+      {key: 39, action: 'motorbc',direction:'backwardforward',speed:100},
+      {key: 32, action: 'motora',direction:'backward',speed:100},
+      {key: 66, action: 'motora',direction:'forward',speed:100},
+    ]
+    }
+  ];
+  
+  for (const config of keyConfigs) {
+    $('#chooseConfig').append('<option>'+config.name+'</option>');
+  }
+  $('#chooseConfig').change(function() {
+    for (const config of keyConfigs) {
+      if ($('#chooseConfig').val() === config.name) {
+        setKeysFromConfig(config.config);
+        //$('#configName').val(config.name);
+        $('#configInstructions').attr('href',config.instructions);
+        $('#configKeys').empty();
+        for (const keyConfig of config.config) {
+          $('#configKeys').append('<p>'+valueKeyMap[keyConfig.key]+' '+keyConfig.action+' '+keyConfig.direction+' '+keyConfig.speed+'</p>');
+          
+        }
+      }
+    }
+  });
+  
+  function setKeysFromConfig(config) {
+    let pushing = [];
+    $('body').off();
+    $('body').keyup(async function(event) {
+        for (const keyConfig of config) {
+            if (event.which == keyConfig.key) {
+                event.preventDefault();
+                pushing = pushing.filter(e => e !== event.which)
+                if (keyConfig.action === 'motora' || keyConfig.action === 'motorab' || keyConfig.action === 'motorac') {
+                    await stopMotor(NXTConstants.motors.PORT_A);
+                }
+                if (keyConfig.action === 'motorb' || keyConfig.action === 'motorab' || keyConfig.action === 'motorbc') {
+                    await stopMotor(NXTConstants.motors.PORT_B);
+                }
+                if (keyConfig.action === 'motorc' || keyConfig.action === 'motorac' || keyConfig.action === 'motorbc') {
+                    await stopMotor(NXTConstants.motors.PORT_C);
+                }
+            }
+        }
+    });
+
+    $('body').keydown(async function(event) {
+        if (pushing.includes(event.which)) {
+          event.preventDefault();
+          return;
+        }
+    
+        for (const keyConfig of config) {
+            if (event.which == keyConfig.key) {
+                event.preventDefault();
+                pushing.push(event.which);
+                switch (keyConfig.action) {
+                    case 'motora' :
+                        await turnMotorSpeed(NXTConstants.motors.PORT_A,keyConfig.speed,(keyConfig.direction === 'forward'));
+                        break;
+                    case 'motorb' :
+                        await turnMotorSpeed(NXTConstants.motors.PORT_B,keyConfig.speed,(keyConfig.direction === 'forward'));
+                        break;
+                    case 'motorc' :
+                        await turnMotorSpeed(NXTConstants.motors.PORT_C,keyConfig.speed,(keyConfig.direction === 'forward'));
+                        break;
+                    case 'motorab' :
+                        await turnMotorSpeed(NXTConstants.motors.PORT_A,keyConfig.speed,(keyConfig.direction === 'forward' || keyConfig.direction === 'forwardbackward'));
+                        await turnMotorSpeed(NXTConstants.motors.PORT_B,keyConfig.speed,(keyConfig.direction === 'forward' || keyConfig.direction === 'backwardforward'));
+                        break;
+                    case 'motorac' :
+                        await turnMotorSpeed(NXTConstants.motors.PORT_A,keyConfig.speed,(keyConfig.direction === 'forward' || keyConfig.direction === 'forwardbackward'));
+                        await turnMotorSpeed(NXTConstants.motors.PORT_C,keyConfig.speed,(keyConfig.direction === 'forward' || keyConfig.direction === 'backwardforward'));
+                        break;
+                    case 'motorbc' :
+                        await turnMotorSpeed(NXTConstants.motors.PORT_B,keyConfig.speed,(keyConfig.direction === 'forward' || keyConfig.direction === 'forwardbackward'));
+                        await turnMotorSpeed(NXTConstants.motors.PORT_C,keyConfig.speed,(keyConfig.direction === 'forward' || keyConfig.direction === 'backwardforward'));
+                        break;
+                }
+            }
+        }
+    });
+  }
+  
+  
+  $('#forwardABtn').mousedown(async function(){
+    await forwardMotor(NXTConstants.motors.PORT_A);
+  });
+  $('#backwardsABtn').mousedown(async function(){
+    await backwardMotor(NXTConstants.motors.PORT_A);
+  });
+  $('#forwardBBtn').mousedown(async function(){
+    await forwardMotor(NXTConstants.motors.PORT_B);
+  });
+  $('#backwardsBBtn').mousedown(async function(){
+    await backwardMotor(NXTConstants.motors.PORT_B);
+  });
+  $('#forwardCBtn').mousedown(async function(){
+    await forwardMotor(NXTConstants.motors.PORT_C);
+  });
+  $('#backwardsCBtn').mousedown(async function(){
+    await backwardMotor(NXTConstants.motors.PORT_C);
+  });
+  $('#forwardBtn').mousedown(async function(){
+    await forwardMotor(NXTConstants.motors.PORT_B);
+    await forwardMotor(NXTConstants.motors.PORT_C);
+  });
+  $('#backwardsBtn').mousedown(async function(){
+    await backwardMotor(NXTConstants.motors.PORT_B);
+    await backwardMotor(NXTConstants.motors.PORT_C);
+  });
+  $('#leftBtn').mousedown(async function(){
+    await forwardMotor(NXTConstants.motors.PORT_B);
+    await backwardMotor(NXTConstants.motors.PORT_C);
+  });
+  $('#rightBtn').mousedown(async function(){
+    await forwardMotor(NXTConstants.motors.PORT_C);
+    await backwardMotor(NXTConstants.motors.PORT_B);
+  });
+  $('.controlls .btn').mouseup(async function(){
+    await stopMotor(NXTConstants.motors.PORT_B);
+    await stopMotor(NXTConstants.motors.PORT_C);
+  });
+  $('.controllsA .btn').mouseup(async function(){
+    await stopMotor(NXTConstants.motors.PORT_A);
+  });
+  $('.controllsB .btn').mouseup(async function(){
+    await stopMotor(NXTConstants.motors.PORT_B);
+  });
+  $('.controllsC .btn').mouseup(async function(){
+    await stopMotor(NXTConstants.motors.PORT_C);
+  });
+  
+  $('#hornBtn').click(async function(){
+    await simpleBeep();
+  });
+  $('#redBtn').click(async function(){
+    await setInputModeColour(NXTConstants.sensorTypes.COLOR_RED,colourPort);
+  });
+  $('#greenBtn').click(async function(){
+    await setInputModeColour(NXTConstants.sensorTypes.COLOR_GREEN,colourPort);
+  });
+  $('#blueBtn').click(async function(){
+    await setInputModeColour(NXTConstants.sensorTypes.COLOR_BLUE,colourPort);
+  });
+  $('#allColourBtn').click(async function(){
+    await setInputModeColour(NXTConstants.sensorTypes.COLOR_FULL,colourPort);
+  });
+  $('#noColourBtn').click(async function(){
+    await setInputModeColour(NXTConstants.sensorTypes.COLOR_NONE,colourPort);
+  });
+  
+  $('#switch1Btn').click(async function(){
+    await getInputValues(switch1Port,function(res){
+      console.log(res);
+    });
+  });
+    $('#switch2Btn').click(async function(){
+    await getInputValues(switch2Port,function(res){
+      console.log(res);
+    });
+  });
+  $('#colourBtn').click(async function(){
+    await getInputValues(colourPort,function(res){
+      console.log(res);
+    });
+  });
+  $('#distanceBtn').click(async function(){
+    //await lsWrite(ultrasonicPort,[66],[],async function(res){
+      await lsGetStatus(ultrasonicPort, async function(res){});
+    //  await lsRead(ultrasonicPort,async function(res){
+        
+    //  });
+    //});
+    
+  });
+  
+  async function pollSensors() {
+    let polling = false;
+    console.log('start polling');
+    while (true) {
+      if (!polling) {
+        polling = true;
+        addCommandToQueue(function() {
+          getInputValues(switch1Port,function(res){
+            console.log(res);
+            $('#switch1').text(res.pressed);
+          });
+        });
+        addCommandToQueue(function() {
+          getInputValues(switch2Port,function(res){
+            console.log(res);
+            $('#switch2').text(res.pressed);
+          });
+        });
+        addCommandToQueue(function() {
+          getInputValues(colourPort,function(res){
+            console.log(res);
+            $('#colourSensor').text(res.colour);
+            
+            polling = false;
+          });
+        });
+      }
+      await sleep(1000);
+    }
+  }
+  
+
+  
+  async function getAllInfo() {
+    addCommandToQueue(function() {
+      getInfo(async function(res) {
+        $('#info').append('<p>NXT name: '+res.deviceName+' <br>Bluetooth address: '+res.bluetoothAddress+'</p>');
+      });
+    });
+    addCommandToQueue(function() {
+      getVersion(async function(res) {
+        $('#info').append('<p>Firmware version: '+res.firmwareVersion+' <br>Protocol version: '+res.protocolVersion+'</p>');
+      });
+    });
+    addCommandToQueue(function() {
+      getBatteryLevel(async function(res) {
+        $('#info').append('<p> Battery level millivolts: '+res.batteryLevelMillivolts+' ('+res.batteryPercent+'%)</p>');
+        initSensors();
+      });
+    });
+    
+    
+    
+ //   await getInfo(async function(res){
+ //     $('#info').append('<p>NXT name: '+res.deviceName+' <br>Bluetooth address: '+res.bluetoothAddress+'</p>');
+ //     await getVersion(async function(res){
+ //       $('#info').append('<p>Firmware version: '+res.firmwareVersion+' <br>Protocol version: '+res.protocolVersion+'</p>');
+ //       await getBatteryLevel(function(res){
+ //         $('#info').append('<p> Battery level millivolts: '+res.batteryLevelMillivolts+' ('+res.batteryPercent+'%)</p>');
+ //         initSensors();
+ //       });
+ //     });
+ //   });
+  }
+  
+  async function initSensors() {
+    await setInputModeColour(NXTConstants.sensorTypes.COLOR_NONE,colourPort);
+    await setInputModeSwitch(switch1Port);
+    await setInputModeSwitch(switch2Port);
+    await initUltrasonicSensor(ultrasonicPort);
+    //pollSensors();
+  }
+
+});
+
+$(function(){
+  const codeInput = document.querySelector('#code-input');
+  const codeOutput = document.querySelector('#code-output');
+
+  // initialise the highlighted output with whatever is in the input
+  codeOutput.textContent = codeInput.value;
+  hljs.highlightBlock(codeOutput);
+
+  codeInput.addEventListener('input', (event) => {
+    codeOutput.textContent = codeInput.value;
+    hljs.highlightBlock(codeOutput);
+  });
+  
+  codeInput.addEventListener('scroll', (event) => {
+    codeOutput.scrollTop = codeInput.scrollTop;
+    codeOutput.scrollLeft = codeInput.scrollLeft;
+  });
+
+const resizeObserver = new ResizeObserver((entries) => {
+    for (let entry of entries) {
+        if (entry.target === codeInput) {
+            // match the height and width of the output area to the input area
+            codeOutput.style.height = (codeInput.offsetHeight) + 'px';
+            codeOutput.style.width = (codeInput.offsetWidth) + 'px';
+
+            // provide some padding in the output area to allow for any scroll bars or other decoration in the input area
+            // offsetWidth/offsetHeight is the full width/height of the element
+            // clientWidth/clientHeight is the width/height inside any decoration, like a scrollbar
+            codeOutput.style.paddingRight = (codeInput.offsetWidth - codeInput.clientWidth) + 'px';
+
+            codeOutput.style.paddingBottom = (codeInput.offsetHeight - codeInput.clientHeight) + 'px';
+        }
+    }
+});
+
+resizeObserver.observe(codeInput);
+
+$('#run-code').click(function(){
+  let code = $('#code-input').val();
+  eval(code);
+});
+
+});
+
+
+</script>
+</head>
+<body>
+<div class="container mt-2">
+<div class="view1">
+<button class="btn btn-primary" type="button" id="connectDeviceBtn">connect</button>
+<p>Ubuntu serial connect:
+<ul>
+<li>in terminal:</li>
+<li>sudo adduser lance dialout (then restart machine)</li>
+<li>rfcomm bind /dev/rfcomm0 00:16:53:0D:F6:08 1</li>
+<li>test/complete connection with:</li>
+<li>sudo l2ping 00:16:53:0D:F6:08</li>
+<li>should be able to connect from chrome now (may need to change access on rfcomm so you dont have to run command as sudo)</li>
+</ul>
+</p>
+</div>
+<div class="view2 d-none">
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="remote-control-tab" data-bs-toggle="tab" data-bs-target="#remote-control" type="button" role="tab" aria-controls="remote-control" aria-selected="true">Remote Control</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="code-control-tab" data-bs-toggle="tab" data-bs-target="#code-control" type="button" role="tab" aria-controls="code-control" aria-selected="false">Code Control</button>
+  </li>
+</ul>
+
+
+<div class="tab-content" id="myTabContent">
+
+<div class="tab-pane fade" id="code-control" role="tabpanel" aria-labelledby="code-control-tab">
+  <p>Code to execute</p>
+  <div class="row">
+    <div class="col col-8">
+      <fieldset class="editor">
+        <textarea id="code-input" aria-controls="code-highlighter" class="input" autocapitalize="off" spellcheck="false"></textarea>
+        <output id="code-output" role="status" class="highlighted-output javascript"></output>
+      </fieldset>
+    </div>
+    <div class="col">
+      <p>sensors:</p>
+      <p>switch1:<span id="switch1"></span></p>
+      <p>switch2:<span id="switch2"></span></p>
+      <p>colour:<span id="colourSensor"></span></p>
+      <p>distance:<span id="distanceSensor"></span></p>
+    </div>
+  </div>
+  
+  <button id="run-code" type="btn" class="btn btn-primary">run</button>
+</div>
+
+
+<div id="remote-control" class="tab-pane fade show active" role="tabpanel" aria-labelledby="remote-control-tab">
+  <div class="row text-center">
+  <div class="controlls col">
+    <p>BC</p>
+    <div class="row">
+      <div class="col mx-auto text-center mb-1">
+        <button class="btn btn-secondary" type="button" id="forwardBtn">↑</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <button class="btn btn-secondary" type="button" id="leftBtn">←</button>
+        <button class="btn btn-secondary" type="button" id="backwardsBtn">↓</button>
+        <button class="btn btn-secondary" type="button" id="rightBtn">→</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col controllsA">
+    <p>A</p>
+    <div class="row">
+      <div class="col mx-auto text-center mb-1">
+        <button class="btn btn-secondary" type="button" id="forwardABtn">↑</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col mx-auto text-center mb-1">
+        <button class="btn btn-secondary" type="button" id="backwardsABtn">↓</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col controllsB">
+    <p>B</p>
+    <div class="row">
+      <div class="col mx-auto text-center mb-1">
+        <button class="btn btn-secondary" type="button" id="forwardBBtn">↑</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col mx-auto text-center mb-1">
+        <button class="btn btn-secondary" type="button" id="backwardsBBtn">↓</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col controllsC">
+    <p>C</p>
+    <div class="row">
+      <div class="col mx-auto text-center mb-1">
+        <button class="btn btn-secondary" type="button" id="forwardCBtn">↑</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col mx-auto text-center mb-1">
+        <button class="btn btn-secondary" type="button" id="backwardsCBtn">↓</button>
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  </div>
+  
+
+  
+  <div>
+    <p>actions</p>
+    <button class="btn btn-secondary" type="button" id="redBtn">light red</button>
+    <button class="btn btn-secondary" type="button" id="greenBtn">light green</button>
+    <button class="btn btn-secondary" type="button" id="blueBtn">light blue</button>
+    <button class="btn btn-secondary" type="button" id="allColourBtn">light all</button>
+    <button class="btn btn-secondary" type="button" id="noColourBtn">light none</button>
+    <button class="btn btn-secondary" type="button" id="hornBtn">horn</button>
+  </div>
+  
+  <div>
+    <p>assign keys</p>
+    <label class="form-label" for="chooseConfig">Configuration</label>
+      <select class="form-control" id="chooseConfig">
+        <option>none</option>
+      </select>
+    
+    <label>
+      
+      <a href="#" id="configInstructions" target="_blank">Instructions</a>
+    </label>
+
+    <div>
+      <p>Config</p>
+      <div id="configKeys"></div>
+    </div>
+    <!--
+    <label>
+      key
+      <select>
+        <option value="38">↑</option>
+        <option value="40">↓</option>
+        <option value="37">←</option>
+        <option value="39">→</option>
+        <option value="32">spacebar</option>
+        <option>enter</option>
+        <option>a</option>
+        <option>b</option>
+        <option>c</option>
+        <option>d</option>
+        <option>e</option>
+        <option>f</option>
+        <option>g</option>
+        <option>h</option>
+        <option>i</option>
+        <option>j</option>
+        <option>k</option>
+        <option>l</option>
+        <option>m</option>
+        <option>n</option>
+        <option>o</option>
+        <option>p</option>
+        <option>q</option>
+        <option>r</option>
+        <option>s</option>
+        <option>t</option>
+        <option>u</option>
+        <option>v</option>
+        <option>w</option>
+        <option>x</option>
+        <option>y</option>
+        <option>z</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+        <option>7</option>
+        <option>8</option>
+        <option>9</option>
+        <option>0</option>
+      </select>
+    </label>
+    <label>
+      action
+      <select>
+        <option class="motor-single">Motor A</option>
+        <option class="motor-single">Motor B</option>
+        <option class="motor-single">Motor C</option>
+        <option class="motor-double">Motor AB</option>
+        <option class="motor-double">Motor AC</option>
+        <option class="motor-double">Motor BC</option>
+        <option class="light">Light</option>
+      </select>
+    </label>
+    <label>
+      colour
+      <select>
+        <option>red</option>
+        <option>green</option>
+        <option>blue</option>
+        <option>all</option>
+        <option>off</option>
+      </select>
+    </label>
+    <label>
+      direction
+      <select>
+        <option>forward</option>
+        <option>backward</option>
+        <option>forward backward</option>
+        <option>backward forward</option>
+      </select>
+    </label>
+    <label>
+      speed %
+      <input type="number" value="100">
+    </label>
+    <button type="button" class="btn btn-primary">Add</button>
+    -->
+    
+  </div>
+  
+  <div id="info"></div>
+  
+</div>
+</div>
+
+</div>
+
+
+</div>
+</body>
+</html>

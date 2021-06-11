@@ -237,7 +237,7 @@
   /////// simplified commands
   
   async function simpleBeep() {
-    await beep(NXTPort,523,500);
+    await beep(523,500,false);
   }
 
   async function stopMotor(motorPort) {

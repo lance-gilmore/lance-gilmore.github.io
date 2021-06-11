@@ -60,8 +60,8 @@ $(function() {
     $('.view1').addClass('d-none');
     $('.view2').removeClass('d-none');
     
-    //runCommandQueue();
-    //getAllInfo();
+    runCommandQueue();
+    getAllInfo();
     
   });
   
@@ -259,61 +259,7 @@ const valueKeyMap = {
     await setInputModeColour(NXTConstants.sensorTypes.COLOR_NONE,colourPort);
   });
   
-  $('#switch1Btn').click(async function(){
-    await getInputValues(switch1Port,function(res){
-      console.log(res);
-    });
-  });
-    $('#switch2Btn').click(async function(){
-    await getInputValues(switch2Port,function(res){
-      console.log(res);
-    });
-  });
-  $('#colourBtn').click(async function(){
-    await getInputValues(colourPort,function(res){
-      console.log(res);
-    });
-  });
-  $('#distanceBtn').click(async function(){
-    //await lsWrite(ultrasonicPort,[66],[],async function(res){
-      await lsGetStatus(ultrasonicPort, async function(res){});
-    //  await lsRead(ultrasonicPort,async function(res){
-        
-    //  });
-    //});
-    
-  });
-  
-  async function pollSensors() {
-    let polling = false;
-    console.log('start polling');
-    while (true) {
-      if (!polling) {
-        polling = true;
-        addCommandToQueue(function() {
-          getInputValues(switch1Port,function(res){
-            console.log(res);
-            $('#switch1').text(res.pressed);
-          });
-        });
-        addCommandToQueue(function() {
-          getInputValues(switch2Port,function(res){
-            console.log(res);
-            $('#switch2').text(res.pressed);
-          });
-        });
-        addCommandToQueue(function() {
-          getInputValues(colourPort,function(res){
-            console.log(res);
-            $('#colourSensor').text(res.colour);
-            
-            polling = false;
-          });
-        });
-      }
-      await sleep(1000);
-    }
-  }
+
   
 
   
@@ -354,12 +300,39 @@ const valueKeyMap = {
     await setInputModeSwitch(switch1Port);
     await setInputModeSwitch(switch2Port);
     await initUltrasonicSensor(ultrasonicPort);
-    //pollSensors();
   }
 
-});
+  async function pollSensors() {
+    let polling = false;
+    console.log('start polling');
+    while (true) {
+      if (!polling) {
+        polling = true;
+        addCommandToQueue(function() {
+          getInputValues(switch1Port,function(res){
+            console.log(res);
+            $('#switch1').text(res.pressed);
+          });
+        });
+        addCommandToQueue(function() {
+          getInputValues(switch2Port,function(res){
+            console.log(res);
+            $('#switch2').text(res.pressed);
+          });
+        });
+        addCommandToQueue(function() {
+          getInputValues(colourPort,function(res){
+            console.log(res);
+            $('#colourSensor').text(res.colour);
+            
+            polling = false;
+          });
+        });
+      }
+      await sleep(1000);
+    }
+  }
 
-$(function(){
   const codeInput = document.querySelector('#code-input');
   const codeOutput = document.querySelector('#code-output');
 
@@ -396,7 +369,8 @@ const resizeObserver = new ResizeObserver((entries) => {
 
 resizeObserver.observe(codeInput);
 
-$('#run-code').click(function(){
+$('#run-code').click(function() {
+  pollSensors();
   let code = $('#code-input').val();
   eval(code);
 });
@@ -533,7 +507,8 @@ $('#run-code').click(function(){
     <button class="btn btn-secondary" type="button" id="hornBtn">horn</button>
   </div>
   
-  <div>
+  <div class="row">
+  <div class="col col-md-6">
     <p>assign keys</p>
     <label class="form-label" for="chooseConfig">Configuration</label>
       <select class="form-control" id="chooseConfig">
@@ -636,8 +611,11 @@ $('#run-code').click(function(){
     -->
     
   </div>
+  <div id="info" class="col col-md-6"></div>
   
-  <div id="info"></div>
+  </div>
+  
+  
   
 </div>
 </div>

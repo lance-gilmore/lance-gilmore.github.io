@@ -175,5 +175,15 @@ $(function() {
   }).mount('#app')
 </script>
 
+
+<div id="app"></div>
+
+<script type="module">
+  import { createApp } from 'vue'
+  import MyComponent from './button_control_component.js'
+
+  createApp(MyComponent).mount('#app')
+</script>
+
 </body>
 </html>

@@ -1,20 +1,19 @@
 import { ref } from 'vue'
 
-
-function changeLight(colour) {
-    console.log(colour)
-    //await setInputModeColour(colour,colourPort);
-}
-
 export default {
   setup() {
-    const changeLight = function changeLight(colour) {
+    const changeLight = async function changeLight(colour) {
         console.log(colour)
-        //await setInputModeColour(colour,colourPort);
+        await setInputModeColour(colour,colourPort);
+    }
+
+    const beepHorn = async function () {
+        console.log('beeping');
+        //await simpleBeep();
     }
     
     const count = ref(0)
-    return { count, NXTConstants, changeLight }
+    return { count, NXTConstants, changeLight, beepHorn }
   },
   template: `<div>count is {{ count }}</div>
   
@@ -88,7 +87,7 @@ export default {
     <button class="btn btn-secondary" type="button" @click="changeLight(NXTConstants.sensorTypes.COLOR_BLUE)">light blue</button>
     <button class="btn btn-secondary" type="button" @click="changeLight(NXTConstants.sensorTypes.COLOR_FULL)">light all</button>
     <button class="btn btn-secondary" type="button" @click="changeLight(NXTConstants.sensorTypes.COLOR_NONE)">light none</button>
-    <button class="btn btn-secondary" type="button" id="hornBtn">horn</button>
+    <button class="btn btn-secondary" type="button" @click="beepHorn">horn</button>
   </div>
   `
 }

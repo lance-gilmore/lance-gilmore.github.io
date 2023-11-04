@@ -44,14 +44,14 @@ export default {
     <p>BC</p>
     <div class="row">
       <div class="col mx-auto text-center mb-1">
-        <button class="btn btn-secondary" type="button" @mousedown="motorsForwards(NXTConstants.motors.PORT_A)" @mouseup="motorsStop(NXTConstants.motors.PORT_A)">↑</button>
+        <button class="btn btn-secondary" type="button" @mousedown="motorsForwards(NXTConstants.motors.PORT_B, NXTConstants.motors.PORT_C)" @mouseup="motorsStop(NXTConstants.motors.PORT_B, NXTConstants.motors.PORT_C)">↑</button>
       </div>
     </div>
     <div class="row">
       <div class="col">
-        <button class="btn btn-secondary" type="button" id="leftBtn">←</button>
-        <button class="btn btn-secondary" type="button" id="backwardsBtn">↓</button>
-        <button class="btn btn-secondary" type="button" id="rightBtn">→</button>
+        <button class="btn btn-secondary" type="button" id="leftBtn" @mousedown="motorsForwardsBackwards(NXTConstants.motors.PORT_B, NXTConstants.motors.PORT_C)" @mouseup="motorsStop(NXTConstants.motors.PORT_B, NXTConstants.motors.PORT_C)">←</button>
+        <button class="btn btn-secondary" type="button" id="backwardsBtn" @mousedown="motorsBackwards(NXTConstants.motors.PORT_B, NXTConstants.motors.PORT_C)" @mouseup="motorsStop(NXTConstants.motors.PORT_B, NXTConstants.motors.PORT_C)">↓</button>
+        <button class="btn btn-secondary" type="button" id="rightBtn" @mousedown="motorsForwardsBackwards(NXTConstants.motors.PORT_C, NXTConstants.motors.PORT_B)" @mouseup="motorsStop(NXTConstants.motors.PORT_B, NXTConstants.motors.PORT_C)">→</button>
       </div>
     </div>
   </div>
@@ -60,12 +60,12 @@ export default {
     <p>A</p>
     <div class="row">
       <div class="col mx-auto text-center mb-1">
-        <button class="btn btn-secondary" type="button" id="forwardABtn">↑</button>
+        <button class="btn btn-secondary" type="button" id="forwardABtn" @mousedown="motorsForwards(NXTConstants.motors.PORT_A)" @mouseup="motorsStop(NXTConstants.motors.PORT_A)">↑</button>
       </div>
     </div>
     <div class="row">
       <div class="col mx-auto text-center mb-1">
-        <button class="btn btn-secondary" type="button" id="backwardsABtn">↓</button>
+        <button class="btn btn-secondary" type="button" id="backwardsABtn" @mousedown="motorsForwards(NXTConstants.motors.PORT_A)" @mouseup="motorsStop(NXTConstants.motors.PORT_A)">↓</button>
       </div>
     </div>
   </div>
@@ -74,12 +74,12 @@ export default {
     <p>B</p>
     <div class="row">
       <div class="col mx-auto text-center mb-1">
-        <button class="btn btn-secondary" type="button" id="forwardBBtn">↑</button>
+        <button class="btn btn-secondary" type="button" id="forwardBBtn" @mousedown="motorsForwards(NXTConstants.motors.PORT_A)" @mouseup="motorsStop(NXTConstants.motors.PORT_A)">↑</button>
       </div>
     </div>
     <div class="row">
       <div class="col mx-auto text-center mb-1">
-        <button class="btn btn-secondary" type="button" id="backwardsBBtn">↓</button>
+        <button class="btn btn-secondary" type="button" id="backwardsBBtn" @mousedown="motorsForwards(NXTConstants.motors.PORT_A)" @mouseup="motorsStop(NXTConstants.motors.PORT_A)">↓</button>
       </div>
     </div>
   </div>
@@ -88,16 +88,15 @@ export default {
     <p>C</p>
     <div class="row">
       <div class="col mx-auto text-center mb-1">
-        <button class="btn btn-secondary" type="button" id="forwardCBtn">↑</button>
+        <button class="btn btn-secondary" type="button" id="forwardCBtn" @mousedown="motorsForwards(NXTConstants.motors.PORT_A)" @mouseup="motorsStop(NXTConstants.motors.PORT_A)">↑</button>
       </div>
     </div>
     <div class="row">
       <div class="col mx-auto text-center mb-1">
-        <button class="btn btn-secondary" type="button" id="backwardsCBtn">↓</button>
+        <button class="btn btn-secondary" type="button" id="backwardsCBtn" @mousedown="motorsForwards(NXTConstants.motors.PORT_A)" @mouseup="motorsStop(NXTConstants.motors.PORT_A)">↓</button>
       </div>
     </div>
   </div>
-  
   
   </div>
   

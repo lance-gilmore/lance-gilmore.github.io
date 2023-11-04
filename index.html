@@ -162,14 +162,22 @@ $(function() {
 
 </div>
 
+<div id="app">
+<BttnControl/>
 
-<div id="app"></div>
+</div>
 
 <script type="module">
   import { createApp } from 'vue'
-  import MyComponent from './button_control_component.js'
+  import ButtonControlComponent from './button_control_component.js'
 
-  createApp(MyComponent).mount('#app')
+  const app = createApp({});
+
+  app.component('BttnControl', ButtonControlComponent);
+
+  app.mount('#app')
+
+  //createApp(ButtonControlComponent).mount('#button-control')
 </script>
 
 </body>

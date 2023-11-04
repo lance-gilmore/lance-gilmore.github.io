@@ -11,7 +11,7 @@ export default {
   setup() {
     console.log(NXTConstants.sensorTypes.COLOR_RED)
     const count = ref(0)
-    return { count }
+    return { count, NXTConstants }
   },
   template: `<div>count is {{ count }}</div>
   

@@ -1,6 +1,5 @@
 import { ref } from 'vue'
 
-console.log(NXTConstants.sensorTypes.COLOR_FULL)
 
 function changeLight(colour) {
     console.log(colour)
@@ -13,7 +12,7 @@ export default {
         console.log(colour)
         //await setInputModeColour(colour,colourPort);
     }
-    console.log(NXTConstants.sensorTypes.COLOR_RED)
+    
     const count = ref(0)
     return { count, NXTConstants, changeLight }
   },

@@ -1,4 +1,4 @@
-  export default {  [
+  export default { keyConfigs : [
     {
     name: 'tracks',
     instructions: 'https://bricksafe.com/files/Kuramapicka1/mindstormnxt-2.0standard/NXT2.0Instructions.pdf',
@@ -6,7 +6,7 @@
       {key: 38, action: 'motorbc',direction:'forward',speed:100},
       {key: 40, action: 'motorbc',direction:'backward',speed:100},
       {key: 37, action: 'motorbc',direction:'forwardbackward',speed:100},
-      {key: 39, action: 'motorbc',direction:'backwardforward',speed:100},
+      {key: 39, action: 'motorbc',direction:'backwardforward',speed:100}
     ]
     },
     {
@@ -16,7 +16,7 @@
       {key: 38, action: 'motorbc',direction:'backward',speed:100},
       {key: 40, action: 'motorbc',direction:'forward',speed:100},
       {key: 37, action: 'motora',direction:'forward',speed:50},
-      {key: 39, action: 'motora',direction:'backward',speed:50},
+      {key: 39, action: 'motora',direction:'backward',speed:50}
     ]
     },
     {

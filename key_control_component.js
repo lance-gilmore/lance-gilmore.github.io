@@ -5,13 +5,13 @@ export default {
   setup() {
     console.log(keyConfigs)
     let selectedConfig = ref({name: "", instructions: "#", config: []})
-    let selectedConfigName = ref("")
+    let selectedConfigName = ref("none")
     return { NXTConstants, keyConfigs, selectedConfig, selectedConfigName }
   },
   methods: {
     onConfigChange(event) {
         console.log(event.target.value)
-        console.log(selectedConfigName)
+        console.log(this.selectedConfigName)
     }
   },
   template: `

@@ -10,7 +10,7 @@ export default {
   },
 
   template: `
-    <ul class="nav nav-tabs" id="controlTabs" role="tablist">
+<ul class="nav nav-tabs" id="controlTabs" role="tablist">
   <li class="nav-item" role="presentation">
     <button class="nav-link active" id="remote-control-tabs" data-bs-toggle="tab" data-bs-target="#remote-controls" type="button" role="tab" aria-controls="remote-controls" aria-selected="true">Key Control</button>
   </li>
@@ -21,7 +21,6 @@ export default {
     <button class="nav-link" id="code-control-tasb" data-bs-toggle="tab" data-bs-target="#code-controls" type="button" role="tab" aria-controls="code-controls" aria-selected="false">Code Control</button>
   </li>
 </ul>
-
 
 <div class="tab-content" id="controlTabsContent">
 

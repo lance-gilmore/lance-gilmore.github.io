@@ -3,45 +3,36 @@ import { ref } from 'vue'
 export default {
   
   setup() {
-    // const changeLight = async function (colour) {
-    //     await setInputModeColour(colour,colourPort);
-    // }
-
-    const beepHorn = async function () {
-        await simpleBeep();
-    }
-
-    const motorsForwards = async function (motor1, motor2) {
-        await forwardMotor(motor1);
-        if(typeof motor2 !== "undefined") {
-            await forwardMotor(motor2);
-        }
-    }
-
-    const motorsBackwards = async function (motor1, motor2) {
-        await backwardMotor(motor1);
-        if(typeof motor2 !== "undefined") {
-            await backwardMotor(motor2);
-        }
-    }
-
-    const motorsForwardsBackwards = async function (motor1, motor2) {
-        await forwardMotor(motor1);
-        await backwardMotor(motor2);
-    }
-
-    const motorsStop = async function (motor1, motor2) {
-        await stopMotor(motor1);
-        if(typeof motor2 !== "undefined") {
-            await stopMotor(motor2);
-        }
-    }
-    
-    return { NXTConstants, beepHorn, motorsForwards, motorsBackwards, motorsForwardsBackwards, motorsStop }
+    return { NXTConstants }
   },
   methods: {
     async changeLight(colour) {
         await setInputModeColour(colour,colourPort);
+    },
+    async beepHorn() {
+        await simpleBeep();
+    },
+    async motorsForwards(motor1, motor2) {
+        await forwardMotor(motor1);
+        if(typeof motor2 !== "undefined") {
+            await forwardMotor(motor2);
+        }
+    },
+    async motorsBackwards(motor1, motor2) {
+        await backwardMotor(motor1);
+        if(typeof motor2 !== "undefined") {
+            await backwardMotor(motor2);
+        }
+    },
+    async motorsForwardsBackwards(motor1, motor2) {
+        await forwardMotor(motor1);
+        await backwardMotor(motor2);
+    },
+    async motorsStop (motor1, motor2) {
+        await stopMotor(motor1);
+        if(typeof motor2 !== "undefined") {
+            await stopMotor(motor2);
+        }
     }
   },
   template: `

@@ -2,27 +2,49 @@ import { ref } from 'vue'
 
 export default {
   setup() {
-    const changeLight = async function changeLight(colour) {
-        console.log(colour)
+    const changeLight = async function (colour) {
         await setInputModeColour(colour,colourPort);
     }
 
     const beepHorn = async function () {
-        console.log('beeping');
-        //await simpleBeep();
+        await simpleBeep();
+    }
+
+    const motorsForwards = async function (motor1, motor2) {
+        await forwardMotor(motor1);
+        if(typeof motor2 !== "undefined") {
+            await forwardMotor(motor2);
+        }
+    }
+
+    const motorsBackwards = async function (motor1, motor2) {
+        await backwardMotor(motor1);
+        if(typeof motor2 !== "undefined") {
+            await backwardMotor(motor2);
+        }
+    }
+
+    const motorsForwardsBackwards = async function (motor1, motor2) {
+        await forwardMotor(motor1);
+        await backwardMotor(motor2);
+    }
+
+    const motorsStop = async function (motor1, motor2) {
+        await stopMotor(motor1);
+        if(typeof motor2 !== "undefined") {
+            await stopMotor(motor2);
+        }
     }
     
-    const count = ref(0)
-    return { count, NXTConstants, changeLight, beepHorn }
+    return { NXTConstants, changeLight, beepHorn, motorsForwards, motorsBackwards, motorsForwardsBackwards, motorsStop }
   },
-  template: `<div>count is {{ count }}</div>
-  
+  template: `
   <div class="row text-center">
   <div class="controlls col">
     <p>BC</p>
     <div class="row">
       <div class="col mx-auto text-center mb-1">
-        <button class="btn btn-secondary" type="button" id="forwardBtn">↑</button>
+        <button class="btn btn-secondary" type="button" @mousedown="motorsForwards(NXTConstants.motors.PORT_A)" @mouseup="motorsStop(NXTConstants.motors.PORT_A)">↑</button>
       </div>
     </div>
     <div class="row">

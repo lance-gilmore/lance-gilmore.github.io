@@ -4,30 +4,39 @@ import keyConfigs from './configs.js'
 export default {
   setup() {
     console.log(keyConfigs)
-    return { NXTConstants, keyConfigs }
+    let selectedConfig = ref({name: "", instructions: "#", config: []})
+    let selectedConfigName = ref("")
+    return { NXTConstants, keyConfigs, selectedConfig, selectedConfigName }
   },
   methods: {
-
+    onConfigChange(event) {
+        console.log(event.target.value)
+        console.log(selectedConfigName)
+    }
   },
   template: `
 <div class="row">
   <div class="col col-md-6">
     <p>assign keys</p>
     <label class="form-label" for="chooseConfig">Configuration</label>
-      <select class="form-control" id="chooseConfig">
-        <option>none</option>
-        <option v-for="item in keyConfigs.keyConfigs">
-            {{ item.name }}
-        </option>
-      </select>
+    <select class="form-control" id="chooseConfig" @change="onConfigChange($event)" v-model="selectedConfigName">
+      <option>none</option>
+      <option v-for="item in keyConfigs.keyConfigs">
+          {{ item.name }}
+      </option>
+    </select>
     
     <label>
-      <a href="#" id="configInstructions" target="_blank">Instructions</a>
+      <a href="{{ selectedConfig.instructions }}" id="configInstructions" target="_blank">Instructions</a>
     </label>
 
     <div>
       <p>Config</p>
-      <div id="configKeys"></div>
+      <div id="configKeys">
+        <p v-for="({item}, index) in selectedConfig.config">
+          {{ index }} {{ item.action }} {{ item.direction }} {{ item.speed }}
+        </p>
+      </div>
     </div>
     
   </div>

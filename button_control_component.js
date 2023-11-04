@@ -9,6 +9,10 @@ function changeLight(colour) {
 
 export default {
   setup() {
+    function changeLight(colour) {
+        console.log(colour)
+        //await setInputModeColour(colour,colourPort);
+    }
     console.log(NXTConstants.sensorTypes.COLOR_RED)
     const count = ref(0)
     return { count, NXTConstants }

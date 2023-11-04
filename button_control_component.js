@@ -2,7 +2,7 @@ import { ref } from 'vue'
 
 export default {
   methods: {
-    async changeLight(colour) {
+    changeLight(colour) {
         await setInputModeColour(colour,colourPort);
     }
   },

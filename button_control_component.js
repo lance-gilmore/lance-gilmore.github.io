@@ -1,10 +1,15 @@
 import { ref } from 'vue'
 
 export default {
-  setup() {
-    const changeLight = async function (colour) {
+  methods: {
+    async changeLight(colour) {
         await setInputModeColour(colour,colourPort);
     }
+  },
+  setup() {
+    // const changeLight = async function (colour) {
+    //     await setInputModeColour(colour,colourPort);
+    // }
 
     const beepHorn = async function () {
         await simpleBeep();

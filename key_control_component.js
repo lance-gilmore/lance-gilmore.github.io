@@ -12,7 +12,7 @@ export default {
     onConfigChange(event) {
         console.log(event.target.value)
         console.log(this.selectedConfigName)
-        for (const config of keyConfigs) {
+        for (const config of keyConfigs.keyConfigs) {
             if (this.selectedConfigName === config.name) {
                 this.selectedConfig = config
                 console.log('config found')

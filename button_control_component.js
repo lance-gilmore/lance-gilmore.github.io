@@ -9,13 +9,13 @@ function changeLight(colour) {
 
 export default {
   setup() {
-    function changeLight(colour) {
+    const changeLight = function changeLight(colour) {
         console.log(colour)
         //await setInputModeColour(colour,colourPort);
     }
     console.log(NXTConstants.sensorTypes.COLOR_RED)
     const count = ref(0)
-    return { count, NXTConstants }
+    return { count, NXTConstants, changeLight }
   },
   template: `<div>count is {{ count }}</div>
   

@@ -1,4 +1,4 @@
-  let keyConfigs = [
+  export default {  [
     {
     name: 'tracks',
     instructions: 'https://bricksafe.com/files/Kuramapicka1/mindstormnxt-2.0standard/NXT2.0Instructions.pdf',
@@ -53,4 +53,5 @@
       {key: 66, action: 'motora',direction:'forward',speed:30},
     ]
     }
-  ];
+  ]
+  }

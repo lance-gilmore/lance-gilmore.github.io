@@ -1,7 +1,9 @@
 import { ref } from 'vue'
+import keyConfigs from './configs.js'
 
 export default {
   setup() {
+    console.log(keyConfigs)
     return { NXTConstants }
   },
 

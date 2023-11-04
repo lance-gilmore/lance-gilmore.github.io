@@ -1,12 +1,14 @@
 import { ref } from 'vue'
-
+import ButtonControlComponent from './button_control_component.js'
 
 export default {
-  
+    components: {
+        ButtonControlComponent
+      },
   setup() {
-    import ButtonControlComponent from './button_control_component.js'
-    return { NXTConstants, ButtonControlComponent }
+    return { NXTConstants }
   },
+
   template: `
     <ButtonControlComponent/>
   `

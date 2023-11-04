@@ -37,10 +37,10 @@ export default {
         }
     }
     
-    return { NXTConstants, changeLight, beepHorn, motorsForwards, motorsBackwards, motorsForwardsBackwards, motorsStop }
+    return { NXTConstants, beepHorn, motorsForwards, motorsBackwards, motorsForwardsBackwards, motorsStop }
   },
   methods: {
-    changeLight(colour) {
+    async changeLight(colour) {
         await setInputModeColour(colour,colourPort);
     }
   },

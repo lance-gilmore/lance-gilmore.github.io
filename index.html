@@ -163,19 +163,21 @@ $(function() {
 </div>
 
 <div id="app">
-<ButtonControlComponent/>
+  
 
 </div>
 
 <script type="module">
   import { createApp } from 'vue'
-  import ButtonControlComponent from './button_control_component.js'
+  import MainComponent from './main.vue'
 
-  const app = createApp({});
+  createApp(MainComponent).mount('#app')
 
-  app.component('ButtonControlComponent', ButtonControlComponent);
+  //const app = createApp({});
 
-  app.mount('#app')
+  //app.component('ButtonControlComponent', ButtonControlComponent);
+
+  //app.mount('#app')
 
   //createApp(ButtonControlComponent).mount('#button-control')
 </script>

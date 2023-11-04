@@ -16,7 +16,7 @@ export default {
     <label class="form-label" for="chooseConfig">Configuration</label>
       <select class="form-control" id="chooseConfig">
         <option>none</option>
-        <option v-for="item in keyConfigs">
+        <option v-for="item in keyConfigs.keyConfigs">
             {{ item.name }}
         </option>
       </select>

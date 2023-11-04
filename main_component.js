@@ -1,9 +1,11 @@
 import { ref } from 'vue'
 import ButtonControlComponent from './button_control_component.js'
+import KeyControlComponent from './key_control_component.js'
 
 export default {
     components: {
-        ButtonControlComponent
+        ButtonControlComponent,
+        KeyControlComponent
       },
   setup() {
     return { NXTConstants }
@@ -25,6 +27,7 @@ export default {
 <div class="tab-content" id="controlTabsContent">
 
   <div id="remote-controls" class="tab-pane fade show active" role="tabpanel" aria-labelledby="remote-control-tabs">
+  <KeyControlComponent/>
   </div>
 
   <div id="button-controls" class="tab-pane fade" role="tabpanel" aria-labelledby="button-control-tabs">

@@ -1,11 +1,7 @@
 import { ref } from 'vue'
 
 export default {
-  methods: {
-    changeLight(colour) {
-        await setInputModeColour(colour,colourPort);
-    }
-  },
+  
   setup() {
     // const changeLight = async function (colour) {
     //     await setInputModeColour(colour,colourPort);
@@ -42,6 +38,11 @@ export default {
     }
     
     return { NXTConstants, changeLight, beepHorn, motorsForwards, motorsBackwards, motorsForwardsBackwards, motorsStop }
+  },
+  methods: {
+    changeLight(colour) {
+        await setInputModeColour(colour,colourPort);
+    }
   },
   template: `
   <div class="row text-center">

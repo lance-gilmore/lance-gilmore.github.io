@@ -69,7 +69,7 @@ export default {
               });
             });
           }
-          await sleep(1000);
+          sleep(1000);
         }
       },
     runCode() {

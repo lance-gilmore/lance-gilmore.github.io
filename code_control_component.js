@@ -98,8 +98,8 @@ export default {
   </div>
 
   <button type="btn" class="btn btn-primary" @click="runCode">run</button>
-  
-  <style scoped>
+
+  <style>
 .editor {
   position: relative;
   height: 30rem;

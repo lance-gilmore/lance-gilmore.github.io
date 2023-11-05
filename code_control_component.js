@@ -72,8 +72,8 @@ export default {
           sleep(1000);
         }
       },
-    runCode() {
-        pollSensors();
+      runCode() {
+        this.pollSensors();
         let code = $('#code-input').val();
         eval(code);
     }

@@ -15,18 +15,71 @@ export default {
         for (const config of keyConfigs.keyConfigs) {
             if (this.selectedConfigName === config.name) {
                 this.selectedConfig = config
+                setKeysFromConfig(config)
             }
         }
     },
-    keyDownEvent(event) {
-        console.log(event.key)
-    },
-    keyUpEvent(event) {
-        console.log(event.key)
-    }
+    setKeysFromConfig(config) {
+        let pushing = [];
+        $('body').off();
+        $('body').keyup(async function(event) {
+            for (const keyConfig of config) {
+                if (event.which == keyConfig.key) {
+                    event.preventDefault();
+                    pushing = pushing.filter(e => e !== event.which);
+                    if (keyConfig.action === 'motora' || keyConfig.action === 'motorab' || keyConfig.action === 'motorac') {
+                        await stopMotor(NXTConstants.motors.PORT_A);
+                    }
+                    if (keyConfig.action === 'motorb' || keyConfig.action === 'motorab' || keyConfig.action === 'motorbc') {
+                        await stopMotor(NXTConstants.motors.PORT_B);
+                    }
+                    if (keyConfig.action === 'motorc' || keyConfig.action === 'motorac' || keyConfig.action === 'motorbc') {
+                        await stopMotor(NXTConstants.motors.PORT_C);
+                    }
+                }
+            }
+        });
+    
+        $('body').keydown(async function(event) {
+            if (pushing.includes(event.which)) {
+              event.preventDefault();
+              return;
+            }
+        
+            for (const keyConfig of config) {
+                if (event.which == keyConfig.key) {
+                    event.preventDefault();
+                    pushing.push(event.which);
+                    switch (keyConfig.action) {
+                        case 'motora' :
+                            await turnMotorSpeed(NXTConstants.motors.PORT_A,keyConfig.speed,(keyConfig.direction === 'forward'));
+                            break;
+                        case 'motorb' :
+                            await turnMotorSpeed(NXTConstants.motors.PORT_B,keyConfig.speed,(keyConfig.direction === 'forward'));
+                            break;
+                        case 'motorc' :
+                            await turnMotorSpeed(NXTConstants.motors.PORT_C,keyConfig.speed,(keyConfig.direction === 'forward'));
+                            break;
+                        case 'motorab' :
+                            await turnMotorSpeed(NXTConstants.motors.PORT_A,keyConfig.speed,(keyConfig.direction === 'forward' || keyConfig.direction === 'forwardbackward'));
+                            await turnMotorSpeed(NXTConstants.motors.PORT_B,keyConfig.speed,(keyConfig.direction === 'forward' || keyConfig.direction === 'backwardforward'));
+                            break;
+                        case 'motorac' :
+                            await turnMotorSpeed(NXTConstants.motors.PORT_A,keyConfig.speed,(keyConfig.direction === 'forward' || keyConfig.direction === 'forwardbackward'));
+                            await turnMotorSpeed(NXTConstants.motors.PORT_C,keyConfig.speed,(keyConfig.direction === 'forward' || keyConfig.direction === 'backwardforward'));
+                            break;
+                        case 'motorbc' :
+                            await turnMotorSpeed(NXTConstants.motors.PORT_B,keyConfig.speed,(keyConfig.direction === 'forward' || keyConfig.direction === 'forwardbackward'));
+                            await turnMotorSpeed(NXTConstants.motors.PORT_C,keyConfig.speed,(keyConfig.direction === 'forward' || keyConfig.direction === 'backwardforward'));
+                            break;
+                    }
+                }
+            }
+        });
+      }
   },
   template: `
-<div class="row" @keydown="keyDownEvent" @keyup="keyUpEvent">
+<div class="row">
   <div class="col col-md-6">
     <p>assign keys</p>
     <label class="form-label" for="chooseConfig">Configuration</label>

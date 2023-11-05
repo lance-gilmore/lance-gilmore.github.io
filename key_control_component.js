@@ -3,14 +3,12 @@ import keyConfigs from './configs.js'
 
 export default {
   setup() {
-    console.log(keyConfigs)
     let selectedConfig = ref({name: "", instructions: "#", config: []})
     let selectedConfigName = ref("none")
     return { NXTConstants, keyConfigs, selectedConfig, selectedConfigName }
   },
   methods: {
     onConfigChange(event) {
-        console.log(event.target.value)
         console.log(this.selectedConfigName)
         for (const config of keyConfigs.keyConfigs) {
             if (this.selectedConfigName === config.name) {

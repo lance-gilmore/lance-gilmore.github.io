@@ -15,7 +15,7 @@ export default {
         for (const config of keyConfigs.keyConfigs) {
             if (this.selectedConfigName === config.name) {
                 this.selectedConfig = config
-                setKeysFromConfig(config)
+                this.setKeysFromConfig(config)
             }
         }
     },

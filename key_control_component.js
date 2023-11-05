@@ -31,14 +31,14 @@ export default {
     </select>
     
     <label>
-      <a href="{{ selectedConfig.instructions }}" id="configInstructions" target="_blank">Instructions</a>
+      <a href="{{ selectedConfig.instructions }}" target="_blank">Instructions</a>
     </label>
 
     <div>
       <p>Config</p>
-      <div id="configKeys">
-        <p v-for="({item}, index) in selectedConfig.config">
-          {{ index }} {{ item.action }} {{ item.direction }} {{ item.speed }}
+      <div>
+        <p v-for="(item in selectedConfig.config">
+          {{ item.key }} {{ item.action }} {{ item.direction }} {{ item.speed }}
         </p>
       </div>
     </div>

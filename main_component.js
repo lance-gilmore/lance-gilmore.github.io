@@ -1,11 +1,13 @@
 import { ref } from 'vue'
 import ButtonControlComponent from './button_control_component.js'
 import KeyControlComponent from './key_control_component.js'
+import CodeControlComponent from './code_control_component.js'
 
 export default {
     components: {
         ButtonControlComponent,
-        KeyControlComponent
+        KeyControlComponent,
+        CodeControlComponent
       },
   setup() {
     return { NXTConstants }
@@ -35,6 +37,7 @@ export default {
   </div>
 
   <div class="tab-pane fade" id="code-controls" role="tabpanel" aria-labelledby="code-control-tabs">
+  <CodeControlComponent/>
   </div>
 
 </div>

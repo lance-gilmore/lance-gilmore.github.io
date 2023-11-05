@@ -8,7 +8,7 @@ export default {
       };
     let selectedConfig = ref({name: "", instructions: "#", config: []})
     let selectedConfigName = ref("none")
-    return { NXTConstants, keyConfigs, selectedConfig, selectedConfigName, valueKeyMap }
+    return { keyConfigs, selectedConfig, selectedConfigName, valueKeyMap }
   },
   methods: {
     onConfigChange(event) {

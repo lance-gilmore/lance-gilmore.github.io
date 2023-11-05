@@ -17,10 +17,16 @@ export default {
                 this.selectedConfig = config
             }
         }
+    },
+    keyDownEvent(event) {
+        console.log(event.key)
+    },
+    keyUpEvent(event) {
+        console.log(event.key)
     }
   },
   template: `
-<div class="row">
+<div class="row" @keydown="keyDownEvent" @keyup="keyUpEvent">
   <div class="col col-md-6">
     <p>assign keys</p>
     <label class="form-label" for="chooseConfig">Configuration</label>

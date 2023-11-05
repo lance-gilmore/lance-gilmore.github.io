@@ -3,7 +3,7 @@ import keyConfigs from './configs.js'
 
 export default {
   setup() {
-    let selectedConfig = ref({name: "", instructions: "#", config: []})
+    let selectedConfig = ref({name: "none", instructions: "#", config: [{key:38,action:'motorbc',direction:'forward',speed:100}]})
     let selectedConfigName = ref("none")
     return { NXTConstants, keyConfigs, selectedConfig, selectedConfigName }
   },
@@ -13,7 +13,7 @@ export default {
         for (const config of keyConfigs.keyConfigs) {
             if (this.selectedConfigName === config.name) {
                 this.selectedConfig = config
-                console.log('config found')
+                console.log(config)
             }
         }
     }

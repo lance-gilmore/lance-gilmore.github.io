@@ -32,7 +32,7 @@ export default {
     </select>
     
     <label>
-      <a href="{{ selectedConfig.instructions }}" target="_blank">Instructions</a>
+      <a :href="selectedConfig.instructions" target="_blank">Instructions</a>
     </label>
 
     <div>

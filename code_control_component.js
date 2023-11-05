@@ -4,7 +4,7 @@ export default {
   setup() {
     return { NXTConstants }
   },
-  mount() {
+  mounted() {
     const codeInput = document.querySelector('#code-input');
     const codeOutput = document.querySelector('#code-output');
   

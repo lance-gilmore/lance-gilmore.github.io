@@ -1,4 +1,5 @@
 import { ref } from 'vue'
+import "./code_editor.css";
 
 export default {
   setup() {

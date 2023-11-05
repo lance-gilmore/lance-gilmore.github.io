@@ -26,7 +26,7 @@ export default {
     <select class="form-control" id="chooseConfig" @change="onConfigChange($event)" v-model="selectedConfigName">
       <option>none</option>
       <option v-for="item in keyConfigs.keyConfigs">
-          {{ item.name }}
+        {{ item.name }}
       </option>
     </select>
     

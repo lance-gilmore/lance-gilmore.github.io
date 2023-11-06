@@ -31,3 +31,10 @@
   .editor .highlighted-output {
     z-index: 0;
   }
+
+  #info {
+    font-size: 10px;
+    color: grey;
+    border: 1px solid lightgray;
+    width: fit-content;
+  }

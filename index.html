@@ -44,12 +44,12 @@ $(function() {
   async function getAllInfo() {
     addCommandToQueue(function() {
       getInfo(async function(res) {
-        $('#info').append('NXT name: '+res.deviceName+' Bluetooth address: '+res.bluetoothAddress);
+        $('#info').append('NXT name: '+res.deviceName+' <br>Bluetooth address: '+res.bluetoothAddress);
       });
     });
     addCommandToQueue(function() {
       getVersion(async function(res) {
-        $('#info').append('<br>Firmware version: '+res.firmwareVersion+' Protocol version: '+res.protocolVersion);
+        $('#info').append('<br>Firmware version: '+res.firmwareVersion+' <br>Protocol version: '+res.protocolVersion);
       });
     });
     addCommandToQueue(function() {
@@ -89,8 +89,8 @@ $(function() {
     <a href="https://github.com/lance-gilmore/lance-gilmore.github.io">github repo</a>
   </div>
 
-<div id="info" class="col col-md-6"></div>
-<div class="view2" id="app"></div>
+<div id="info" class="p-2"></div>
+<div class="view2 mt-4 d-none" id="app"></div>
 
 </div>
 

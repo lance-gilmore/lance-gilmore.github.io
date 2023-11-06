@@ -76,7 +76,7 @@ export default {
     </div>
     <div class="row">
       <div class="col mx-auto text-center mb-1">
-        <button class="btn btn-secondary" type="button" id="backwardsBBtn" @mousedown="motorsForwards(NXTConstants.motors.PORT_B)" @mouseup="motorsStop(NXTConstants.motors.PORT_B)">↓</button>
+        <button class="btn btn-secondary" type="button" id="backwardsBBtn" @mousedown="motorsBackwards(NXTConstants.motors.PORT_B)" @mouseup="motorsStop(NXTConstants.motors.PORT_B)">↓</button>
       </div>
     </div>
   </div>
@@ -90,7 +90,7 @@ export default {
     </div>
     <div class="row">
       <div class="col mx-auto text-center mb-1">
-        <button class="btn btn-secondary" type="button" id="backwardsCBtn" @mousedown="motorsForwards(NXTConstants.motors.PORT_C)" @mouseup="motorsStop(NXTConstants.motors.PORT_C)">↓</button>
+        <button class="btn btn-secondary" type="button" id="backwardsCBtn" @mousedown="motorsBackwards(NXTConstants.motors.PORT_C)" @mouseup="motorsStop(NXTConstants.motors.PORT_C)">↓</button>
       </div>
     </div>
   </div>

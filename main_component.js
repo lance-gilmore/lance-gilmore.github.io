@@ -36,7 +36,7 @@ export default {
     async getAllInfo() {
       deviceInfo.deviceName = 'two';
       addCommandToQueue(function() {
-        await getInfo(async function(res) {
+        getInfo(async function(res) {
           deviceInfo.deviceName = res.deviceName
           this.bluetoothAddress = res.bluetoothAddress
         });

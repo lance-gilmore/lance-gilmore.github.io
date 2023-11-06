@@ -4,7 +4,8 @@ import KeyControlComponent from './key_control_component.js'
 import CodeControlComponent from './code_control_component.js'
 import NxtInfoComponent from './nxt_info_component.js'
 
-let deviceInfo = {deviceName:''};
+let deviceInfo = ref({deviceName:''});
+let deviceName = ref('')
 
 export default {
     components: {
@@ -38,19 +39,19 @@ export default {
       addCommandToQueue(function() {
         getInfo(async function(res) {
           deviceInfo.deviceName = res.deviceName
-          this.bluetoothAddress = res.bluetoothAddress
+          deviceInfo.bluetoothAddress = res.bluetoothAddress
         });
       });
       addCommandToQueue(function() {
         getVersion(async function(res) {
-          this.firmwareVersion = res.firmwareVersion
-          this.protocolVersion = res.protocolVersion
+          deviceInfo.firmwareVersion = res.firmwareVersion
+          deviceInfo.protocolVersion = res.protocolVersion
         });
       });
       addCommandToQueue(function() {
         getBatteryLevel(async function(res) {
-          this.batteryLevelMillivolts = res.batteryLevelMillivolts
-          this.batteryPercent = res.batteryPercent
+          deviceInfo.batteryLevelMillivolts = res.batteryLevelMillivolts
+          deviceInfo.batteryPercent = res.batteryPercent
           //initSensors();
         });
       });

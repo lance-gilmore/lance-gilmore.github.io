@@ -19,7 +19,7 @@ export default {
     let batteryLevelMillivolts = ref('')
     let batteryPercent = ref('')
 
-    return { NXTConstants }
+    return { NXTConstants, deviceName, bluetoothAddress, firmwareVersion, protocolVersion, batteryLevelMillivolts, batteryPercent }
   },
   methods: {
     async connectNxt() {

@@ -17,7 +17,7 @@ export default {
         InputsComponent
       },
   setup() {
-    let deviceName = ref(deviceInfo.deviceName)
+    //let deviceName = ref(deviceInfo.deviceName)
     let bluetoothAddress = ref('')
     let firmwareVersion = ref('')
     let protocolVersion = ref('')

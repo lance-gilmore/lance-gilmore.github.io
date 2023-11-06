@@ -29,7 +29,7 @@ export default {
       $('.view2').removeClass('d-none');
       
       runCommandQueue();
-      //this.getAllInfo();
+      this.getAllInfo();
     },
     async getAllInfo() {
       addCommandToQueue(function() {
@@ -48,7 +48,7 @@ export default {
         getBatteryLevel(async function(res) {
           this.batteryLevelMillivolts = res.batteryLevelMillivolts
           this.batteryPercent = res.batteryPercent
-          initSensors();
+          //initSensors();
         });
       });
     }
@@ -70,10 +70,10 @@ export default {
     <a href="https://github.com/lance-gilmore/lance-gilmore.github.io">github repo</a>
   </div>
 
-<div class="view2 mt-4 d-none">
+<div class="view2 d-none">
   <NxtInfoComponent :deviceName="deviceName" :bluetoothAddress="bluetoothAddress" :firmwareVersion="firmwareVersion" :protocolVersion="protocolVersion" :batteryLevelMillivolts="batteryLevelMillivolts" :batteryPercent="batteryPercent" />
 
-  <ul class="nav nav-tabs" id="controlTabs" role="tablist">
+  <ul class="nav nav-tabs mt-4" id="controlTabs" role="tablist">
     <li class="nav-item" role="presentation">
       <button class="nav-link active" id="remote-control-tabs" data-bs-toggle="tab" data-bs-target="#remote-controls" type="button" role="tab" aria-controls="remote-controls" aria-selected="true">Key Control</button>
     </li>

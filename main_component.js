@@ -32,13 +32,14 @@ export default {
       // TOOD: the stuff below on actual connect eventrunCom
       $('.view1').addClass('d-none');
       $('.view2').removeClass('d-none');
-      deviceInfo.deviceName = 'one';
+      deviceName = 'one';
       runCommandQueue();
       this.getAllInfo();
     },
     async getAllInfo() {
-      deviceInfo.deviceName = 'two';
+      deviceName = 'two';
       addCommandToQueue(function() {
+        deviceName = 'three';
         getInfo(async function(res) {
           deviceName = res.deviceName
           deviceInfo.bluetoothAddress = res.bluetoothAddress
@@ -79,7 +80,7 @@ export default {
 <div class="view2 ">
   <div class="row">
     <div class="col">
-      <NxtInfoComponent :deviceName="deviceInfo.deviceName" :bluetoothAddress="bluetoothAddress" :firmwareVersion="firmwareVersion" :protocolVersion="protocolVersion" :batteryLevelMillivolts="batteryLevelMillivolts" :batteryPercent="batteryPercent" />
+      <NxtInfoComponent :deviceName="deviceName" :bluetoothAddress="bluetoothAddress" :firmwareVersion="firmwareVersion" :protocolVersion="protocolVersion" :batteryLevelMillivolts="batteryLevelMillivolts" :batteryPercent="batteryPercent" />
     </div>
     <div class="col">
       <InputsComponent :switch1="switch1" :switch2="switch2" :colour="colour" :ultrasonic="ultrasonic" />

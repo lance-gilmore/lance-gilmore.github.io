@@ -6,7 +6,7 @@ import NxtInfoComponent from './nxt_info_component.js'
 import InputsComponent from './inputs_component.js'
 
 let deviceInfo = ref({deviceName:''});
-let deviceName = ref('')
+let deviceName = ref('zero')
 
 export default {
     components: {
@@ -42,6 +42,7 @@ export default {
         deviceName = 'three';
         getInfo(async function(res) {
           deviceName = res.deviceName
+          console.log(deviceName)
           deviceInfo.bluetoothAddress = res.bluetoothAddress
         });
       });

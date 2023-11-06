@@ -30,36 +30,36 @@ const colourPort = NXTConstants.sensors.PORT_3;
 const ultrasonicPort = NXTConstants.sensors.PORT_4;
 
 $(function() {
-  $('#connectDeviceBtn').click(async function(){
-    await connectDeviceSerial();
-    // TOOD: the stuff below on actual connect eventrunCom
-    $('.view1').addClass('d-none');
-    $('.view2').removeClass('d-none');
+  // $('#connectDeviceBtn').click(async function(){
+  //   await connectDeviceSerial();
+  //   // TOOD: the stuff below on actual connect eventrunCom
+  //   $('.view1').addClass('d-none');
+  //   $('.view2').removeClass('d-none');
     
-    runCommandQueue();
-    getAllInfo();
+  //   runCommandQueue();
+  //   getAllInfo();
     
-  });
+  // });
   
-  async function getAllInfo() {
-    addCommandToQueue(function() {
-      getInfo(async function(res) {
-        $('#info').append('NXT name: '+res.deviceName+' <br>Bluetooth address: '+res.bluetoothAddress);
-      });
-    });
-    addCommandToQueue(function() {
-      getVersion(async function(res) {
-        $('#info').append('<br>Firmware version: '+res.firmwareVersion+' <br>Protocol version: '+res.protocolVersion);
-      });
-    });
-    addCommandToQueue(function() {
-      getBatteryLevel(async function(res) {
-        $('#info').append('<br> Battery level millivolts: '+res.batteryLevelMillivolts+' ('+res.batteryPercent+'%)');
-        initSensors();
-      });
-    });
+  // async function getAllInfo() {
+  //   addCommandToQueue(function() {
+  //     getInfo(async function(res) {
+  //       $('#info').append('NXT name: '+res.deviceName+' <br>Bluetooth address: '+res.bluetoothAddress);
+  //     });
+  //   });
+  //   addCommandToQueue(function() {
+  //     getVersion(async function(res) {
+  //       $('#info').append('<br>Firmware version: '+res.firmwareVersion+' <br>Protocol version: '+res.protocolVersion);
+  //     });
+  //   });
+  //   addCommandToQueue(function() {
+  //     getBatteryLevel(async function(res) {
+  //       $('#info').append('<br> Battery level millivolts: '+res.batteryLevelMillivolts+' ('+res.batteryPercent+'%)');
+  //       initSensors();
+  //     });
+  //   });
     
-  }
+  // }
   
   async function initSensors() {
     await setInputModeColour(NXTConstants.sensorTypes.COLOR_NONE,colourPort);

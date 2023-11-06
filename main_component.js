@@ -29,7 +29,7 @@ export default {
       $('.view2').removeClass('d-none');
       
       runCommandQueue();
-      this.getAllInfo();
+      //this.getAllInfo();
     },
     async getAllInfo() {
       addCommandToQueue(function() {

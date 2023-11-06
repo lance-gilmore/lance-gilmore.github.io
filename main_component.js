@@ -34,11 +34,12 @@ export default {
     async getAllInfo() {
       this.deviceName = 'two';
       addCommandToQueue(function() {
-        this.deviceName = 'three';
-        getInfo(async function(res) {
+        let deviceName = 'three';
+        await getInfo(async function(res) {
           this.deviceName = res.deviceName
           this.bluetoothAddress = res.bluetoothAddress
         });
+        this.deviceName = deviceName
       });
       addCommandToQueue(function() {
         getVersion(async function(res) {

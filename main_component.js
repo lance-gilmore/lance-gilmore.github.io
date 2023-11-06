@@ -40,7 +40,7 @@ export default {
       deviceInfo.deviceName = 'two';
       addCommandToQueue(function() {
         getInfo(async function(res) {
-          deviceInfo.deviceName = res.deviceName
+          deviceName = res.deviceName
           deviceInfo.bluetoothAddress = res.bluetoothAddress
         });
       });

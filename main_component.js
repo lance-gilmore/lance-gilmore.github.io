@@ -4,6 +4,8 @@ import KeyControlComponent from './key_control_component.js'
 import CodeControlComponent from './code_control_component.js'
 import NxtInfoComponent from './nxt_info_component.js'
 
+let deviceInfo = {deviceName:''};
+
 export default {
     components: {
         ButtonControlComponent,
@@ -12,7 +14,7 @@ export default {
         NxtInfoComponent
       },
   setup() {
-    let deviceName = ref('')
+    let deviceName = ref(deviceInfo.deviceName)
     let bluetoothAddress = ref('')
     let firmwareVersion = ref('')
     let protocolVersion = ref('')
@@ -27,19 +29,17 @@ export default {
       // TOOD: the stuff below on actual connect eventrunCom
       $('.view1').addClass('d-none');
       $('.view2').removeClass('d-none');
-      this.deviceName = 'one';
+      deviceInfo.deviceName = 'one';
       runCommandQueue();
       this.getAllInfo();
     },
     async getAllInfo() {
-      this.deviceName = 'two';
+      deviceInfo.deviceName = 'two';
       addCommandToQueue(function() {
-        let deviceName = 'three';
         await getInfo(async function(res) {
-          this.deviceName = res.deviceName
+          deviceInfo.deviceName = res.deviceName
           this.bluetoothAddress = res.bluetoothAddress
         });
-        this.deviceName = deviceName
       });
       addCommandToQueue(function() {
         getVersion(async function(res) {

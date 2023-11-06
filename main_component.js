@@ -24,7 +24,7 @@ export default {
     let batteryLevelMillivolts = ref('')
     let batteryPercent = ref('')
 
-    return { NXTConstants, deviceName, bluetoothAddress, firmwareVersion, protocolVersion, batteryLevelMillivolts, batteryPercent }
+    return { NXTConstants, deviceInfo, deviceName, bluetoothAddress, firmwareVersion, protocolVersion, batteryLevelMillivolts, batteryPercent }
   },
   methods: {
     async connectNxt() {
@@ -79,7 +79,7 @@ export default {
 <div class="view2 ">
   <div class="row">
     <div class="col">
-      <NxtInfoComponent :deviceName="deviceName" :bluetoothAddress="bluetoothAddress" :firmwareVersion="firmwareVersion" :protocolVersion="protocolVersion" :batteryLevelMillivolts="batteryLevelMillivolts" :batteryPercent="batteryPercent" />
+      <NxtInfoComponent :deviceName="deviceInfo.deviceName" :bluetoothAddress="bluetoothAddress" :firmwareVersion="firmwareVersion" :protocolVersion="protocolVersion" :batteryLevelMillivolts="batteryLevelMillivolts" :batteryPercent="batteryPercent" />
     </div>
     <div class="col">
       <InputsComponent :switch1="switch1" :switch2="switch2" :colour="colour" :ultrasonic="ultrasonic" />

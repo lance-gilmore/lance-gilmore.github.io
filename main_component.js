@@ -3,6 +3,7 @@ import ButtonControlComponent from './button_control_component.js'
 import KeyControlComponent from './key_control_component.js'
 import CodeControlComponent from './code_control_component.js'
 import NxtInfoComponent from './nxt_info_component.js'
+import InputsComponent from './inputs_component.js'
 
 let deviceInfo = ref({deviceName:''});
 let deviceName = ref('')
@@ -74,8 +75,15 @@ export default {
     <a href="https://github.com/lance-gilmore/lance-gilmore.github.io">github repo</a>
   </div>
 
-<div class="view2 d-none">
-  <NxtInfoComponent :deviceName="deviceName" :bluetoothAddress="bluetoothAddress" :firmwareVersion="firmwareVersion" :protocolVersion="protocolVersion" :batteryLevelMillivolts="batteryLevelMillivolts" :batteryPercent="batteryPercent" />
+<div class="view2 ">
+  <div class="row">
+    <div class="col">
+      <NxtInfoComponent :deviceName="deviceName" :bluetoothAddress="bluetoothAddress" :firmwareVersion="firmwareVersion" :protocolVersion="protocolVersion" :batteryLevelMillivolts="batteryLevelMillivolts" :batteryPercent="batteryPercent" />
+    </div>
+    <div class="col">
+      <InputsComponent />
+    </div>
+  </div>
 
   <ul class="nav nav-tabs mt-4" id="controlTabs" role="tablist">
     <li class="nav-item" role="presentation">

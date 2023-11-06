@@ -99,7 +99,9 @@ $(function() {
 <script type="module">
   import { createApp } from 'vue'
   import MainComponent from './main_component.js'
-  createApp(MainComponent).mount('#app')
+  const app = createApp(MainComponent)
+  app.data({deviceName: 'bla'})
+  app.mount('#app')
 </script>
 
 </body>

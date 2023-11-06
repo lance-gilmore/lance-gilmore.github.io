@@ -2,18 +2,23 @@ import { ref } from 'vue'
 import ButtonControlComponent from './button_control_component.js'
 import KeyControlComponent from './key_control_component.js'
 import CodeControlComponent from './code_control_component.js'
+import NxtInfoComponent from './nxt_info_component.js'
 
 export default {
     components: {
         ButtonControlComponent,
         KeyControlComponent,
-        CodeControlComponent
+        CodeControlComponent,
+        NxtInfoComponent
       },
   setup() {
     return { NXTConstants }
   },
+  props: ['deviceName', 'bluetoothAddress', 'firmwareVersion', 'protocolVersion', 'batteryLevelMillivolts', 'batteryPercent'],
 
   template: `
+<NxtInfoComponent :deviceName="deviceName" :bluetoothAddress="bluetoothAddress" :firmwareVersion="firmwareVersion" :protocolVersion="protocolVersion" :batteryLevelMillivolts="batteryLevelMillivolts" :batteryPercent="batteryPercent" />
+
 <ul class="nav nav-tabs" id="controlTabs" role="tablist">
   <li class="nav-item" role="presentation">
     <button class="nav-link active" id="remote-control-tabs" data-bs-toggle="tab" data-bs-target="#remote-controls" type="button" role="tab" aria-controls="remote-controls" aria-selected="true">Key Control</button>

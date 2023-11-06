@@ -5,7 +5,7 @@ import CodeControlComponent from './code_control_component.js'
 import NxtInfoComponent from './nxt_info_component.js'
 import InputsComponent from './inputs_component.js'
 
-let deviceInfo = ref({deviceName:''});
+let deviceInfo = ref({deviceName:'zz'});
 let deviceName = ref('zero')
 
 export default {
@@ -17,7 +17,7 @@ export default {
         InputsComponent
       },
   setup() {
-    //let deviceName = ref(deviceInfo.deviceName)
+    let deviceName = ref(deviceInfo.deviceName)
     let bluetoothAddress = ref('')
     let firmwareVersion = ref('')
     let protocolVersion = ref('')
@@ -33,6 +33,7 @@ export default {
       $('.view1').addClass('d-none');
       $('.view2').removeClass('d-none');
       deviceName = 'one';
+      deviceInfo.deviceName = 'bla'
       runCommandQueue();
       this.getAllInfo();
     },
@@ -81,7 +82,7 @@ export default {
 <div class="view2 ">
   <div class="row">
     <div class="col">
-      <NxtInfoComponent :deviceName="deviceName" :bluetoothAddress="bluetoothAddress" :firmwareVersion="firmwareVersion" :protocolVersion="protocolVersion" :batteryLevelMillivolts="batteryLevelMillivolts" :batteryPercent="batteryPercent" />
+      <NxtInfoComponent :deviceName="deviceInfo.deviceName" :bluetoothAddress="bluetoothAddress" :firmwareVersion="firmwareVersion" :protocolVersion="protocolVersion" :batteryLevelMillivolts="batteryLevelMillivolts" :batteryPercent="batteryPercent" />
     </div>
     <div class="col">
       <InputsComponent :switch1="switch1" :switch2="switch2" :colour="colour" :ultrasonic="ultrasonic" />

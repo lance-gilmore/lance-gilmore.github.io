@@ -81,7 +81,7 @@ export default {
       <NxtInfoComponent :deviceName="deviceName" :bluetoothAddress="bluetoothAddress" :firmwareVersion="firmwareVersion" :protocolVersion="protocolVersion" :batteryLevelMillivolts="batteryLevelMillivolts" :batteryPercent="batteryPercent" />
     </div>
     <div class="col">
-      <InputsComponent />
+      <InputsComponent :switch1="switch1" :switch2="switch2" :colour="colour" :ultrasonic="ultrasonic" />
     </div>
   </div>
 

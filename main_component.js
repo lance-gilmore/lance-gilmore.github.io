@@ -13,7 +13,8 @@ export default {
         ButtonControlComponent,
         KeyControlComponent,
         CodeControlComponent,
-        NxtInfoComponent
+        NxtInfoComponent,
+        InputsComponent
       },
   setup() {
     let deviceName = ref(deviceInfo.deviceName)

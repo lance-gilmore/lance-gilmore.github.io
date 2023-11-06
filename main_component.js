@@ -27,12 +27,14 @@ export default {
       // TOOD: the stuff below on actual connect eventrunCom
       $('.view1').addClass('d-none');
       $('.view2').removeClass('d-none');
-      
+      this.deviceName = 'one';
       runCommandQueue();
       this.getAllInfo();
     },
     async getAllInfo() {
+      this.deviceName = 'two';
       addCommandToQueue(function() {
+        this.deviceName = 'three';
         getInfo(async function(res) {
           this.deviceName = res.deviceName
           this.bluetoothAddress = res.bluetoothAddress

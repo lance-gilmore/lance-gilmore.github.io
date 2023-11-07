@@ -1,11 +1,11 @@
 import { ref } from 'vue'
-import ButtonControlComponent from './button_control_component.js'
+import ButtonControlComponent from './button_control/button_control_component.js'
 import KeyControlComponent from './key_control_component.js'
 import CodeControlComponent from './code_control_component.js'
 import NxtInfoComponent from './nxt_info_component.js'
 import InputsComponent from './inputs_component.js'
 
-let deviceInfo = ref({deviceName:'zz'});
+let deviceInfo = ref({deviceName:'zz'})
 let deviceName = ref('zero')
 
 export default {
@@ -24,7 +24,7 @@ export default {
     let batteryLevelMillivolts = ref('')
     let batteryPercent = ref('')
 
-    return { NXTConstants, deviceInfo, deviceName, bluetoothAddress, firmwareVersion, protocolVersion, batteryLevelMillivolts, batteryPercent }
+    return { deviceInfo, deviceName, bluetoothAddress, firmwareVersion, protocolVersion, batteryLevelMillivolts, batteryPercent }
   },
   methods: {
     async connectNxt() {

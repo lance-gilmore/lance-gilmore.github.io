@@ -30,8 +30,8 @@ export default {
     }
   },
   template: `
+<h3>Motors</h3>
 <div class="row text-center">
-  <h3>Motors</h3>
 
   <div class="col">
     <p>BC</p>

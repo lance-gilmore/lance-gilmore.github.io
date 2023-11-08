@@ -8,7 +8,7 @@ export default {
   methods: {
     async changeLight(colour) {
         await setInputModeColour(colour,colourPort);
-        selectedColour = colour
+        this.selectedColour = colour
     }
   },
   template: `

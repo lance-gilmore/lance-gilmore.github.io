@@ -13,12 +13,12 @@ export default {
   },
   template: `
 <div class="my-4">
-    <h3>Light</h3>{{ selectedColour }}
+    <h3>Light</h3>
     <button class="btn mx-1" :class="selectedColour === NXTConstants.sensorTypes.COLOR_RED ? 'btn-danger' : 'btn-secondary'" type="button" @click="changeLight(NXTConstants.sensorTypes.COLOR_RED)">red</button>
-    <button class="btn btn-secondary mx-1" type="button" @click="changeLight(NXTConstants.sensorTypes.COLOR_GREEN)">green</button>
-    <button class="btn btn-secondary mx-1" type="button" @click="changeLight(NXTConstants.sensorTypes.COLOR_BLUE)">blue</button>
-    <button class="btn btn-secondary mx-1" type="button" @click="changeLight(NXTConstants.sensorTypes.COLOR_FULL)">all</button>
-    <button class="btn btn-secondary mx-1" type="button" @click="changeLight(NXTConstants.sensorTypes.COLOR_NONE)">off</button>
+    <button class="btn mx-1" :class="selectedColour === NXTConstants.sensorTypes.COLOR_GREEN ? 'btn-success' : 'btn-secondary'" type="button" @click="changeLight(NXTConstants.sensorTypes.COLOR_GREEN)">green</button>
+    <button class="btn mx-1" :class="selectedColour === NXTConstants.sensorTypes.COLOR_BLUE ? 'btn-primary' : 'btn-secondary'" type="button" @click="changeLight(NXTConstants.sensorTypes.COLOR_BLUE)">blue</button>
+    <button class="btn mx-1" :class="selectedColour === NXTConstants.sensorTypes.COLOR_FULL ? 'btn-light' : 'btn-secondary'" type="button" @click="changeLight(NXTConstants.sensorTypes.COLOR_FULL)">all</button>
+    <button class="btn mx-1" :class="selectedColour === NXTConstants.sensorTypes.COLOR_NONE ? 'btn-dark' : 'btn-secondary'" type="button" @click="changeLight(NXTConstants.sensorTypes.COLOR_NONE)">off</button>
 </div>
   `
 }

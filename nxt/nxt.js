@@ -1,7 +1,7 @@
-//import NXTConstants from './config.js'
+import NXTConstants from './config.js'
 
-
-  async function processResponse(message) {
+export default {
+  async processResponse(message) {
     const length = binArrayToVal([message[0],message[1]]);
     const getReply = getPropertyFromVal(NXTConstants.getReply,message[2]);
     const commandReceived = getPropertyFromVal(NXTConstants.commandTypes,message[3]);
@@ -29,9 +29,9 @@
       break;
     }
     triggerReplyEvents(reply);
-  }
+  },
   
-  function processDeviceInfo(message) {
+   processDeviceInfo(message) {
     let deviceName = '';
     for (let i=5; i<20;i++) {
       if (message[i] != 0) {
@@ -43,9 +43,9 @@
       bluetoothAddress += message[i].toString(16)+':';
     }
     return {'deviceName': deviceName,'bluetoothAddress':bluetoothAddress};
-  }
+  },
   
-  function processSensorValues(message) {
+   processSensorValues(message) {
     const inputPort = message[5];
     const valid = message[6];
     const calibrated = message[7]; // boolean
@@ -73,9 +73,9 @@
     }
     
     return reply;
-  }
+  },
   
-  async function initUltrasonicSensor(ultrasonicPort) {
+  async initUltrasonicSensor(ultrasonicPort) {
     await setInputModeUltrasonic(ultrasonicPort,async function(res){
       let data = [
       0,
@@ -101,10 +101,10 @@
    //   });
    // });
     
-  }
+  },
   
-  let NXTPort = {};
-  async function connectDeviceSerial() {
+   NXTPort = {},
+  async connectDeviceSerial() {
     if (!"serial" in navigator) {
       console.log('warning web serial not supported!');
     }
@@ -122,9 +122,9 @@
        
     
     readThePort(port);
-  }
+  },
   
-  async function readThePort(port) {
+  async readThePort(port) {
       while (port.readable) {
       const reader = port.readable.getReader();
 
@@ -148,11 +148,11 @@
         // TODO: Handle non-fatal read error.
       }
     }
-  }
+  },
   
   /////// command functions
   
-  async function runMotorCommand(motorPort,motorPowerPercent,motorMode,motorRegulation,regulatedTurnRatio,
+  async runMotorCommand(motorPort,motorPowerPercent,motorMode,motorRegulation,regulatedTurnRatio,
                                  motorRunState,tacholimit,resultCallback) {
     const reply = callbackCheck(resultCallback);
     let tachoBits = valToBinArray(tacholimit); // tacholimit 0,0,0,0 for running forever
@@ -172,9 +172,9 @@
       data = data.concat(tachoBits);
     
     await sendMessage(data);
-  }
+  },
   
-    async function getMotorstate(motorPort,resultCallback) {
+    async getMotorstate(motorPort,resultCallback) {
     const data = [
         NXTConstants.getReply.yes,
         NXTConstants.commandTypes.GET_OUTPUT_STATE,
@@ -182,9 +182,9 @@
       ];
     addReplyListener(resultCallback);
     await sendMessage(data);
-  }
+  },
   
-  async function lsGetStatus(sensorPort,resultCallback) {
+  async lsGetStatus(sensorPort,resultCallback) {
     const data = [
         NXTConstants.getReply.yes,
         NXTConstants.commandTypes.LS_GET_STATUS,
@@ -192,9 +192,9 @@
       ];
     addReplyListener(resultCallback);
     await sendMessage(data);
-  }
+  },
   
-  async function lsWrite(sensorPort,txData,rxData,resultCallback) {
+  async lsWrite(sensorPort,txData,rxData,resultCallback) {
     const reply = callbackCheck(resultCallback);
     let data = [
         reply,
@@ -205,9 +205,9 @@
       ];
     data = data.concat(txData,rxData);
     await sendMessage(data);
-  }
+  },
   
-  async function lsRead(sensorPort,resultCallback) {
+  async lsRead(sensorPort,resultCallback) {
     const data = [
         NXTConstants.getReply.yes,
         NXTConstants.commandTypes.LS_READ,
@@ -215,9 +215,9 @@
       ];
     addReplyListener(resultCallback);
     await sendMessage(data);
-  }
+  },
   
-  async function setInputModeUltrasonic(ultrasonicPort,resultCallback) {
+  async setInputModeUltrasonic(ultrasonicPort,resultCallback) {
     const reply = callbackCheck(resultCallback);
     const data = [
         reply,
@@ -228,9 +228,9 @@
       ];
     
     await sendMessage(data);
-  }
+  },
   
-  async function setInputModeColour(lightColour,sensorPort,resultCallback) {
+  async setInputModeColour(lightColour,sensorPort,resultCallback) {
     const reply = callbackCheck(resultCallback);
     const data = [
         reply,
@@ -241,9 +241,9 @@
       ];
     
     await sendMessage(data);
-  }
+  },
   
-  async function setInputModeSwitch(switchPort,resultCallback) {
+  async setInputModeSwitch(switchPort,resultCallback) {
     const reply = callbackCheck(resultCallback);
     const data = [
         reply,
@@ -254,9 +254,9 @@
       ];
     
     await sendMessage(data);
-  }
+  },
   
-  async function getInputValues(sensorPort,resultCallback) {
+  async getInputValues(sensorPort,resultCallback) {
     const data = [
         NXTConstants.getReply.yes,
         NXTConstants.commandTypes.GET_INPUT_VALUES,
@@ -264,9 +264,9 @@
       ];
     addReplyListener(resultCallback);
     await sendMessage(data);
-  }
+  },
   
-  async function setInputModeLight(active,resultCallback) {
+  async setInputModeLight(active,resultCallback) {
     const reply = callbackCheck(resultCallback);
     const data = [
         reply,
@@ -277,63 +277,63 @@
       ];
     
     await sendMessage(data);
-  }
+  },
   
-  async function beep(frequencyHz,durationMilliseconds,resultCallback) {
+  async beep(frequencyHz,durationMilliseconds,resultCallback) {
     const reply = callbackCheck(resultCallback);
     const frequencyBin = valToBinArray(frequencyHz);
     const durationBin = valToBinArray(durationMilliseconds);
     const messageArray = [reply, NXTConstants.commandTypes.PLAY_TONE].concat(frequencyBin,durationBin);
     
     await sendMessage(messageArray);
-  }
+  },
   
-  async function getVersion(resultCallback) {
+  async getVersion(resultCallback) {
     const messageArray = [
       NXTConstants.getReply.yesSystem,
       NXTConstants.commandTypes.GET_FIRMWARE_VERSION
     ];
     addReplyListener(resultCallback);
     await sendMessage(messageArray);
-  }
+  },
   
-  async function getBatteryLevel(resultCallback) {
+  async getBatteryLevel(resultCallback) {
     const messageArray = [NXTConstants.getReply.yes,NXTConstants.commandTypes.GET_BATTERY_LEVEL]; 
     addReplyListener(resultCallback);
     await sendMessage(messageArray);
-  }
+  },
   
-  async function getInfo(resultCallback) {
+  async getInfo(resultCallback) {
     const messageArray = [NXTConstants.getReply.yesSystem,NXTConstants.commandTypes.GET_DEVICE_INFO];
     addReplyListener(resultCallback);
     await sendMessage(messageArray);
-  }
+  },
   
-  async function sendMessage(messageArray) {
+  async sendMessage(messageArray) {
     const lengthBits = getLengthBits(messageArray);
     const fullMessage = lengthBits.concat(messageArray);
     
     await writeCommand(NXTPort,Uint8Array.from(fullMessage));
-  }
+  },
   
-  async function writeCommand(port, command) {
+  async writeCommand(port, command) {
     console.log('sending:');
     console.log(command);
     const writer = port.writable.getWriter();
     await writer.write(command);
     // Allow the serial port to be closed later.
     writer.releaseLock();
-  }
+  },
   
   ////////////////////// helper functions
   
   
-  let commandQueue = [];
-  async function addCommandToQueue(command) {
+   commandQueue = [],
+  async addCommandToQueue(command) {
     commandQueue.push(command);
-  }
+  },
   
-  async function runCommandQueue() {
+  async runCommandQueue() {
     let free = true;
     while (true) {
       if (free && commandQueue.length > 0) {
@@ -346,42 +346,42 @@
       }
       await sleep(10);
     }
-  }
+  },
   
-  function callbackCheck(resultCallback) {
+  callbackCheck(resultCallback) {
     if (resultCallback !== undefined) {
       addReplyListener(resultCallback);
       return NXTConstants.getReply.yes;
     }
     return NXTConstants.getReply.no;
-  }
+  },
   
-  let replyListeners = [];
-  function triggerReplyEvents(reply) {
+   replyListeners = [],
+   triggerReplyEvents(reply) {
     const listeners = replyListeners;
     replyListeners = [];
     if (listeners.length > 0) {
       listeners.forEach(replyListener => replyListener(reply));
     }
-  }
+  },
   
-  function addReplyListener(func) {
+  addReplyListener(func) {
     replyListeners.push(func);
-  }
+  },
   
-  function getLengthBits(messageArray) {
+  getLengthBits(messageArray) {
     let lengthBits = valToBinArray(messageArray.length);
     if (lengthBits.length < 2) {
       lengthBits.push(0);
     }
     return lengthBits;
-  }
+  },
   
-  function sleep(ms) {
+  sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
-  }
+  },
 
-  function binArrayToVal(binArray) {
+  binArrayToVal(binArray) {
     let rejoined = '';
     for (let i=binArray.length;i>0;i--) {
         let toHex = binArray[i-1].toString(16);
@@ -391,9 +391,9 @@
         rejoined += toHex;
     }
     return parseInt(rejoined,16);
-  }
+  },
 
-  function valToBinArray(val) {
+  valToBinArray(val) {
     let hex = val.toString(16);
     let parts = [];
     let even = false;
@@ -407,9 +407,9 @@
         even = !even;
     }
     return parts;
-  }
+  },
   
-  function getPropertyFromVal(obj,val) {
+  getPropertyFromVal(obj,val) {
     for(var name in obj) {
       if (obj[name] === val) {
         return name;
@@ -417,3 +417,5 @@
     }
     return 'error cant find property in object';
   }
+
+}

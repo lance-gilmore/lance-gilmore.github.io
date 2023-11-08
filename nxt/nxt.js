@@ -195,7 +195,7 @@ export default {
   },
   
   async lsWrite(sensorPort,txData,rxData,resultCallback) {
-    const reply = callbackCheck(resultCallback);
+    const reply = this.callbackCheck(resultCallback);
     let data = [
         reply,
         NXTConstants.commandTypes.LS_WRITE,
@@ -218,7 +218,7 @@ export default {
   },
   
   async setInputModeUltrasonic(ultrasonicPort,resultCallback) {
-    const reply = callbackCheck(resultCallback);
+    const reply = this.callbackCheck(resultCallback);
     const data = [
         reply,
         NXTConstants.commandTypes.SET_INPUT_MODE,
@@ -231,7 +231,7 @@ export default {
   },
   
   async setInputModeColour(lightColour,sensorPort,resultCallback) {
-    const reply = callbackCheck(resultCallback);
+    const reply = this.callbackCheck(resultCallback);
     const data = [
         reply,
         NXTConstants.commandTypes.SET_INPUT_MODE,
@@ -244,7 +244,7 @@ export default {
   },
   
   async setInputModeSwitch(switchPort,resultCallback) {
-    const reply = callbackCheck(resultCallback);
+    const reply = this.callbackCheck(resultCallback);
     const data = [
         reply,
         NXTConstants.commandTypes.SET_INPUT_MODE,

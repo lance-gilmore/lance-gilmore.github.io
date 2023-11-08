@@ -1,3 +1,4 @@
+import NXTConstants from './config.js'
 
 
   async function processResponse(message) {
@@ -147,56 +148,6 @@
         // TODO: Handle non-fatal read error.
       }
     }
-  }
-  
-  /////// simplified commands
-  
-  async function simpleBeep() {
-    await beep(523,500,false);
-  }
-
-  async function stopMotor(motorPort) {
-    const motorPowerPercent = 0; // 0 - 100 forwards 255 - 156 backwards (156 = 100% backwards)
-    const regulatedTurnRatio = 0; // 0 - 100 forwards 255 - 156 backwards (156 = 100% backwards)
-    await runMotorCommand(motorPort,motorPowerPercent,
-      NXTConstants.motorModes.motorOnBreakRegulated,NXTConstants.motorRegulation.none,
-      regulatedTurnRatio,NXTConstants.motorRunState.running,0);
-  }
-  
-  async function forwardMotor(motorPort) {
-    const motorPowerPercent = 100; // 0 - 100 forwards 255 - 156 backwards (156 = 100% backwards)
-    const regulatedTurnRatio = 0; // 0 - 100 forwards 255 - 156 backwards (156 = 100% backwards)
-    await runMotorCommand(motorPort,motorPowerPercent,
-      NXTConstants.motorModes.motorOnBreakRegulated,NXTConstants.motorRegulation.none,
-      regulatedTurnRatio,NXTConstants.motorRunState.running,0);
-  }
-  
-  async function backwardMotor(motorPort) {
-    const motorPowerPercent = 156; // 0 - 100 forwards 255 - 156 backwards (156 = 100% backwards)
-    const regulatedTurnRatio = 0; // 0 - 100 forwards 255 - 156 backwards (156 = 100% backwards)
-    await runMotorCommand(motorPort,motorPowerPercent,
-      NXTConstants.motorModes.motorOnBreakRegulated,NXTConstants.motorRegulation.none,
-      regulatedTurnRatio,NXTConstants.motorRunState.running,0);
-  }
-  
-  async function motorAOneRevolution() {
-    await turnMotorDegrees(NXTConstants.motors.PORT_A,360,true);
-  }
-  
-  async function turnMotorSpeed(motorPort,speed,forward) {
-    const motorPowerPercent = (forward) ? speed : 256 - speed; // 0 - 100 forwards 255 - 156 backwards (156 = 100% backwards)
-    const regulatedTurnRatio = 0; // 0 - 100 forwards 255 - 156 backwards (156 = 100% backwards)
-    await runMotorCommand(motorPort,motorPowerPercent,
-      NXTConstants.motorModes.motorOnBreakRegulated,NXTConstants.motorRegulation.none,
-      regulatedTurnRatio,NXTConstants.motorRunState.running,0);
-  }
-  
-  async function turnMotorDegrees(motorPort,degrees,forward) {
-    const motorPowerPercent = (forward) ? 25 : 225; // 0 - 100 forwards 255 - 156 backwards (156 = 100% backwards)
-    const regulatedTurnRatio = 0; // 0 - 100 forwards 255 - 156 backwards (156 = 100% backwards)
-    await runMotorCommand(motorPort,motorPowerPercent,
-      NXTConstants.motorModes.motorOnBreakRegulated,NXTConstants.motorRegulation.none,
-      regulatedTurnRatio,NXTConstants.motorRunState.running,degrees);
   }
   
   /////// command functions

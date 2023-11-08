@@ -13,13 +13,10 @@ export default {
     return { }
   },
   template: `
-<h3>Motors</h3>
 <DirectionControlsComponent />
 
-<h3>Light</h3>
 <ColourControlsComponent />
 
-<h3>Sound</h3>
 <SoundControlsComponent />  
   `
 }

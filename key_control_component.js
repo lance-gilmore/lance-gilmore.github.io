@@ -81,8 +81,8 @@ export default {
   template: `
 <div class="row">
   <div class="col col-md-6">
-    <p>assign keys</p>
-    <label class="form-label" for="chooseConfig">Configuration</label>
+    <h3>Assign keys</h3>
+    <label class="form-label" for="chooseConfig">Build Configuration</label>
     <select class="form-control" id="chooseConfig" @change="onConfigChange($event)" v-model="selectedConfigName">
       <option>none</option>
       <option v-for="item in keyConfigs.keyConfigs">
@@ -94,7 +94,7 @@ export default {
     <a v-if="selectedConfigName !== 'none'" :href="selectedConfig.instructions" target="_blank">Build Instructions</a>
     
     <div v-if="selectedConfigName !== 'none'">
-      <p>Config</p>
+      <p>Key Config</p>
       <div>
         <p v-for="(item in selectedConfig.config">
           {{ valueKeyMap[item.key] }} {{ item.action }} {{ item.direction }} {{ item.speed }}

@@ -34,7 +34,7 @@ export default {
       <NxtInfoComponent :deviceName="deviceName" :bluetoothAddress="bluetoothAddress" :firmwareVersion="firmwareVersion" :protocolVersion="protocolVersion" :batteryLevelMillivolts="batteryLevelMillivolts" :batteryPercent="batteryPercent" />
     </div>
     <div class="col">
-      <SensorConfigComponent switch1Port="inputPorts.switch1Port" switch2Port="inputPorts.switch2Port" colourPort="inputPorts.colourPort" ultrasonicPort="inputPorts.ultrasonicPort"  />
+      <SensorConfigComponent :switch1Port="inputPorts.switch1Port" :switch2Port="inputPorts.switch2Port" :colourPort="inputPorts.colourPort" ultrasonicPort="inputPorts.ultrasonicPort"  />
     </div>
     <div class="col">
       <InputsComponent :switch1="switch1" :switch2="switch2" :colour="colour" :ultrasonic="ultrasonic" />

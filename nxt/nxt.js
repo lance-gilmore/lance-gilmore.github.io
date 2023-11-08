@@ -154,8 +154,8 @@ export default {
   
   async runMotorCommand(motorPort,motorPowerPercent,motorMode,motorRegulation,regulatedTurnRatio,
                                  motorRunState,tacholimit,resultCallback) {
-    const reply = callbackCheck(resultCallback);
-    let tachoBits = valToBinArray(tacholimit); // tacholimit 0,0,0,0 for running forever
+    const reply = this.callbackCheck(resultCallback);
+    let tachoBits = this.valToBinArray(tacholimit); // tacholimit 0,0,0,0 for running forever
     while (tachoBits.length < 4) {
       tachoBits.push(0);
     }
@@ -370,7 +370,7 @@ export default {
   },
   
   getLengthBits(messageArray) {
-    let lengthBits = valToBinArray(messageArray.length);
+    let lengthBits = this.valToBinArray(messageArray.length);
     if (lengthBits.length < 2) {
       lengthBits.push(0);
     }

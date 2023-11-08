@@ -8,8 +8,8 @@ export default {
   props: ['switch1', 'switch2', 'colour', 'ultrasonic'],
 
   template: `
-  <div class="p-2">
-    Inputs
+  <div class="p-2 info">
+    <b>Inputs</b>
     <br>
     Switch 1: {{ switch1 }}
     <br>

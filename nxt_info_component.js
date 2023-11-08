@@ -8,7 +8,8 @@ export default {
   props: ['deviceName', 'bluetoothAddress', 'firmwareVersion', 'protocolVersion', 'batteryLevelMillivolts', 'batteryPercent'],
 
   template: `
-  <div class="p-2" id="info">
+  <div class="p-2 info">
+    <b>Device Info</b>
     NXT name: {{ deviceName }} 
     <br>
     Bluetooth address: {{ bluetoothAddress }}

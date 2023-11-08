@@ -180,8 +180,8 @@ export default {
         NXTConstants.commandTypes.GET_OUTPUT_STATE,
         motorPort
       ];
-    addReplyListener(resultCallback);
-    await sendMessage(data);
+    this.addReplyListener(resultCallback);
+    await this.sendMessage(data);
   },
   
   async lsGetStatus(sensorPort,resultCallback) {
@@ -190,8 +190,8 @@ export default {
         NXTConstants.commandTypes.LS_GET_STATUS,
         sensorPort
       ];
-    addReplyListener(resultCallback);
-    await sendMessage(data);
+    this.addReplyListener(resultCallback);
+    await this.sendMessage(data);
   },
   
   async lsWrite(sensorPort,txData,rxData,resultCallback) {
@@ -204,7 +204,7 @@ export default {
         rxData.length
       ];
     data = data.concat(txData,rxData);
-    await sendMessage(data);
+    await this.sendMessage(data);
   },
   
   async lsRead(sensorPort,resultCallback) {
@@ -213,8 +213,8 @@ export default {
         NXTConstants.commandTypes.LS_READ,
         sensorPort
       ];
-    addReplyListener(resultCallback);
-    await sendMessage(data);
+    this.addReplyListener(resultCallback);
+    await this.sendMessage(data);
   },
   
   async setInputModeUltrasonic(ultrasonicPort,resultCallback) {
@@ -253,7 +253,7 @@ export default {
         NXTConstants.sensorModes.BOOLEAN_MODE
       ];
     
-    await sendMessage(data);
+    await this.sendMessage(data);
   },
   
   async getInputValues(sensorPort,resultCallback) {
@@ -262,8 +262,8 @@ export default {
         NXTConstants.commandTypes.GET_INPUT_VALUES,
         sensorPort,
       ];
-    addReplyListener(resultCallback);
-    await sendMessage(data);
+    this.addReplyListener(resultCallback);
+    await this.sendMessage(data);
   },
   
   async setInputModeLight(active,resultCallback) {
@@ -293,19 +293,19 @@ export default {
       NXTConstants.getReply.yesSystem,
       NXTConstants.commandTypes.GET_FIRMWARE_VERSION
     ];
-    addReplyListener(resultCallback);
+    this.addReplyListener(resultCallback);
     await sendMessage(messageArray);
   },
   
   async getBatteryLevel(resultCallback) {
     const messageArray = [NXTConstants.getReply.yes,NXTConstants.commandTypes.GET_BATTERY_LEVEL]; 
-    addReplyListener(resultCallback);
+    this.addReplyListener(resultCallback);
     await sendMessage(messageArray);
   },
   
   async getInfo(resultCallback) {
     const messageArray = [NXTConstants.getReply.yesSystem,NXTConstants.commandTypes.GET_DEVICE_INFO];
-    addReplyListener(resultCallback);
+    this.addReplyListener(resultCallback);
     await sendMessage(messageArray);
   },
   
@@ -359,14 +359,14 @@ export default {
    replyListeners: [],
    triggerReplyEvents(reply) {
     const listeners = replyListeners;
-    replyListeners = [];
+    this.replyListeners = [];
     if (listeners.length > 0) {
       listeners.forEach(replyListener => replyListener(reply));
     }
   },
   
   addReplyListener(func) {
-    replyListeners.push(func);
+    this.replyListeners.push(func);
   },
   
   getLengthBits(messageArray) {

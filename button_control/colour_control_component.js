@@ -7,6 +7,7 @@ export default {
     const selectedColour = ref(NXTConstants.sensorTypes.COLOR_NONE)
     return { NXTConstants, selectedColour }
   },
+  props: ['colourPort'],
   methods: {
     async changeLight(colour) {
         await NXT.setInputModeColour(colour,colourPort);

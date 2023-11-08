@@ -102,7 +102,7 @@ export default {
     </div>
 
     <div id="button-controls" class="tab-pane fade" role="tabpanel" aria-labelledby="button-control-tabs">
-      <ButtonControlComponent/>
+      <ButtonControlComponent :colourPort="colourPort"/>
     </div>
 
     <div class="tab-pane fade" id="code-controls" role="tabpanel" aria-labelledby="code-control-tabs">

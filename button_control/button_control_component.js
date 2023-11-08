@@ -11,10 +11,11 @@ export default {
   setup() {
     return { }
   },
+  props: ['colourPort'],
   template: `
 <DirectionControlsComponent />
 
-<ColourControlsComponent />
+<ColourControlsComponent :colourPort="colourPort" />
 
 <SoundControlsComponent />  
   `

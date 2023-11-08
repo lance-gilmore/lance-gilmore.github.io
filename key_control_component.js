@@ -90,11 +90,10 @@ export default {
       </option>
     </select>
     
-    <label>
-      <a :href="selectedConfig.instructions" target="_blank">Instructions</a>
-    </label>
-
-    <div>
+    
+    <a v-if="selectedConfigName !== 'none'" :href="selectedConfig.instructions" target="_blank">Build Instructions</a>
+    
+    <div v-if="selectedConfigName !== 'none'">
       <p>Config</p>
       <div>
         <p v-for="(item in selectedConfig.config">

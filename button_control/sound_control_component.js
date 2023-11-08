@@ -1,4 +1,4 @@
-import NxtCommands from './nxt/simplified_commands.js'
+import NxtCommands from '../nxt/simplified_commands.js'
 
 export default {
   

@@ -10,7 +10,7 @@ export default {
         InputsComponent
       },
   setup() {
-    let deviceName = ref(deviceInfo.deviceName)
+    let deviceName = ref('')
     let bluetoothAddress = ref('')
     let firmwareVersion = ref('')
     let protocolVersion = ref('')
@@ -31,7 +31,7 @@ export default {
   template: `
   <div class="row">
     <div class="col">
-      <NxtInfoComponent :deviceName="deviceInfo.deviceName" :bluetoothAddress="bluetoothAddress" :firmwareVersion="firmwareVersion" :protocolVersion="protocolVersion" :batteryLevelMillivolts="batteryLevelMillivolts" :batteryPercent="batteryPercent" />
+      <NxtInfoComponent :deviceName="deviceName" :bluetoothAddress="bluetoothAddress" :firmwareVersion="firmwareVersion" :protocolVersion="protocolVersion" :batteryLevelMillivolts="batteryLevelMillivolts" :batteryPercent="batteryPercent" />
     </div>
     <div class="col">
       <SensorConfigComponent switch1Port="inputPorts.switch1Port" switch2Port="inputPorts.switch2Port" colourPort="inputPorts.colourPort" ultrasonicPort="inputPorts.ultrasonicPort"  />

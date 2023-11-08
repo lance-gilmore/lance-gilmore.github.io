@@ -31,7 +31,7 @@ export default {
   },
   template: `
 <div class="row text-center">
-  <div class="controlls col">
+  <div class="col">
     <p>BC</p>
     <div class="row">
       <div class="col mx-auto text-center mb-1">
@@ -40,51 +40,51 @@ export default {
     </div>
     <div class="row">
       <div class="col">
-        <button class="btn btn-secondary" type="button" id="leftBtn" @mousedown="motorsForwardsBackwards(NXTConstants.motors.PORT_B, NXTConstants.motors.PORT_C)" @mouseup="motorsStop(NXTConstants.motors.PORT_B, NXTConstants.motors.PORT_C)">←</button>
-        <button class="btn btn-secondary" type="button" id="backwardsBtn" @mousedown="motorsBackwards(NXTConstants.motors.PORT_B, NXTConstants.motors.PORT_C)" @mouseup="motorsStop(NXTConstants.motors.PORT_B, NXTConstants.motors.PORT_C)">↓</button>
-        <button class="btn btn-secondary" type="button" id="rightBtn" @mousedown="motorsForwardsBackwards(NXTConstants.motors.PORT_C, NXTConstants.motors.PORT_B)" @mouseup="motorsStop(NXTConstants.motors.PORT_B, NXTConstants.motors.PORT_C)">→</button>
+        <button class="btn btn-secondary" type="button" @mousedown="motorsForwardsBackwards(NXTConstants.motors.PORT_B, NXTConstants.motors.PORT_C)" @mouseup="motorsStop(NXTConstants.motors.PORT_B, NXTConstants.motors.PORT_C)">←</button>
+        <button class="btn btn-secondary mx-1" type="button" @mousedown="motorsBackwards(NXTConstants.motors.PORT_B, NXTConstants.motors.PORT_C)" @mouseup="motorsStop(NXTConstants.motors.PORT_B, NXTConstants.motors.PORT_C)">↓</button>
+        <button class="btn btn-secondary" type="button" @mousedown="motorsForwardsBackwards(NXTConstants.motors.PORT_C, NXTConstants.motors.PORT_B)" @mouseup="motorsStop(NXTConstants.motors.PORT_B, NXTConstants.motors.PORT_C)">→</button>
       </div>
     </div>
   </div>
   
-  <div class="col controllsA">
+  <div class="col">
     <p>A</p>
     <div class="row">
       <div class="col mx-auto text-center mb-1">
-        <button class="btn btn-secondary" type="button" id="forwardABtn" @mousedown="motorsForwards(NXTConstants.motors.PORT_A)" @mouseup="motorsStop(NXTConstants.motors.PORT_A)">↑</button>
+        <button class="btn btn-secondary" type="button" @mousedown="motorsForwards(NXTConstants.motors.PORT_A)" @mouseup="motorsStop(NXTConstants.motors.PORT_A)">↑</button>
       </div>
     </div>
     <div class="row">
       <div class="col mx-auto text-center mb-1">
-        <button class="btn btn-secondary" type="button" id="backwardsABtn" @mousedown="motorsBackwards(NXTConstants.motors.PORT_A)" @mouseup="motorsStop(NXTConstants.motors.PORT_A)">↓</button>
+        <button class="btn btn-secondary" type="button" @mousedown="motorsBackwards(NXTConstants.motors.PORT_A)" @mouseup="motorsStop(NXTConstants.motors.PORT_A)">↓</button>
       </div>
     </div>
   </div>
   
-  <div class="col controllsB">
+  <div class="col">
     <p>B</p>
     <div class="row">
       <div class="col mx-auto text-center mb-1">
-        <button class="btn btn-secondary" type="button" id="forwardBBtn" @mousedown="motorsForwards(NXTConstants.motors.PORT_B)" @mouseup="motorsStop(NXTConstants.motors.PORT_B)">↑</button>
+        <button class="btn btn-secondary" type="button" @mousedown="motorsForwards(NXTConstants.motors.PORT_B)" @mouseup="motorsStop(NXTConstants.motors.PORT_B)">↑</button>
       </div>
     </div>
     <div class="row">
       <div class="col mx-auto text-center mb-1">
-        <button class="btn btn-secondary" type="button" id="backwardsBBtn" @mousedown="motorsBackwards(NXTConstants.motors.PORT_B)" @mouseup="motorsStop(NXTConstants.motors.PORT_B)">↓</button>
+        <button class="btn btn-secondary" type="button" @mousedown="motorsBackwards(NXTConstants.motors.PORT_B)" @mouseup="motorsStop(NXTConstants.motors.PORT_B)">↓</button>
       </div>
     </div>
   </div>
   
-  <div class="col controllsC">
+  <div class="col">
     <p>C</p>
     <div class="row">
       <div class="col mx-auto text-center mb-1">
-        <button class="btn btn-secondary" type="button" id="forwardCBtn" @mousedown="motorsForwards(NXTConstants.motors.PORT_C)" @mouseup="motorsStop(NXTConstants.motors.PORT_C)">↑</button>
+        <button class="btn btn-secondary" type="button" @mousedown="motorsForwards(NXTConstants.motors.PORT_C)" @mouseup="motorsStop(NXTConstants.motors.PORT_C)">↑</button>
       </div>
     </div>
     <div class="row">
       <div class="col mx-auto text-center mb-1">
-        <button class="btn btn-secondary" type="button" id="backwardsCBtn" @mousedown="motorsBackwards(NXTConstants.motors.PORT_C)" @mouseup="motorsStop(NXTConstants.motors.PORT_C)">↓</button>
+        <button class="btn btn-secondary" type="button" @mousedown="motorsBackwards(NXTConstants.motors.PORT_C)" @mouseup="motorsStop(NXTConstants.motors.PORT_C)">↓</button>
       </div>
     </div>
   </div>

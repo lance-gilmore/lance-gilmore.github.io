@@ -7,7 +7,7 @@ export default {
   },
   methods: {
     async changeLight(colour) {
-        //await setInputModeColour(colour,colourPort);
+        await setInputModeColour(colour,colourPort);
         this.selectedColour = colour
     }
   },

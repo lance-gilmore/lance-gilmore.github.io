@@ -267,7 +267,7 @@ export default {
   },
   
   async setInputModeLight(active,resultCallback) {
-    const reply = callbackCheck(resultCallback);
+    const reply = this.callbackCheck(resultCallback);
     const data = [
         reply,
         NXTConstants.commandTypes.SET_INPUT_MODE,
@@ -276,7 +276,7 @@ export default {
         NXTConstants.sensorModes.PCT_FULL_SCALE_MODE
       ];
     
-    await sendMessage(data);
+    await this.sendMessage(data);
   },
   
   async beep(frequencyHz,durationMilliseconds,resultCallback) {
@@ -339,7 +339,7 @@ export default {
       if (free && commandQueue.length > 0) {
         free = false;
         const command = commandQueue.shift();
-        addReplyListener(function(){
+        this.addReplyListener(function(){
           free = true;
         });
         await command();
@@ -350,7 +350,7 @@ export default {
   
   callbackCheck(resultCallback) {
     if (resultCallback !== undefined) {
-      addReplyListener(resultCallback);
+      this.addReplyListener(resultCallback);
       return NXTConstants.getReply.yes;
     }
     return NXTConstants.getReply.no;

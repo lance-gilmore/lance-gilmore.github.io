@@ -21,7 +21,7 @@ export default {
     const colour = ref('')
     const ultrasonic = ref('')
 
-    return { deviceInfo, deviceName, bluetoothAddress, firmwareVersion, protocolVersion, batteryLevelMillivolts, batteryPercent,
+    return { deviceName, bluetoothAddress, firmwareVersion, protocolVersion, batteryLevelMillivolts, batteryPercent,
     switch1, switch2, colour, ultrasonic }
   },
   props: ['inputPorts'],

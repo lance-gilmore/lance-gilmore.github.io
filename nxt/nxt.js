@@ -103,7 +103,7 @@ export default {
     
   },
   
-   NXTPort = {},
+   NXTPort: {},
   async connectDeviceSerial() {
     if (!"serial" in navigator) {
       console.log('warning web serial not supported!');
@@ -328,7 +328,7 @@ export default {
   ////////////////////// helper functions
   
   
-   commandQueue = [],
+   commandQueue: [],
   async addCommandToQueue(command) {
     commandQueue.push(command);
   },
@@ -356,7 +356,7 @@ export default {
     return NXTConstants.getReply.no;
   },
   
-   replyListeners = [],
+   replyListeners: [],
    triggerReplyEvents(reply) {
     const listeners = replyListeners;
     replyListeners = [];

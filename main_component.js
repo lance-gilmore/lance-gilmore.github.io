@@ -79,7 +79,7 @@ export default {
   </div>
 
 <div class="view2 ">
-  <DeviceStatusComponent inputPorts="inputPorts" />
+  <DeviceStatusComponent :inputPorts="inputPorts" />
 
   <ul class="nav nav-tabs mt-4" id="controlTabs" role="tablist">
     <li class="nav-item" role="presentation">

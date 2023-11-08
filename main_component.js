@@ -4,6 +4,7 @@ import KeyControlComponent from './key_control_component.js'
 import CodeControlComponent from './code_control_component.js'
 import NxtInfoComponent from './nxt_info_component.js'
 import InputsComponent from './inputs_component.js'
+import SensorConfigComponent from './sensor_config_component.js'
 
 let deviceInfo = ref({deviceName:'zz'})
 let deviceName = ref('zero')
@@ -17,6 +18,12 @@ export default {
         InputsComponent
       },
   setup() {
+    const switch1Port = NXTConstants.sensors.PORT_1;
+    const switch2Port = NXTConstants.sensors.PORT_2;
+    const colourPort = NXTConstants.sensors.PORT_3;
+    const ultrasonicPort = NXTConstants.sensors.PORT_4;
+    const inputPorts = {'switch1Port':switch1Port, 'switch2Port':switch2Port, 'colourPort':colourPort, 'ultrasonicPort':ultrasonicPort}
+
     let deviceName = ref(deviceInfo.deviceName)
     let bluetoothAddress = ref('')
     let firmwareVersion = ref('')
@@ -24,7 +31,7 @@ export default {
     let batteryLevelMillivolts = ref('')
     let batteryPercent = ref('')
 
-    return { deviceInfo, deviceName, bluetoothAddress, firmwareVersion, protocolVersion, batteryLevelMillivolts, batteryPercent }
+    return { inputPorts }
   },
   methods: {
     async connectNxt() {
@@ -57,9 +64,15 @@ export default {
         getBatteryLevel(async function(res) {
           deviceInfo.batteryLevelMillivolts = res.batteryLevelMillivolts
           deviceInfo.batteryPercent = res.batteryPercent
-          //initSensors();
+          initSensors();
         });
       });
+    },
+    async initSensors() {
+      await setInputModeColour(NXTConstants.sensorTypes.COLOR_NONE,colourPort);
+      await setInputModeSwitch(this.switch1Port);
+      await setInputModeSwitch(this.switch2Port);
+      await initUltrasonicSensor(this.ultrasonicPort);
     }
   },
 
@@ -80,14 +93,7 @@ export default {
   </div>
 
 <div class="view2 ">
-  <div class="row">
-    <div class="col">
-      <NxtInfoComponent :deviceName="deviceInfo.deviceName" :bluetoothAddress="bluetoothAddress" :firmwareVersion="firmwareVersion" :protocolVersion="protocolVersion" :batteryLevelMillivolts="batteryLevelMillivolts" :batteryPercent="batteryPercent" />
-    </div>
-    <div class="col">
-      <InputsComponent :switch1="switch1" :switch2="switch2" :colour="colour" :ultrasonic="ultrasonic" />
-    </div>
-  </div>
+  <DeviceStatusComponent inputPorts="inputPorts" />
 
   <ul class="nav nav-tabs mt-4" id="controlTabs" role="tablist">
     <li class="nav-item" role="presentation">

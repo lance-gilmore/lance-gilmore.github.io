@@ -24,10 +24,10 @@
 <link rel="stylesheet" href="code_editor.css">
 
 <script>
-const switch1Port = NXTConstants.sensors.PORT_1;
-const switch2Port = NXTConstants.sensors.PORT_2;
-const colourPort = NXTConstants.sensors.PORT_3;
-const ultrasonicPort = NXTConstants.sensors.PORT_4;
+//const switch1Port = NXTConstants.sensors.PORT_1;
+//const switch2Port = NXTConstants.sensors.PORT_2;
+//const colourPort = NXTConstants.sensors.PORT_3;
+//const ultrasonicPort = NXTConstants.sensors.PORT_4;
 
 $(function() {
   // $('#connectDeviceBtn').click(async function(){
@@ -61,12 +61,12 @@ $(function() {
     
   // }
   
-  async function initSensors() {
-    await setInputModeColour(NXTConstants.sensorTypes.COLOR_NONE,colourPort);
-    await setInputModeSwitch(switch1Port);
-    await setInputModeSwitch(switch2Port);
-    await initUltrasonicSensor(ultrasonicPort);
-  }
+  // async function initSensors() {
+  //   await setInputModeColour(NXTConstants.sensorTypes.COLOR_NONE,colourPort);
+  //   await setInputModeSwitch(switch1Port);
+  //   await setInputModeSwitch(switch2Port);
+  //   await initUltrasonicSensor(ultrasonicPort);
+  // }
 
 });
 

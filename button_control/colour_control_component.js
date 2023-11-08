@@ -10,7 +10,7 @@ export default {
     }
   },
   template: `
-<div class="mx-4">
+<div class="my-4">
     <button class="btn btn-secondary mx-1" type="button" @click="changeLight(NXTConstants.sensorTypes.COLOR_RED)">light red</button>
     <button class="btn btn-secondary mx-1" type="button" @click="changeLight(NXTConstants.sensorTypes.COLOR_GREEN)">light green</button>
     <button class="btn btn-secondary mx-1" type="button" @click="changeLight(NXTConstants.sensorTypes.COLOR_BLUE)">light blue</button>

@@ -110,7 +110,7 @@ export default {
     }
     
     const port = await navigator.serial.requestPort();
-    NXTPort = port;
+    this.NXTPort = port;
     await port.open({ 
       baudRate: 9600, 
       dataBits: 8, 
@@ -313,7 +313,7 @@ export default {
     const lengthBits = this.getLengthBits(messageArray);
     const fullMessage = lengthBits.concat(messageArray);
     
-    await this.writeCommand(NXTPort,Uint8Array.from(fullMessage));
+    await this.writeCommand(this.NXTPort,Uint8Array.from(fullMessage));
   },
   
   async writeCommand(port, command) {

@@ -280,12 +280,12 @@ export default {
   },
   
   async beep(frequencyHz,durationMilliseconds,resultCallback) {
-    const reply = callbackCheck(resultCallback);
-    const frequencyBin = valToBinArray(frequencyHz);
-    const durationBin = valToBinArray(durationMilliseconds);
+    const reply = this.callbackCheck(resultCallback);
+    const frequencyBin = this.valToBinArray(frequencyHz);
+    const durationBin = this.valToBinArray(durationMilliseconds);
     const messageArray = [reply, NXTConstants.commandTypes.PLAY_TONE].concat(frequencyBin,durationBin);
     
-    await sendMessage(messageArray);
+    await this.sendMessage(messageArray);
   },
   
   async getVersion(resultCallback) {

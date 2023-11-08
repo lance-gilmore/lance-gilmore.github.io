@@ -1,5 +1,6 @@
 
 import NXTConstants from '../nxt/config.js'
+import NxtCommands from '../nxt/simplified_commands.js'
 
 export default {
   
@@ -8,25 +9,25 @@ export default {
   },
   methods: {
     async motorsForwards(motor1, motor2) {
-        await forwardMotor(motor1);
+        await NxtCommands.forwardMotor(motor1);
         if(typeof motor2 !== "undefined") {
             await forwardMotor(motor2);
         }
     },
     async motorsBackwards(motor1, motor2) {
-        await backwardMotor(motor1);
+        await NxtCommands.backwardMotor(motor1);
         if(typeof motor2 !== "undefined") {
             await backwardMotor(motor2);
         }
     },
     async motorsForwardsBackwards(motor1, motor2) {
-        await forwardMotor(motor1);
-        await backwardMotor(motor2);
+        await NxtCommands.forwardMotor(motor1);
+        await NxtCommands.backwardMotor(motor2);
     },
     async motorsStop (motor1, motor2) {
         await stopMotor(motor1);
         if(typeof motor2 !== "undefined") {
-            await stopMotor(motor2);
+            await NxtCommands.stopMotor(motor2);
         }
     }
   },

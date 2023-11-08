@@ -1,4 +1,6 @@
 
+import NXTConstants from '../nxt/config.js'
+
 export default {
   
   setup() {

@@ -20,7 +20,7 @@ export default {
     const ultrasonicPort = NXTConstants.sensors.PORT_4;
     const inputPorts = {'switch1Port':switch1Port, 'switch2Port':switch2Port, 'colourPort':colourPort, 'ultrasonicPort':ultrasonicPort}
 
-    return { inputPorts }
+    return { inputPorts, colourPort }
   },
   methods: {
     async connectNxt() {

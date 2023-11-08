@@ -10,7 +10,7 @@ export default {
   props: ['colourPort'],
   methods: {
     async changeLight(colour) {
-        await NXT.setInputModeColour(colour,colourPort);
+        await NXT.setInputModeColour(colour,this.colourPort);
         this.selectedColour = colour
     }
   },

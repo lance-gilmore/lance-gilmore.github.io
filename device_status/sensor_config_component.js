@@ -8,6 +8,7 @@ export default {
   template: `
   <div class="p-2 info">
     <b>Sensor Config</b>
+    <br>
     Switch 1: {{ switch1Port }} 
     <br>
     Switch 2: {{ switch2Port }}

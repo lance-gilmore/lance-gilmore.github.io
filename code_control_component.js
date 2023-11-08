@@ -5,7 +5,6 @@ export default {
     return { NXTConstants }
   },
   mounted() {
-    console.log('adding code box')
     const codeInput = document.querySelector('#code-input');
     const codeOutput = document.querySelector('#code-output');
   

@@ -2,20 +2,14 @@ import { ref } from 'vue'
 import ButtonControlComponent from './button_control/button_control_component.js'
 import KeyControlComponent from './key_control_component.js'
 import CodeControlComponent from './code_control_component.js'
-import NxtInfoComponent from './nxt_info_component.js'
-import InputsComponent from './inputs_component.js'
-import SensorConfigComponent from './sensor_config_component.js'
-
-let deviceInfo = ref({deviceName:'zz'})
-let deviceName = ref('zero')
+import DeviceStatusComponent from './device_status/device_status_component.js'
 
 export default {
     components: {
         ButtonControlComponent,
         KeyControlComponent,
         CodeControlComponent,
-        NxtInfoComponent,
-        InputsComponent
+        DeviceStatusComponent
       },
   setup() {
     const switch1Port = NXTConstants.sensors.PORT_1;
@@ -64,12 +58,12 @@ export default {
         getBatteryLevel(async function(res) {
           deviceInfo.batteryLevelMillivolts = res.batteryLevelMillivolts
           deviceInfo.batteryPercent = res.batteryPercent
-          initSensors();
+          //this.initSensors();
         });
       });
     },
     async initSensors() {
-      await setInputModeColour(NXTConstants.sensorTypes.COLOR_NONE,colourPort);
+      await setInputModeColour(NXTConstants.sensorTypes.COLOR_NONE,this.colourPort);
       await setInputModeSwitch(this.switch1Port);
       await setInputModeSwitch(this.switch2Port);
       await initUltrasonicSensor(this.ultrasonicPort);

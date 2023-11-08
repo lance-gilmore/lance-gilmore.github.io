@@ -96,7 +96,7 @@ export default {
   <div class="tab-content" id="controlTabsContent">
 
     <div id="remote-controls" class="tab-pane fade show active" role="tabpanel" aria-labelledby="remote-control-tabs">
-    <KeyControlComponent/>
+      <KeyControlComponent/>
     </div>
 
     <div id="button-controls" class="tab-pane fade" role="tabpanel" aria-labelledby="button-control-tabs">
@@ -104,7 +104,7 @@ export default {
     </div>
 
     <div class="tab-pane fade" id="code-controls" role="tabpanel" aria-labelledby="code-control-tabs">
-    <CodeControlComponent/>
+      <CodeControlComponent/>
     </div>
 
   </div>

@@ -91,9 +91,9 @@ export default {
     </select>
     
     
-    <a v-if="selectedConfigName !== 'none'" :href="selectedConfig.instructions" target="_blank" class="my-4">Build Instructions</a>
+    <a v-if="selectedConfigName !== 'none'" :href="selectedConfig.instructions" target="_blank" class="my-4 d-block">Build Instructions</a>
     
-    <div v-if="selectedConfigName !== 'none'" class="border">
+    <div v-if="selectedConfigName !== 'none'" class="border p-2">
       <h4>Key Config</h4>
       <div>
         <p v-for="(item in selectedConfig.config">

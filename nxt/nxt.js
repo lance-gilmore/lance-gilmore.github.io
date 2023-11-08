@@ -86,7 +86,7 @@ export default {
       1,
       66
       ];
-      await sendMessage(data);
+      await this.sendMessage(data);
     });
     //await lsWrite(ultrasonicPort,[65,2],[],async function(res){
     // 0x00, 0x0F, port, 0x02, 0x01, 0x02, 0x42
@@ -171,7 +171,7 @@ export default {
       ];
       data = data.concat(tachoBits);
     
-    await sendMessage(data);
+    await this.sendMessage(data);
   },
   
     async getMotorstate(motorPort,resultCallback) {
@@ -227,7 +227,7 @@ export default {
         NXTConstants.sensorModes.RAW_MODE
       ];
     
-    await sendMessage(data);
+    await this.sendMessage(data);
   },
   
   async setInputModeColour(lightColour,sensorPort,resultCallback) {
@@ -240,7 +240,7 @@ export default {
         NXTConstants.sensorModes.RAW_MODE
       ];
     
-    await sendMessage(data);
+    await this.sendMessage(data);
   },
   
   async setInputModeSwitch(switchPort,resultCallback) {
@@ -294,13 +294,13 @@ export default {
       NXTConstants.commandTypes.GET_FIRMWARE_VERSION
     ];
     this.addReplyListener(resultCallback);
-    await sendMessage(messageArray);
+    await this.sendMessage(messageArray);
   },
   
   async getBatteryLevel(resultCallback) {
     const messageArray = [NXTConstants.getReply.yes,NXTConstants.commandTypes.GET_BATTERY_LEVEL]; 
     this.addReplyListener(resultCallback);
-    await sendMessage(messageArray);
+    await this.sendMessage(messageArray);
   },
   
   async getInfo(resultCallback) {
@@ -310,10 +310,10 @@ export default {
   },
   
   async sendMessage(messageArray) {
-    const lengthBits = getLengthBits(messageArray);
+    const lengthBits = this.getLengthBits(messageArray);
     const fullMessage = lengthBits.concat(messageArray);
     
-    await writeCommand(NXTPort,Uint8Array.from(fullMessage));
+    await this.writeCommand(NXTPort,Uint8Array.from(fullMessage));
   },
   
   async writeCommand(port, command) {
@@ -330,15 +330,15 @@ export default {
   
    commandQueue: [],
   async addCommandToQueue(command) {
-    commandQueue.push(command);
+    this.commandQueue.push(command);
   },
   
   async runCommandQueue() {
     let free = true;
     while (true) {
-      if (free && commandQueue.length > 0) {
+      if (free && this.commandQueue.length > 0) {
         free = false;
-        const command = commandQueue.shift();
+        const command = this.commandQueue.shift();
         this.addReplyListener(function(){
           free = true;
         });

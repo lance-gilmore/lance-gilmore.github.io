@@ -1,4 +1,4 @@
-import nxtCommands from './nxt/simplified_commands.js'
+import NxtCommands from './nxt/simplified_commands.js'
 
 export default {
   
@@ -7,7 +7,7 @@ export default {
   },
   methods: {
     async beepHorn() {
-        await nxtCommands.simpleBeep();
+        await NxtCommands.simpleBeep();
     }
   },
   template: `

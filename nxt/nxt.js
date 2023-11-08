@@ -1,4 +1,4 @@
-import NXTConstants from './config.js'
+//import NXTConstants from './config.js'
 
 
   async function processResponse(message) {

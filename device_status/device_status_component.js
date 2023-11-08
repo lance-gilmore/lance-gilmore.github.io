@@ -1,3 +1,4 @@
+import { ref } from 'vue'
 import NxtInfoComponent from './nxt_info_component.js'
 import InputsComponent from './inputs_component.js'
 import SensorConfigComponent from './sensor_config_component.js'

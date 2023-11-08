@@ -14,7 +14,7 @@ export default {
   template: `
 <div class="my-4">
     <h3>Light</h3>{{ selectedColour }}
-    <button  type="button" @click="changeLight(NXTConstants.sensorTypes.COLOR_RED)">red</button>
+    <button class="btn mx-1" :class="selectedColour === NXTConstants.sensorTypes.COLOR_RED ? 'btn-danger' : 'btn-secondary'" type="button" @click="changeLight(NXTConstants.sensorTypes.COLOR_RED)">red</button>
     <button class="btn btn-secondary mx-1" type="button" @click="changeLight(NXTConstants.sensorTypes.COLOR_GREEN)">green</button>
     <button class="btn btn-secondary mx-1" type="button" @click="changeLight(NXTConstants.sensorTypes.COLOR_BLUE)">blue</button>
     <button class="btn btn-secondary mx-1" type="button" @click="changeLight(NXTConstants.sensorTypes.COLOR_FULL)">all</button>

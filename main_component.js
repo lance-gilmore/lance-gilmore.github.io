@@ -18,13 +18,6 @@ export default {
     const ultrasonicPort = NXTConstants.sensors.PORT_4;
     const inputPorts = {'switch1Port':switch1Port, 'switch2Port':switch2Port, 'colourPort':colourPort, 'ultrasonicPort':ultrasonicPort}
 
-    let deviceName = ref(deviceInfo.deviceName)
-    let bluetoothAddress = ref('')
-    let firmwareVersion = ref('')
-    let protocolVersion = ref('')
-    let batteryLevelMillivolts = ref('')
-    let batteryPercent = ref('')
-
     return { inputPorts }
   },
   methods: {
@@ -34,30 +27,29 @@ export default {
       $('.view1').addClass('d-none');
       $('.view2').removeClass('d-none');
       deviceName = 'one';
-      deviceInfo.deviceName = 'bla'
       runCommandQueue();
       this.getAllInfo();
     },
     async getAllInfo() {
-      deviceName = 'two';
+      //deviceName = 'two';
       addCommandToQueue(function() {
-        deviceName = 'three';
+        //deviceName = 'three';
         getInfo(async function(res) {
-          deviceName = res.deviceName
-          console.log(deviceName)
-          deviceInfo.bluetoothAddress = res.bluetoothAddress
+          //deviceName = res.deviceName
+          //console.log(deviceName)
+          //deviceInfo.bluetoothAddress = res.bluetoothAddress
         });
       });
       addCommandToQueue(function() {
         getVersion(async function(res) {
-          deviceInfo.firmwareVersion = res.firmwareVersion
-          deviceInfo.protocolVersion = res.protocolVersion
+          //deviceInfo.firmwareVersion = res.firmwareVersion
+          //deviceInfo.protocolVersion = res.protocolVersion
         });
       });
       addCommandToQueue(function() {
         getBatteryLevel(async function(res) {
-          deviceInfo.batteryLevelMillivolts = res.batteryLevelMillivolts
-          deviceInfo.batteryPercent = res.batteryPercent
+          //deviceInfo.batteryLevelMillivolts = res.batteryLevelMillivolts
+          //deviceInfo.batteryPercent = res.batteryPercent
           //this.initSensors();
         });
       });

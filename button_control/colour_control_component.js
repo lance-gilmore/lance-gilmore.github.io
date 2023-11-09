@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import NXTConstants from '/../nxt/config.js'
-import NXT from '/../nxt/nxt.js'
+import NXTCommands from '/../nxt/comands.js'
 
 export default {
   setup() {
@@ -10,7 +10,7 @@ export default {
   props: ['colourPort'],
   methods: {
     async changeLight(colour) {
-        await NXT.setInputModeColour(colour,this.colourPort);
+        await NXTCommands.setInputModeColour(colour,this.colourPort);
         this.selectedColour = colour
     }
   },

@@ -1,4 +1,3 @@
-
 import NXTConstants from '../nxt/config.js'
 import NxtCommands from '../nxt/simplified_commands.js'
 

@@ -1,4 +1,5 @@
 import NXT from './nxt.js'
+import NXTConstants from './config.js'
 
 export default {
     async initUltrasonicSensor(ultrasonicPort) {

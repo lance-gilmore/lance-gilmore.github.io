@@ -158,8 +158,8 @@ export default {
 
     async beep(frequencyHz,durationMilliseconds,resultCallback) {
         const reply = NXT.callbackCheck(resultCallback);
-        const frequencyBin = this.valToBinArray(frequencyHz);
-        const durationBin = this.valToBinArray(durationMilliseconds);
+        const frequencyBin = NXT.valToBinArray(frequencyHz);
+        const durationBin = NXT.valToBinArray(durationMilliseconds);
         const messageArray = [reply, NXTConstants.commandTypes.PLAY_TONE].concat(frequencyBin,durationBin);
 
         await NXT.sendMessage(messageArray);

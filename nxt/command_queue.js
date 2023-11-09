@@ -1,7 +1,7 @@
 import NXT from './nxt.js'
 
 export default {
-    private commandQueue: [],
+    commandQueue: [],
     async addCommandToQueue(command) {
       this.commandQueue.push(command);
     },

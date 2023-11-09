@@ -1,5 +1,7 @@
 import { ref } from 'vue'
 import NXTConstants from './nxt/config.js'
+import NXT from '/../nxt/nxt.js'
+import NXTCommandQueue from '/../nxt/command_queue.js'
 
 export default {
   setup() {
@@ -49,20 +51,20 @@ export default {
         while (true) {
           if (!polling) {
             polling = true;
-            addCommandToQueue(function() {
-              getInputValues(switch1Port,function(res){
+            NXTCommandQueue.addCommandToQueue(function() {
+              NXT.getInputValues(switch1Port,function(res){
                 console.log(res);
                 $('#switch1').text(res.pressed);
               });
             });
-            addCommandToQueue(function() {
-              getInputValues(switch2Port,function(res){
+            NXTCommandQueue.addCommandToQueue(function() {
+              NXT.getInputValues(switch2Port,function(res){
                 console.log(res);
                 $('#switch2').text(res.pressed);
               });
             });
-            addCommandToQueue(function() {
-              getInputValues(colourPort,function(res){
+            NXTCommandQueue.addCommandToQueue(function() {
+              NXT.getInputValues(colourPort,function(res){
                 console.log(res);
                 $('#colourSensor').text(res.colour);
                 

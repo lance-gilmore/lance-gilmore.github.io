@@ -327,27 +327,6 @@ export default {
   
   ////////////////////// helper functions
   
-  
-   commandQueue: [],
-  async addCommandToQueue(command) {
-    this.commandQueue.push(command);
-  },
-  
-  async runCommandQueue() {
-    let free = true;
-    while (true) {
-      if (free && this.commandQueue.length > 0) {
-        free = false;
-        const command = this.commandQueue.shift();
-        this.addReplyListener(function(){
-          free = true;
-        });
-        await command();
-      }
-      await sleep(10);
-    }
-  },
-  
   callbackCheck(resultCallback) {
     if (resultCallback !== undefined) {
       this.addReplyListener(resultCallback);
@@ -375,10 +354,6 @@ export default {
       lengthBits.push(0);
     }
     return lengthBits;
-  },
-  
-  sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
   },
 
   binArrayToVal(binArray) {

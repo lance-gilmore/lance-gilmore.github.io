@@ -5,6 +5,7 @@ import CodeControlComponent from './code_control_component.js'
 import DeviceStatusComponent from './device_status/device_status_component.js'
 import NXTConstants from './nxt/config.js'
 import NXT from '/../nxt/nxt.js'
+import NXTCommandQueue from '/../nxt/command_queue.js'
 
 export default {
     components: {
@@ -28,13 +29,13 @@ export default {
       // TOOD: the stuff below on actual connect eventrunCom
       $('.view1').addClass('d-none');
       $('.view2').removeClass('d-none');
-      deviceName = 'one';
-      NXT.runCommandQueue();
+      //deviceName = 'one';
+      NXTCommandQueue.runCommandQueue();
       this.getAllInfo();
     },
     async getAllInfo() {
       //deviceName = 'two';
-      NXT.addCommandToQueue(function() {
+      NXTCommandQueue.addCommandToQueue(function() {
         //deviceName = 'three';
         NXT.getInfo(async function(res) {
           //deviceName = res.deviceName
@@ -42,13 +43,13 @@ export default {
           //deviceInfo.bluetoothAddress = res.bluetoothAddress
         });
       });
-      NXT.addCommandToQueue(function() {
+      NXTCommandQueue.addCommandToQueue(function() {
         NXT.getVersion(async function(res) {
           //deviceInfo.firmwareVersion = res.firmwareVersion
           //deviceInfo.protocolVersion = res.protocolVersion
         });
       });
-      NXT.addCommandToQueue(function() {
+      NXTCommandQueue.addCommandToQueue(function() {
         NXT.getBatteryLevel(async function(res) {
           //deviceInfo.batteryLevelMillivolts = res.batteryLevelMillivolts
           //deviceInfo.batteryPercent = res.batteryPercent

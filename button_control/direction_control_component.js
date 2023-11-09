@@ -11,13 +11,13 @@ export default {
     async motorsForwards(motor1, motor2) {
         await NxtCommands.forwardMotor(motor1);
         if(typeof motor2 !== "undefined") {
-            await forwardMotor(motor2);
+            await NxtCommands.forwardMotor(motor2);
         }
     },
     async motorsBackwards(motor1, motor2) {
         await NxtCommands.backwardMotor(motor1);
         if(typeof motor2 !== "undefined") {
-            await backwardMotor(motor2);
+            await NxtCommands.backwardMotor(motor2);
         }
     },
     async motorsForwardsBackwards(motor1, motor2) {
@@ -25,7 +25,7 @@ export default {
         await NxtCommands.backwardMotor(motor2);
     },
     async motorsStop (motor1, motor2) {
-        await stopMotor(motor1);
+        await NxtCommands.stopMotor(motor1);
         if(typeof motor2 !== "undefined") {
             await NxtCommands.stopMotor(motor2);
         }

@@ -5,6 +5,7 @@ import CodeControlComponent from './code_control_component.js'
 import DeviceStatusComponent from './device_status/device_status_component.js'
 import NXTConstants from './nxt/config.js'
 import NXT from '/../nxt/nxt.js'
+import NXTCommands from '/../nxt/commands.js'
 import NXTCommandQueue from '/../nxt/command_queue.js'
 
 export default {
@@ -37,20 +38,20 @@ export default {
       //deviceName = 'two';
       NXTCommandQueue.addCommandToQueue(function() {
         //deviceName = 'three';
-        NXT.getInfo(async function(res) {
+        NXTCommands.getInfo(async function(res) {
           //deviceName = res.deviceName
           //console.log(deviceName)
           //deviceInfo.bluetoothAddress = res.bluetoothAddress
         });
       });
       NXTCommandQueue.addCommandToQueue(function() {
-        NXT.getVersion(async function(res) {
+        NXTCommands.getVersion(async function(res) {
           //deviceInfo.firmwareVersion = res.firmwareVersion
           //deviceInfo.protocolVersion = res.protocolVersion
         });
       });
       NXTCommandQueue.addCommandToQueue(function() {
-        NXT.getBatteryLevel(async function(res) {
+        NXTCommands.getBatteryLevel(async function(res) {
           //deviceInfo.batteryLevelMillivolts = res.batteryLevelMillivolts
           //deviceInfo.batteryPercent = res.batteryPercent
           //this.initSensors();

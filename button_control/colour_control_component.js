@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import NXTConstants from '/../nxt/config.js'
-import NXTCommands from '/../nxt/comands.js'
+import NXTCommands from '/../nxt/commands.js'
 
 export default {
   setup() {

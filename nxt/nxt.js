@@ -93,7 +93,7 @@ export default {
        });
        
     
-    readThePort(port);
+    this.readThePort(port);
   },
   
   async readThePort(port) {

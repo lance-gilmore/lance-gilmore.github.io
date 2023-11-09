@@ -208,6 +208,10 @@ export default {
       }
     }
     return 'error cant find property in object';
+  },
+
+  sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
 }

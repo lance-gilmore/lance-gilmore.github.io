@@ -17,11 +17,9 @@ export default {
           });
           await command();
         }
-        await this.sleep(10);
+        await NXT.sleep(10);
       }
     },
 
-    sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
+
 }

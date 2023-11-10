@@ -32,8 +32,19 @@ export default {
       $('.view2').removeClass('d-none');
       //deviceName = 'one';
       NXTCommandQueue.runCommandQueue();
-      this.getAllInfo();
+      //this.getAllInfo();
+      addInfoComponent()
     },
+
+    addInfoComponent() {
+      var ComponentClass = Vue.extend(DeviceStatusComponent)
+      var instance = new ComponentClass({
+          propsData: { inputPorts: this.inputPorts }
+        })
+      instance.$mount() // pass nothing
+      this.$refs.status_display.appendChild(instance.$el)
+    },
+
     async getAllInfo() {
       //deviceName = 'two';
       NXTCommandQueue.addCommandToQueue(function() {
@@ -83,7 +94,8 @@ export default {
   </div>
 
 <div class="view2 ">
-  <DeviceStatusComponent :inputPorts="inputPorts" />
+  <div ref="status_display"></div>
+  
 
   <ul class="nav nav-tabs mt-4" id="controlTabs" role="tablist">
     <li class="nav-item" role="presentation">

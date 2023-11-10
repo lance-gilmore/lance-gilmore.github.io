@@ -5,6 +5,9 @@ import NXTCommandQueue from '/../nxt/command_queue.js'
 import CodeEditor from './code_editor.js'
 
 export default {
+  components: {
+    CodeEditor
+  },
   setup() {
     return { NXTConstants }
   },

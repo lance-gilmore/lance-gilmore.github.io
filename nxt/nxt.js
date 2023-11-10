@@ -33,7 +33,7 @@ export default {
 
   replyPromises: [],
   addReplyPromise() {
-    let prom = new Promise(resolve)
+    let prom = new Promise()
     this.replyPromises.push(prom)
     return prom
   },

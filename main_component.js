@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 import ButtonControlComponent from './button_control/button_control_component.js'
 import KeyControlComponent from './key_control/key_control_component.js'
-import CodeControlComponent from './code_control_component.js'
+import CodeControlComponent from './code_control/code_control_component.js'
 import DeviceStatusComponent from './device_status/device_status_component.js'
 import NXTConstants from './nxt/config.js'
 import NXT from '/../nxt/nxt.js'

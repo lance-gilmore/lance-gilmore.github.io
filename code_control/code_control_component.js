@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import NXTConstants from './nxt/config.js'
+import NXTConstants from '/../nxt/config.js'
 import NXT from '/../nxt/nxt.js'
 import NXTCommandQueue from '/../nxt/command_queue.js'
 import CodeEditor from './code_editor.js'

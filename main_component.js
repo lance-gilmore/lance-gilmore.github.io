@@ -22,6 +22,7 @@ export default {
     const ultrasonicPort = NXTConstants.sensors.PORT_4;
     const inputPorts = {'switch1Port':switch1Port, 'switch2Port':switch2Port, 'colourPort':colourPort, 'ultrasonicPort':ultrasonicPort}
 
+    const deviceConnected  = ref(false)
     return { inputPorts, colourPort }
   },
   methods: {
@@ -33,7 +34,9 @@ export default {
       //deviceName = 'one';
       NXTCommandQueue.runCommandQueue();
       //this.getAllInfo();
-      addInfoComponent()
+      //addInfoComponent()
+      console.log('here')
+      this.deviceConnected = true
     },
 
     addInfoComponent() {
@@ -95,6 +98,7 @@ export default {
 
 <div class="view2 ">
   <div ref="status_display"></div>
+  <DeviceStatusComponent :inputPorts="inputPorts" v-if="deviceConnected" />
   
 
   <ul class="nav nav-tabs mt-4" id="controlTabs" role="tablist">

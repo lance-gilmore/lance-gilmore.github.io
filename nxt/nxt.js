@@ -30,6 +30,17 @@ export default {
     }
     triggerReplyEvents(reply);
   },
+
+  replyPromises: [],
+  addReplyPromise() {
+    let prom = new Promise(resolve)
+    this.replyPromises.push(prom)
+    return prom
+  },
+
+  fulfullPromises(result) {
+    replyPromises.forEach(prom => prom.resolve(result));
+  },
   
    processDeviceInfo(message) {
     let deviceName = '';

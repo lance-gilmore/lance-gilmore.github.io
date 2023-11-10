@@ -185,4 +185,11 @@ export default {
         NXT.addReplyListener(resultCallback);
         await NXT.sendMessage(messageArray);
     },
+
+    getInfoPromise() {
+        const messageArray = [NXTConstants.getReply.yesSystem,NXTConstants.commandTypes.GET_DEVICE_INFO];
+        const promiseRes = NXT.addReplyPromise();
+        NXT.sendMessage(messageArray);
+        return promiseRes
+    }
 }

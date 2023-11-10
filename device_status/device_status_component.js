@@ -31,7 +31,7 @@ export default {
   template: `
   <div class="row">
     <div class="col">
-      <NxtInfoComponent :deviceName="deviceName" :bluetoothAddress="bluetoothAddress" :firmwareVersion="firmwareVersion" :protocolVersion="protocolVersion" :batteryLevelMillivolts="batteryLevelMillivolts" :batteryPercent="batteryPercent" />
+      <NxtInfoComponent />
     </div>
     <div class="col">
       <SensorConfigComponent :switch1Port="inputPorts.switch1Port" :switch2Port="inputPorts.switch2Port" :colourPort="inputPorts.colourPort" :ultrasonicPort="inputPorts.ultrasonicPort"  />

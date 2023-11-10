@@ -23,14 +23,14 @@ export default {
     const inputPorts = {'switch1Port':switch1Port, 'switch2Port':switch2Port, 'colourPort':colourPort, 'ultrasonicPort':ultrasonicPort}
 
     const deviceConnected  = ref(false)
+    
     return { inputPorts, colourPort, deviceConnected }
   },
   methods: {
     async connectNxt() {
       await NXT.connectDeviceSerial();
       // TOOD: the stuff below on actual connect eventrunCom
-      $('.view1').addClass('d-none');
-      $('.view2').removeClass('d-none');
+
       //deviceName = 'one';
       NXTCommandQueue.runCommandQueue();
       //this.getAllInfo();
@@ -81,7 +81,7 @@ export default {
   },
 
   template: `
-  <div class="view1">
+  <div v-if="!deviceConnected">
     <button class="btn btn-primary" type="button" id="connectDeviceBtn" @click="connectNxt">connect</button>
     <p>Ubuntu serial connect:
     <ul>
@@ -96,9 +96,9 @@ export default {
     <a href="https://github.com/lance-gilmore/lance-gilmore.github.io">github repo</a>
   </div>
 
-<div class="view2 ">
+<div v-if="deviceConnected">
   <div ref="status_display"></div>
-  <DeviceStatusComponent :inputPorts="inputPorts" v-if="deviceConnected" />
+  <DeviceStatusComponent :inputPorts="inputPorts" />
   
 
   <ul class="nav nav-tabs mt-4" id="controlTabs" role="tablist">

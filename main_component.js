@@ -23,7 +23,7 @@ export default {
     const inputPorts = {'switch1Port':switch1Port, 'switch2Port':switch2Port, 'colourPort':colourPort, 'ultrasonicPort':ultrasonicPort}
 
     const deviceConnected  = ref(false)
-    return { inputPorts, colourPort }
+    return { inputPorts, colourPort, deviceConnected }
   },
   methods: {
     async connectNxt() {

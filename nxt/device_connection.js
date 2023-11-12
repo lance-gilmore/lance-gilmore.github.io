@@ -1,31 +1,28 @@
 
-export default {
-    //NXTPort: {},
-    async connectDeviceSerial() {
-      //  return new Promise((resolve) => {
-            if (!"serial" in navigator) {
-                console.log('warning web serial not supported!');
-            }
-            
-            const port = await navigator.serial.requestPort();
-           // this.NXTPort = port;
-            await port.open({ 
-                baudRate: 9600, 
-                dataBits: 8, 
-                stopBits : 1, 
-                parity: 'none',
-                //  bufferSize: 
-                flowControl: 'none'
-            });
-            return port
-            //resolve(port)
-      //  })
+export default class {
+    #NXTPort = {}
 
-    },
+    async constructor() {
+        if (!"serial" in navigator) {
+            console.log('warning web serial not supported!');
+        }
+        
+        const port = await navigator.serial.requestPort();
+        this.#NXTPort = port;
+        await port.open({ 
+            baudRate: 9600, 
+            dataBits: 8, 
+            stopBits : 1, 
+            parity: 'none',
+            //  bufferSize: 
+            flowControl: 'none'
+        });
 
-    async readThePort(port) {
-        while (port.readable) {
-        const reader = port.readable.getReader();
+    }
+
+    async readThePort() {
+        while (this.#NXTPort.readable) {
+        const reader = this.#NXTPort.readable.getReader();
   
         try {
           while (true) {
@@ -47,15 +44,15 @@ export default {
           // TODO: Handle non-fatal read error.
         }
       }
-    },
+    }
 
-    async writeCommand(port, command) {
+    async writeCommand(command) {
         console.log('sending:');
         console.log(command);
-        const writer = port.writable.getWriter();
+        const writer = this.#NXTPort.writable.getWriter();
         await writer.write(command);
         // Allow the serial port to be closed later.
         writer.releaseLock();
-    },
+    }
 
 }

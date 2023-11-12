@@ -7,7 +7,12 @@ export default class {
             console.log('warning web serial not supported!');
         }
         
-        const port = await navigator.serial.requestPort();
+        
+        this.#connectDevice()
+    }
+
+    async #connectDevice() {
+      const port = await navigator.serial.requestPort();
         this.#NXTPort = port;
         await port.open({ 
             baudRate: 9600, 
@@ -17,7 +22,6 @@ export default class {
             //  bufferSize: 
             flowControl: 'none'
         });
-
     }
 
     async readThePort() {

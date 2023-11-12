@@ -2,7 +2,7 @@
 export default {
     //NXTPort: {},
     connectDeviceSerial() {
-        //return new Promise((resolve) => {
+        return new Promise((resolve) => {
             if (!"serial" in navigator) {
                 console.log('warning web serial not supported!');
             }
@@ -17,9 +17,9 @@ export default {
                 //  bufferSize: 
                 flowControl: 'none'
             });
-            return port
-           // resolve(port)
-       // })
+           // return port
+            resolve(port)
+        })
 
     },
 

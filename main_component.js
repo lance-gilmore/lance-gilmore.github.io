@@ -28,7 +28,7 @@ export default {
     return { inputPorts, colourPort, deviceConnected }
   },
   methods: {
-    async connectNxt() {
+    async connectNxt2() {
       const connection = await new NXTConnection;
       
 
@@ -41,7 +41,7 @@ export default {
       this.deviceConnected = true
     },
 
-    async connectNx2t() {
+    async connectNxt() {
       await NXT.connectDeviceSerial();
       // TOOD: the stuff below on actual connect eventrunCom
 

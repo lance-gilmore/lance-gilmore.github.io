@@ -4,10 +4,10 @@ import KeyControlComponent from './key_control/key_control_component.js'
 import CodeControlComponent from './code_control/code_control_component.js'
 import DeviceStatusComponent from './device_status/device_status_component.js'
 import NXTConstants from './nxt/config.js'
-import NXT from '/../nxt/nxt.js'
-import NXTCommands from '/../nxt/commands.js'
-import NXTCommandQueue from '/../nxt/command_queue.js'
-import NXTConnection from '/../nxt/device_connection.js'
+import NXT from './nxt/nxt.js'
+import NXTCommands from './nxt/commands.js'
+import NXTCommandQueue from './nxt/command_queue.js'
+import NXTConnection from './nxt/device_connection.js'
 
 export default {
     components: {
@@ -30,7 +30,7 @@ export default {
   methods: {
     async connectNxt() {
       const connection = await NXTConnection.connectDeviceSerial();
-      
+
       // TOOD: the stuff below on actual connect eventrunCom
 
       //NXTCommandQueue.runCommandQueue();

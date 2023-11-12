@@ -1,7 +1,7 @@
 
 export default {
     //NXTPort: {},
-    connectDeviceSerial() {
+    async connectDeviceSerial() {
         return new Promise((resolve) => {
             if (!"serial" in navigator) {
                 console.log('warning web serial not supported!');

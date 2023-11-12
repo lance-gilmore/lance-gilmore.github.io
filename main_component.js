@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     async connectNxt() {
-      const connection = await new NXTConnection.connectDeviceSerial();
+      const connection = await new NXTConnection;
       
 
       // TOOD: the stuff below on actual connect eventrunCom

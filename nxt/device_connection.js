@@ -2,7 +2,7 @@
 export default class {
     #NXTPort = {}
 
-    async constructor() {
+    constructor() {
         if (!"serial" in navigator) {
             console.log('warning web serial not supported!');
         }

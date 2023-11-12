@@ -12,7 +12,7 @@ export default {
     const batteryPercent = ''
           //deviceName = 'two';
           NXTCommandQueue.addCommandToQueue(function() {
-            devRes = NXTCommands.getInfoPromise();
+            //devRes = NXTCommands.getInfoPromise();
             //deviceName = 'three';
             NXTCommands.getInfo(async function(res) {
               //deviceName = res.deviceName

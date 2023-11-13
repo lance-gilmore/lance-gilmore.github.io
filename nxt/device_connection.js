@@ -8,7 +8,7 @@ export default class {
         }
         
         
-        await this.#connectDevice()
+        this.#connectDevice()
     }
 
     async #connectDevice() {

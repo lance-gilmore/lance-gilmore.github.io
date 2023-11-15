@@ -1,7 +1,14 @@
 import NXT from './nxt.js'
 import NXTConstants from './config.js'
 
-export default {
+export default class {
+
+    #NXTConnection = {}
+
+    constructor(connection) {
+        this.#NXTConnection = connection
+    }
+
     async initUltrasonicSensor(ultrasonicPort) {
         await setInputModeUltrasonic(ultrasonicPort,async function(res){
           let data = [
@@ -13,7 +20,7 @@ export default {
           1,
           66
           ];
-          await NXT.sendMessage(data);
+          await this.#NXTConnection.sendMessage(data);
         });
         //await lsWrite(ultrasonicPort,[65,2],[],async function(res){
         // 0x00, 0x0F, port, 0x02, 0x01, 0x02, 0x42
@@ -28,7 +35,7 @@ export default {
        //   });
        // });
         
-      },
+      }
 
     async runMotorCommand(motorPort,motorPowerPercent,motorMode,motorRegulation,regulatedTurnRatio, motorRunState,tacholimit,resultCallback) {
         const reply = NXT.callbackCheck(resultCallback);
@@ -48,8 +55,8 @@ export default {
         ];
         data = data.concat(tachoBits);
 
-        await NXT.sendMessage(data);
-    },
+        await this.#NXTConnection.sendMessage(data);
+    }
 
     async getMotorstate(motorPort,resultCallback) {
         const data = [
@@ -57,9 +64,9 @@ export default {
             NXTConstants.commandTypes.GET_OUTPUT_STATE,
             motorPort
         ];
-        NXT.addReplyListener(resultCallback);
-        await NXT.sendMessage(data);
-    },
+        this.#NXTConnection.addReplyListener(resultCallback);
+        await this.#NXTConnection.sendMessage(data);
+    }
 
     async lsGetStatus(sensorPort,resultCallback) {
         const data = [
@@ -67,9 +74,9 @@ export default {
             NXTConstants.commandTypes.LS_GET_STATUS,
             sensorPort
         ];
-        NXT.addReplyListener(resultCallback);
-        await NXT.sendMessage(data);
-    },
+        this.#NXTConnection.addReplyListener(resultCallback);
+        await this.#NXTConnection.sendMessage(data);
+    }
 
     async lsWrite(sensorPort,txData,rxData,resultCallback) {
         const reply = NXT.callbackCheck(resultCallback);
@@ -81,8 +88,8 @@ export default {
             rxData.length
         ];
         data = data.concat(txData,rxData);
-        await NXT.sendMessage(data);
-    },
+        await this.#NXTConnection.sendMessage(data);
+    }
 
     async lsRead(sensorPort,resultCallback) {
         const data = [
@@ -90,9 +97,9 @@ export default {
             NXTConstants.commandTypes.LS_READ,
             sensorPort
         ];
-        NXT.addReplyListener(resultCallback);
-        await NXT.sendMessage(data);
-    },
+        this.#NXTConnection.addReplyListener(resultCallback);
+        await this.#NXTConnection.sendMessage(data);
+    }
 
     async setInputModeUltrasonic(ultrasonicPort,resultCallback) {
         const reply = NXT.callbackCheck(resultCallback);
@@ -104,8 +111,8 @@ export default {
             NXTConstants.sensorModes.RAW_MODE
         ];
 
-        await NXT.sendMessage(data);
-    },
+        await this.#NXTConnection.sendMessage(data);
+    }
 
     async setInputModeColour(lightColour,sensorPort,resultCallback) {
         const reply = NXT.callbackCheck(resultCallback);
@@ -117,8 +124,8 @@ export default {
             NXTConstants.sensorModes.RAW_MODE
         ];
 
-        await NXT.sendMessage(data);
-    },
+        await this.#NXTConnection.sendMessage(data);
+    }
 
     async setInputModeSwitch(switchPort,resultCallback) {
         const reply = NXT.callbackCheck(resultCallback);
@@ -130,8 +137,8 @@ export default {
             NXTConstants.sensorModes.BOOLEAN_MODE
         ];
 
-        await NXT.sendMessage(data);
-    },
+        await this.#NXTConnection.sendMessage(data);
+    }
 
     async getInputValues(sensorPort,resultCallback) {
         const data = [
@@ -139,9 +146,9 @@ export default {
             NXTConstants.commandTypes.GET_INPUT_VALUES,
             sensorPort,
         ];
-        NXT.addReplyListener(resultCallback);
-        await NXT.sendMessage(data);
-    },
+        this.#NXTConnection.addReplyListener(resultCallback);
+        await this.#NXTConnection.sendMessage(data);
+    }
 
     async setInputModeLight(active,resultCallback) {
         const reply = NXT.callbackCheck(resultCallback);
@@ -153,8 +160,8 @@ export default {
             NXTConstants.sensorModes.PCT_FULL_SCALE_MODE
         ];
 
-        await NXT.sendMessage(data);
-    },
+        await this.#NXTConnection.sendMessage(data);
+    }
 
     async beep(frequencyHz,durationMilliseconds,resultCallback) {
         const reply = NXT.callbackCheck(resultCallback);
@@ -162,34 +169,34 @@ export default {
         const durationBin = NXT.valToBinArray(durationMilliseconds);
         const messageArray = [reply, NXTConstants.commandTypes.PLAY_TONE].concat(frequencyBin,durationBin);
 
-        await NXT.sendMessage(messageArray);
-    },
+        await this.#NXTConnection.sendMessage(messageArray);
+    }
 
     async getVersion(resultCallback) {
         const messageArray = [
             NXTConstants.getReply.yesSystem,
             NXTConstants.commandTypes.GET_FIRMWARE_VERSION
         ];
-        NXT.addReplyListener(resultCallback);
-        await NXT.sendMessage(messageArray);
-    },
+        this.#NXTConnection.addReplyListener(resultCallback);
+        await this.#NXTConnection.sendMessage(messageArray);
+    }
 
     async getBatteryLevel(resultCallback) {
         const messageArray = [NXTConstants.getReply.yes,NXTConstants.commandTypes.GET_BATTERY_LEVEL]; 
-        NXT.addReplyListener(resultCallback);
-        await NXT.sendMessage(messageArray);
-    },
+        this.#NXTConnection.addReplyListener(resultCallback);
+        await this.#NXTConnection.sendMessage(messageArray);
+    }
 
     async getInfo(resultCallback) {
         const messageArray = [NXTConstants.getReply.yesSystem,NXTConstants.commandTypes.GET_DEVICE_INFO];
-        NXT.addReplyListener(resultCallback);
-        await NXT.sendMessage(messageArray);
-    },
+        this.#NXTConnection.addReplyListener(resultCallback);
+        await this.#NXTConnection.sendMessage(messageArray);
+    }
 
     getInfoPromise() {
         const messageArray = [NXTConstants.getReply.yesSystem,NXTConstants.commandTypes.GET_DEVICE_INFO];
         const promiseRes = NXT.addReplyPromise();
-        NXT.sendMessage(messageArray);
+        this.#NXTConnection.sendMessage(messageArray);
         return promiseRes
     }
 }

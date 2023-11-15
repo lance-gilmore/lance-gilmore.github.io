@@ -7,7 +7,6 @@ export default class {
             console.log('warning web serial not supported!');
         }
         
-        
         this.#connectDevice()
     }
 

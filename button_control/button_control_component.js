@@ -11,11 +11,11 @@ export default {
   setup() {
     return { }
   },
-  props: ['colourPort'],
+  props: ['colourPort', 'commandsNXT'],
   template: `
 <DirectionControlsComponent />
 
-<ColourControlsComponent :colourPort="colourPort" />
+<ColourControlsComponent :colourPort="colourPort" :commandsNXT="commandsNXT" />
 
 <SoundControlsComponent />  
   `

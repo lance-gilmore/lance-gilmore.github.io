@@ -30,6 +30,8 @@ export default {
   methods: {
     async connectNxt() {
       const connection = await new NXTConnection;
+
+      const commandsNXT = new NXTCommands(connection);
       
 
       // TOOD: the stuff below on actual connect eventrunCom
@@ -124,7 +126,7 @@ export default {
     </div>
 
     <div id="button-controls" class="tab-pane fade" role="tabpanel" aria-labelledby="button-control-tabs">
-      <ButtonControlComponent :colourPort="colourPort"/>
+      <ButtonControlComponent :colourPort="colourPort" :commandsNXT="commandsNXT" />
     </div>
 
     <div class="tab-pane fade" id="code-controls" role="tabpanel" aria-labelledby="code-control-tabs">

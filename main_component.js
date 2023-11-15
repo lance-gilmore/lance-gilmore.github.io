@@ -24,14 +24,16 @@ export default {
     const inputPorts = {'switch1Port':switch1Port, 'switch2Port':switch2Port, 'colourPort':colourPort, 'ultrasonicPort':ultrasonicPort}
 
     const deviceConnected  = ref(false)
+
+    const commandsNXT = ref({})
     
-    return { inputPorts, colourPort, deviceConnected }
+    return { inputPorts, colourPort, deviceConnected, commandsNXT }
   },
   methods: {
     async connectNxt() {
       const connection = await new NXTConnection;
 
-      const commandsNXT = new NXTCommands(connection);
+      this.commandsNXT = new NXTCommands(connection);
       
 
       // TOOD: the stuff below on actual connect eventrunCom

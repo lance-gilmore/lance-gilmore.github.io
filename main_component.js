@@ -34,6 +34,7 @@ export default {
       const connection = await new NXTConnection;
 
       this.commandsNXT = new NXTCommands(connection);
+      console.log(this.commandsNXT)
       
 
       // TOOD: the stuff below on actual connect eventrunCom
@@ -41,7 +42,6 @@ export default {
       //NXTCommandQueue.runCommandQueue();
       //this.getAllInfo();
       //addInfoComponent()
-      console.log('here')
       this.deviceConnected = true
     },
 
@@ -52,7 +52,6 @@ export default {
       NXTCommandQueue.runCommandQueue();
       //this.getAllInfo();
       //addInfoComponent()
-      console.log('here')
       this.deviceConnected = true
     },
 

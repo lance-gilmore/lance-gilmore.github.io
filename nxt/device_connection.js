@@ -21,6 +21,7 @@ export default class {
             //  bufferSize: 
             flowControl: 'none'
         });
+        console.log('device connected')
     }
 
     async readThePort() {

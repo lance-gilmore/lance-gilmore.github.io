@@ -35,6 +35,13 @@ export default {
   methods: {
     async connectNxt() {
       const connection = await new NXTConnection;
+      let self = this
+      let refreshIntervalId = setInterval(function(){
+        if (connection.NXTPort !== undefined) {
+          self.deviceConnected = true
+          clearInterval(refreshIntervalId);
+        }
+      },100);
 
       this.commandsNXT = new NXTCommands(connection);
       

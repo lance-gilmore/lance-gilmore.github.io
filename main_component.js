@@ -8,6 +8,7 @@ import NXT from './nxt/nxt.js'
 import NXTCommands from './nxt/commands.js'
 import NXTCommandQueue from './nxt/command_queue.js'
 import NXTConnection from './nxt/device_connection.js'
+import NXTSimplifiedCommands from './nxt/simplified_commands.js'
 
 export default {
     components: {
@@ -26,8 +27,10 @@ export default {
     const deviceConnected  = ref(false)
 
     const commandsNXT = ref({})
+
+    const simpleCommands = ref({})
     
-    return { inputPorts, colourPort, deviceConnected, commandsNXT }
+    return { inputPorts, colourPort, deviceConnected, commandsNXT, simpleCommands }
   },
   methods: {
     async connectNxt() {
@@ -35,7 +38,7 @@ export default {
 
       this.commandsNXT = new NXTCommands(connection);
       
-      
+      this.simpleCommands = new NXTSimplifiedCommands(this.commandsNXT)
 
       // TOOD: the stuff below on actual connect eventrunCom
 
@@ -127,7 +130,7 @@ export default {
     </div>
 
     <div id="button-controls" class="tab-pane fade" role="tabpanel" aria-labelledby="button-control-tabs">
-      <ButtonControlComponent :colourPort="colourPort" :commandsNXT="commandsNXT" />
+      <ButtonControlComponent :colourPort="colourPort" :commandsNXT="commandsNXT" :simpleCommands="simpleCommands" />
     </div>
 
     <div class="tab-pane fade" id="code-controls" role="tabpanel" aria-labelledby="code-control-tabs">

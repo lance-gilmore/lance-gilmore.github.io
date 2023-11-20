@@ -9,6 +9,7 @@ import NXTCommands from './nxt/commands.js'
 import NXTCommandQueue from './nxt/command_queue.js'
 import NXTConnection from './nxt/device_connection.js'
 import NXTSimplifiedCommands from './nxt/simplified_commands.js'
+import NXTDeviceReader from './nxt/device_reader.js'
 
 export default {
     components: {
@@ -29,8 +30,10 @@ export default {
     const commandsNXT = ref({})
 
     const simpleCommands = ref({})
+
+    let commandQueue = {}
     
-    return { inputPorts, colourPort, deviceConnected, commandsNXT, simpleCommands }
+    return { inputPorts, colourPort, deviceConnected, commandsNXT, simpleCommands, commandQueue }
   },
   methods: {
     async connectNxt() {
@@ -44,9 +47,14 @@ export default {
         }
       },100);
 
-      this.commandsNXT = new NXTCommands(connection);
+      const deviceReader = new NXTDeviceReader(connection)
+
+      this.commandsNXT = new NXTCommands(connection, deviceReader);
       
       this.simpleCommands = new NXTSimplifiedCommands(this.commandsNXT)
+
+      this.commandQueue = new NXTCommandQueue(deviceReader)
+
 
       // TOOD: the stuff below on actual connect eventrunCom
 
@@ -115,7 +123,7 @@ export default {
 
 <div v-if="deviceConnected">
   <div ref="status_display"></div>
-  <DeviceStatusComponent :inputPorts="inputPorts" />
+  <DeviceStatusComponent :inputPorts="inputPorts" :commandsNXT="commandsNXT" :commandQueue="commandQueue" />
   
 
   <ul class="nav nav-tabs mt-4" id="controlTabs" role="tablist">

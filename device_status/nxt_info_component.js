@@ -5,46 +5,49 @@ import NXTCommandQueue from '/../nxt/command_queue.js'
 
 export default {
   setup() {
-    const devRes = ref({deviceName: '', bluetoothAddress: ''})
-    const firmwareVersion = ''
-    const protocolVersion = ''
-    const batteryLevelMillivolts = ''
-    const batteryPercent = ''
-          //deviceName = 'two';
-          NXTCommandQueue.addCommandToQueue(function() {
-            //devRes = NXTCommands.getInfoPromise();
-            //deviceName = 'three';
-            NXTCommands.getInfo(async function(res) {
-              //deviceName = res.deviceName
-              //console.log(deviceName)
-              //deviceInfo.bluetoothAddress = res.bluetoothAddress
-              return res
-            });
-          });
-          NXTCommandQueue.addCommandToQueue(function() {
-            NXTCommands.getVersion(async function(res) {
-              //deviceInfo.firmwareVersion = res.firmwareVersion
-              //deviceInfo.protocolVersion = res.protocolVersion
-            });
-          });
-          NXTCommandQueue.addCommandToQueue(function() {
-            NXTCommands.getBatteryLevel(async function(res) {
-              //deviceInfo.batteryLevelMillivolts = res.batteryLevelMillivolts
-              //deviceInfo.batteryPercent = res.batteryPercent
-              //this.initSensors();
-            });
-          });
+    const deviceName = ref('')
+    const bluetoothAddress = ref('')
+    const firmwareVersion = ref('')
+    const protocolVersion = ref('')
+    const batteryLevelMillivolts = ref('')
+    const batteryPercent = ref('')
 
-    return { devRes, firmwareVersion, protocolVersion, batteryLevelMillivolts, batteryPercent }
+    commandQueue.addCommandToQueue(function() {
+        //devRes = NXTCommands.getInfoPromise();
+        //deviceName = 'three';
+        commandsNXT.getInfo(async function(res) {
+          console.log(res)
+          //deviceName = res.deviceName
+          //console.log(deviceName)
+          //deviceInfo.bluetoothAddress = res.bluetoothAddress
+          //return res
+        });
+      });
+      commandQueue.addCommandToQueue(function() {
+        commandsNXT.getVersion(async function(res) {
+          console.log(res)
+          //deviceInfo.firmwareVersion = res.firmwareVersion
+          //deviceInfo.protocolVersion = res.protocolVersion
+        });
+      });
+      commandQueue.addCommandToQueue(function() {
+        commandsNXT.getBatteryLevel(async function(res) {
+          console.log(res)
+          //deviceInfo.batteryLevelMillivolts = res.batteryLevelMillivolts
+          //deviceInfo.batteryPercent = res.batteryPercent
+        });
+      });
+
+    return { deviceName, bluetoothAddress, firmwareVersion, protocolVersion, batteryLevelMillivolts, batteryPercent }
   },
-
+  props: {commandsNXT: {type: NXTCommands, required: true}, commandQueue: {type: NXTCommandQueue, required: true}},
   template: `
   <div class="p-2 info">
     <b>Device Info</b>
     <br>
-    NXT name: {{ devRes.deviceName }} 
+    NXT name: {{ ddeviceName }} 
     <br>
-    Bluetooth address: {{ devRes.bluetoothAddress }}
+    Bluetooth address: {{ bluetoothAddress }}
     <br>
     Firmware version: {{ firmwareVersion }}
     <br>

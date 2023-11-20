@@ -2,6 +2,8 @@ import { ref } from 'vue'
 import NxtInfoComponent from './nxt_info_component.js'
 import InputsComponent from './inputs_component.js'
 import SensorConfigComponent from './sensor_config_component.js'
+import NXTCommandQueue from './../nxt/command_queue.js'
+import NXTCommands from './../nxt/commands.js'
 
 export default {
     components: {
@@ -10,28 +12,19 @@ export default {
         InputsComponent
       },
   setup() {
-    let deviceName = ref('')
-    let bluetoothAddress = ref('')
-    let firmwareVersion = ref('')
-    let protocolVersion = ref('')
-    let batteryLevelMillivolts = ref('')
-    let batteryPercent = ref('')
     const switch1 = ref('')
     const switch2 = ref('')
     const colour = ref('')
     const ultrasonic = ref('')
 
-    return { deviceName, bluetoothAddress, firmwareVersion, protocolVersion, batteryLevelMillivolts, batteryPercent,
-    switch1, switch2, colour, ultrasonic }
+    return { switch1, switch2, colour, ultrasonic }
   },
-  props: ['inputPorts'],
-  methods: {
-  },
-
+  props: {inputPorts: Object, commandsNXT: {type: NXTCommands, required: true}, commandQueue: {type: NXTCommandQueue, required: true}},
+ 
   template: `
   <div class="row">
     <div class="col">
-      <NxtInfoComponent />
+      <NxtInfoComponent :commandsNXT="commandsNXT" :commandQueue="commandQueue" />
     </div>
     <div class="col">
       <SensorConfigComponent :switch1Port="inputPorts.switch1Port" :switch2Port="inputPorts.switch2Port" :colourPort="inputPorts.colourPort" :ultrasonicPort="inputPorts.ultrasonicPort"  />

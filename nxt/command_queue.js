@@ -1,10 +1,15 @@
-import NXT from './nxt.js'
 
-export default {
-    commandQueue: [],
+export default class {
+    commandQueue = []
+    deviceReader
+
+    constructor(reader) {
+        this.deviceReader = reader
+    }
+    
     async addCommandToQueue(command) {
       this.commandQueue.push(command);
-    },
+    }
     
     async runCommandQueue() {
       let free = true;
@@ -12,14 +17,17 @@ export default {
         if (free && this.commandQueue.length > 0) {
           free = false;
           const command = this.commandQueue.shift();
-          NXT.addReplyListener(function(){
+          this.deviceReader.addReplyListener(function(){
             free = true;
           });
           await command();
         }
-        await NXT.sleep(10);
+        await this.sleep(10);
       }
-    },
+    }
 
+    sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
 
 }

@@ -4,9 +4,11 @@ import NXTConstants from './config.js'
 export default class {
 
     NXTConnection
+    reader
 
-    constructor(connection) {
+    constructor(connection, reader) {
         this.NXTConnection = connection
+        this.reader = reader
     }
 
     async initUltrasonicSensor(ultrasonicPort) {
@@ -39,7 +41,7 @@ export default class {
 
     async runMotorCommand(motorPort,motorPowerPercent,motorMode,motorRegulation,regulatedTurnRatio, motorRunState,tacholimit,resultCallback) {
         const reply = NXT.callbackCheck(resultCallback);
-        let tachoBits = NXT.valToBinArray(tacholimit); // tacholimit 0,0,0,0 for running forever
+        let tachoBits = this.valToBinArray(tacholimit); // tacholimit 0,0,0,0 for running forever
         while (tachoBits.length < 4) {
             tachoBits.push(0);
         }
@@ -64,7 +66,7 @@ export default class {
             NXTConstants.commandTypes.GET_OUTPUT_STATE,
             motorPort
         ];
-        this.NXTConnection.addReplyListener(resultCallback);
+        this.reader.addReplyListener(resultCallback);
         await this.sendMessage(data);
     }
 
@@ -74,7 +76,7 @@ export default class {
             NXTConstants.commandTypes.LS_GET_STATUS,
             sensorPort
         ];
-        this.NXTConnection.addReplyListener(resultCallback);
+        this.reader.addReplyListener(resultCallback);
         await this.sendMessage(data);
     }
 
@@ -97,7 +99,7 @@ export default class {
             NXTConstants.commandTypes.LS_READ,
             sensorPort
         ];
-        this.NXTConnection.addReplyListener(resultCallback);
+        this.reader.addReplyListener(resultCallback);
         await this.sendMessage(data);
     }
 
@@ -145,7 +147,7 @@ export default class {
             NXTConstants.commandTypes.GET_INPUT_VALUES,
             sensorPort,
         ];
-        this.NXTConnection.addReplyListener(resultCallback);
+        this.reader.addReplyListener(resultCallback);
         await this.sendMessage(data);
     }
 
@@ -164,8 +166,8 @@ export default class {
 
     async beep(frequencyHz,durationMilliseconds,resultCallback) {
         const reply = NXT.callbackCheck(resultCallback);
-        const frequencyBin = NXT.valToBinArray(frequencyHz);
-        const durationBin = NXT.valToBinArray(durationMilliseconds);
+        const frequencyBin = this.valToBinArray(frequencyHz);
+        const durationBin = this.valToBinArray(durationMilliseconds);
         const messageArray = [reply, NXTConstants.commandTypes.PLAY_TONE].concat(frequencyBin,durationBin);
 
         await this.sendMessage(messageArray);
@@ -176,19 +178,19 @@ export default class {
             NXTConstants.getReply.yesSystem,
             NXTConstants.commandTypes.GET_FIRMWARE_VERSION
         ];
-        this.NXTConnection.addReplyListener(resultCallback);
+        this.reader.addReplyListener(resultCallback);
         await this.sendMessage(messageArray);
     }
 
     async getBatteryLevel(resultCallback) {
         const messageArray = [NXTConstants.getReply.yes,NXTConstants.commandTypes.GET_BATTERY_LEVEL]; 
-        this.NXTConnection.addReplyListener(resultCallback);
+        this.reader.addReplyListener(resultCallback);
         await this.sendMessage(messageArray);
     }
 
     async getInfo(resultCallback) {
         const messageArray = [NXTConstants.getReply.yesSystem,NXTConstants.commandTypes.GET_DEVICE_INFO];
-        this.NXTConnection.addReplyListener(resultCallback);
+        this.reader.addReplyListener(resultCallback);
         await this.sendMessage(messageArray);
     }
 

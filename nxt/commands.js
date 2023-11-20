@@ -203,7 +203,7 @@ export default class {
         const lengthBits = this.getLengthBits(messageArray);
         const fullMessage = lengthBits.concat(messageArray);
         
-        await this.NXTConnection.writeCommand(this.NXTPort,Uint8Array.from(fullMessage));
+        await this.NXTConnection.writeCommand(Uint8Array.from(fullMessage));
       }
 
       getLengthBits(messageArray) {

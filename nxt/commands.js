@@ -4,12 +4,9 @@ import NXTConstants from './config.js'
 export default class {
 
     NXTConnection
-    inst
 
     constructor(connection) {
         this.NXTConnection = connection
-        this.inst = Math.random()
-        console.log('commands constructed '+this.inst)
     }
 
     async initUltrasonicSensor(ultrasonicPort) {
@@ -23,7 +20,7 @@ export default class {
           1,
           66
           ];
-          await this.NXTConnection.sendMessage(data);
+          await this.sendMessage(data);
         });
         //await lsWrite(ultrasonicPort,[65,2],[],async function(res){
         // 0x00, 0x0F, port, 0x02, 0x01, 0x02, 0x42
@@ -58,7 +55,7 @@ export default class {
         ];
         data = data.concat(tachoBits);
 
-        await this.NXTConnection.sendMessage(data);
+        await this.sendMessage(data);
     }
 
     async getMotorstate(motorPort,resultCallback) {
@@ -68,7 +65,7 @@ export default class {
             motorPort
         ];
         this.NXTConnection.addReplyListener(resultCallback);
-        await this.NXTConnection.sendMessage(data);
+        await this.sendMessage(data);
     }
 
     async lsGetStatus(sensorPort,resultCallback) {
@@ -78,7 +75,7 @@ export default class {
             sensorPort
         ];
         this.NXTConnection.addReplyListener(resultCallback);
-        await this.NXTConnection.sendMessage(data);
+        await this.sendMessage(data);
     }
 
     async lsWrite(sensorPort,txData,rxData,resultCallback) {
@@ -91,7 +88,7 @@ export default class {
             rxData.length
         ];
         data = data.concat(txData,rxData);
-        await this.NXTConnection.sendMessage(data);
+        await this.sendMessage(data);
     }
 
     async lsRead(sensorPort,resultCallback) {
@@ -101,7 +98,7 @@ export default class {
             sensorPort
         ];
         this.NXTConnection.addReplyListener(resultCallback);
-        await this.NXTConnection.sendMessage(data);
+        await this.sendMessage(data);
     }
 
     async setInputModeUltrasonic(ultrasonicPort,resultCallback) {
@@ -114,7 +111,7 @@ export default class {
             NXTConstants.sensorModes.RAW_MODE
         ];
 
-        await this.NXTConnection.sendMessage(data);
+        await this.sendMessage(data);
     }
 
     async setInputModeColour(lightColour,sensorPort,resultCallback) {
@@ -126,8 +123,7 @@ export default class {
             lightColour,
             NXTConstants.sensorModes.RAW_MODE
         ];
-        console.log('setting colour '+this.inst)
-        await this.NXTConnection.sendMessage(data);
+        await this.sendMessage(data);
     }
 
     async setInputModeSwitch(switchPort,resultCallback) {
@@ -140,7 +136,7 @@ export default class {
             NXTConstants.sensorModes.BOOLEAN_MODE
         ];
 
-        await this.NXTConnection.sendMessage(data);
+        await this.sendMessage(data);
     }
 
     async getInputValues(sensorPort,resultCallback) {
@@ -150,7 +146,7 @@ export default class {
             sensorPort,
         ];
         this.NXTConnection.addReplyListener(resultCallback);
-        await this.NXTConnection.sendMessage(data);
+        await this.sendMessage(data);
     }
 
     async setInputModeLight(active,resultCallback) {
@@ -163,7 +159,7 @@ export default class {
             NXTConstants.sensorModes.PCT_FULL_SCALE_MODE
         ];
 
-        await this.NXTConnection.sendMessage(data);
+        await this.sendMessage(data);
     }
 
     async beep(frequencyHz,durationMilliseconds,resultCallback) {
@@ -172,7 +168,7 @@ export default class {
         const durationBin = NXT.valToBinArray(durationMilliseconds);
         const messageArray = [reply, NXTConstants.commandTypes.PLAY_TONE].concat(frequencyBin,durationBin);
 
-        await this.NXTConnection.sendMessage(messageArray);
+        await this.sendMessage(messageArray);
     }
 
     async getVersion(resultCallback) {
@@ -181,25 +177,56 @@ export default class {
             NXTConstants.commandTypes.GET_FIRMWARE_VERSION
         ];
         this.NXTConnection.addReplyListener(resultCallback);
-        await this.NXTConnection.sendMessage(messageArray);
+        await this.sendMessage(messageArray);
     }
 
     async getBatteryLevel(resultCallback) {
         const messageArray = [NXTConstants.getReply.yes,NXTConstants.commandTypes.GET_BATTERY_LEVEL]; 
         this.NXTConnection.addReplyListener(resultCallback);
-        await this.NXTConnection.sendMessage(messageArray);
+        await this.sendMessage(messageArray);
     }
 
     async getInfo(resultCallback) {
         const messageArray = [NXTConstants.getReply.yesSystem,NXTConstants.commandTypes.GET_DEVICE_INFO];
         this.NXTConnection.addReplyListener(resultCallback);
-        await this.NXTConnection.sendMessage(messageArray);
+        await this.sendMessage(messageArray);
     }
 
     getInfoPromise() {
         const messageArray = [NXTConstants.getReply.yesSystem,NXTConstants.commandTypes.GET_DEVICE_INFO];
         const promiseRes = NXT.addReplyPromise();
-        this.NXTConnection.sendMessage(messageArray);
+        this.sendMessage(messageArray);
         return promiseRes
     }
+
+    async sendMessage(messageArray) {
+        const lengthBits = this.getLengthBits(messageArray);
+        const fullMessage = lengthBits.concat(messageArray);
+        
+        await this.NXTConnection.writeCommand(this.NXTPort,Uint8Array.from(fullMessage));
+      }
+
+      getLengthBits(messageArray) {
+        let lengthBits = this.valToBinArray(messageArray.length);
+        if (lengthBits.length < 2) {
+          lengthBits.push(0);
+        }
+        return lengthBits;
+      }
+
+      valToBinArray(val) {
+        let hex = val.toString(16);
+        let parts = [];
+        let even = false;
+        for (let i=hex.length-1; i>-1;i--) {
+            if (even) {
+                parts.push(parseInt(hex.substr(i,i+1),16));
+            }
+            if (i===0 && !even) {
+                parts.push(parseInt(hex.substr(0,1),16));
+            }
+            even = !even;
+        }
+        return parts;
+      }
 }

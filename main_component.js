@@ -34,7 +34,7 @@ export default {
       const connection = await new NXTConnection;
 
       this.commandsNXT = new NXTCommands(connection);
-      console.log(this.commandsNXT)
+      
       
 
       // TOOD: the stuff below on actual connect eventrunCom

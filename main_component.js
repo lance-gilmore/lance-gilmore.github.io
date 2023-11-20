@@ -53,7 +53,7 @@ export default {
       this.simpleCommands = new NXTSimplifiedCommands(this.commandsNXT)
 
       this.commandQueue = new NXTCommandQueue(deviceReader)
-console.log('queue created')
+      console.log(this.commandQueue)
 
       // TOOD: the stuff below on actual connect eventrunCom
 

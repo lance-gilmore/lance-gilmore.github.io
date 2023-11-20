@@ -1,4 +1,4 @@
-import NXTConstants from './nxt/config.js'
+import NXTConstants from './config.js'
 
 export default class {
     NXTPort

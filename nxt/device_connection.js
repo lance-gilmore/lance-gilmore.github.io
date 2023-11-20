@@ -1,6 +1,6 @@
 
 export default class {
-    #NXTPort = {}
+    NXTPort
 
     constructor() {
         if (!"serial" in navigator) {
@@ -12,7 +12,7 @@ export default class {
 
     async #connectDevice() {
       const port = await navigator.serial.requestPort();
-        this.#NXTPort = port;
+        this.NXTPort = port;
         await port.open({ 
             baudRate: 9600, 
             dataBits: 8, 
@@ -25,8 +25,8 @@ export default class {
     }
 
     async readThePort() {
-        while (this.#NXTPort.readable) {
-        const reader = this.#NXTPort.readable.getReader();
+        while (this.NXTPort.readable) {
+        const reader = this.NXTPort.readable.getReader();
   
         try {
           while (true) {
@@ -53,7 +53,7 @@ export default class {
     async writeCommand(command) {
         console.log('sending:');
         console.log(command);
-        const writer = this.#NXTPort.writable.getWriter();
+        const writer = this.NXTPort.writable.getWriter();
         await writer.write(command);
         // Allow the serial port to be closed later.
         writer.releaseLock();

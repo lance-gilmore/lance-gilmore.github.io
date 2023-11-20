@@ -1,32 +1,33 @@
 import NXTConstants from '../nxt/config.js'
-import NxtCommands from '../nxt/simplified_commands.js'
+//import NxtCommands from '../nxt/simplified_commands.js'
 
 export default {
   
   setup() {
     return { NXTConstants }
   },
+  props: ['simpleCommands'],
   methods: {
     async motorsForwards(motor1, motor2) {
-        await NxtCommands.forwardMotor(motor1);
+        await this.simpleCommands.forwardMotor(motor1);
         if(typeof motor2 !== "undefined") {
-            await NxtCommands.forwardMotor(motor2);
+            await this.simpleCommands.forwardMotor(motor2);
         }
     },
     async motorsBackwards(motor1, motor2) {
-        await NxtCommands.backwardMotor(motor1);
+        await this.simpleCommands.backwardMotor(motor1);
         if(typeof motor2 !== "undefined") {
-            await NxtCommands.backwardMotor(motor2);
+            await this.simpleCommands.backwardMotor(motor2);
         }
     },
     async motorsForwardsBackwards(motor1, motor2) {
-        await NxtCommands.forwardMotor(motor1);
-        await NxtCommands.backwardMotor(motor2);
+        await this.simpleCommands.forwardMotor(motor1);
+        await this.simpleCommands.backwardMotor(motor2);
     },
     async motorsStop (motor1, motor2) {
-        await NxtCommands.stopMotor(motor1);
+        await this.simpleCommands.stopMotor(motor1);
         if(typeof motor2 !== "undefined") {
-            await NxtCommands.stopMotor(motor2);
+            await this.simpleCommands.stopMotor(motor2);
         }
     }
   },

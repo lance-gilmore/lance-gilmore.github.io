@@ -1,11 +1,11 @@
-//import NxtCommands from '../nxt/simplified_commands.js'
+import SimplifiedCommands from '../nxt/simplified_commands.js'
 
 export default {
   
   setup() {
     return { }
   },
-  props: ['simpleCommands'],
+  props: {simpleCommands: {type: SimplifiedCommands, required: true}},
   methods: {
     async beepHorn() {
         await this.simpleCommands.simpleBeep();

@@ -24,6 +24,7 @@ export default {
     },
     setKeysFromConfig(config) {
         let pushing = [];
+        let self = this;
         $('body').off();
         $('body').keyup(async function(event) {
             for (const keyConfig of config) {
@@ -31,13 +32,13 @@ export default {
                     event.preventDefault();
                     pushing = pushing.filter(e => e !== event.which);
                     if (keyConfig.action === 'motora' || keyConfig.action === 'motorab' || keyConfig.action === 'motorac') {
-                        await this.simpleCommands.stopMotor(NXTConstants.motors.PORT_A);
+                        await self.simpleCommands.stopMotor(NXTConstants.motors.PORT_A);
                     }
                     if (keyConfig.action === 'motorb' || keyConfig.action === 'motorab' || keyConfig.action === 'motorbc') {
-                        await this.simpleCommands.stopMotor(NXTConstants.motors.PORT_B);
+                        await self.simpleCommands.stopMotor(NXTConstants.motors.PORT_B);
                     }
                     if (keyConfig.action === 'motorc' || keyConfig.action === 'motorac' || keyConfig.action === 'motorbc') {
-                        await this.simpleCommands.stopMotor(NXTConstants.motors.PORT_C);
+                        await self.simpleCommands.stopMotor(NXTConstants.motors.PORT_C);
                     }
                 }
             }
@@ -55,25 +56,25 @@ export default {
                     pushing.push(event.which);
                     switch (keyConfig.action) {
                         case 'motora' :
-                            await this.simpleCommands.turnMotorSpeed(NXTConstants.motors.PORT_A,keyConfig.speed,(keyConfig.direction === 'forward'));
+                            await self.simpleCommands.turnMotorSpeed(NXTConstants.motors.PORT_A,keyConfig.speed,(keyConfig.direction === 'forward'));
                             break;
                         case 'motorb' :
-                            await this.simpleCommands.turnMotorSpeed(NXTConstants.motors.PORT_B,keyConfig.speed,(keyConfig.direction === 'forward'));
+                            await self.simpleCommands.turnMotorSpeed(NXTConstants.motors.PORT_B,keyConfig.speed,(keyConfig.direction === 'forward'));
                             break;
                         case 'motorc' :
-                            await this.simpleCommands.turnMotorSpeed(NXTConstants.motors.PORT_C,keyConfig.speed,(keyConfig.direction === 'forward'));
+                            await self.simpleCommands.turnMotorSpeed(NXTConstants.motors.PORT_C,keyConfig.speed,(keyConfig.direction === 'forward'));
                             break;
                         case 'motorab' :
-                            await this.simpleCommands.turnMotorSpeed(NXTConstants.motors.PORT_A,keyConfig.speed,(keyConfig.direction === 'forward' || keyConfig.direction === 'forwardbackward'));
-                            await this.simpleCommands.turnMotorSpeed(NXTConstants.motors.PORT_B,keyConfig.speed,(keyConfig.direction === 'forward' || keyConfig.direction === 'backwardforward'));
+                            await self.simpleCommands.turnMotorSpeed(NXTConstants.motors.PORT_A,keyConfig.speed,(keyConfig.direction === 'forward' || keyConfig.direction === 'forwardbackward'));
+                            await self.simpleCommands.turnMotorSpeed(NXTConstants.motors.PORT_B,keyConfig.speed,(keyConfig.direction === 'forward' || keyConfig.direction === 'backwardforward'));
                             break;
                         case 'motorac' :
-                            await this.simpleCommands.turnMotorSpeed(NXTConstants.motors.PORT_A,keyConfig.speed,(keyConfig.direction === 'forward' || keyConfig.direction === 'forwardbackward'));
-                            await this.simpleCommands.turnMotorSpeed(NXTConstants.motors.PORT_C,keyConfig.speed,(keyConfig.direction === 'forward' || keyConfig.direction === 'backwardforward'));
+                            await self.simpleCommands.turnMotorSpeed(NXTConstants.motors.PORT_A,keyConfig.speed,(keyConfig.direction === 'forward' || keyConfig.direction === 'forwardbackward'));
+                            await self.simpleCommands.turnMotorSpeed(NXTConstants.motors.PORT_C,keyConfig.speed,(keyConfig.direction === 'forward' || keyConfig.direction === 'backwardforward'));
                             break;
                         case 'motorbc' :
-                            await this.simpleCommands.turnMotorSpeed(NXTConstants.motors.PORT_B,keyConfig.speed,(keyConfig.direction === 'forward' || keyConfig.direction === 'forwardbackward'));
-                            await this.simpleCommands.turnMotorSpeed(NXTConstants.motors.PORT_C,keyConfig.speed,(keyConfig.direction === 'forward' || keyConfig.direction === 'backwardforward'));
+                            await self.simpleCommands.turnMotorSpeed(NXTConstants.motors.PORT_B,keyConfig.speed,(keyConfig.direction === 'forward' || keyConfig.direction === 'forwardbackward'));
+                            await self.simpleCommands.turnMotorSpeed(NXTConstants.motors.PORT_C,keyConfig.speed,(keyConfig.direction === 'forward' || keyConfig.direction === 'backwardforward'));
                             break;
                     }
                 }

@@ -1,6 +1,8 @@
 import DirectionControlsComponent from './direction_control_component.js'
 import ColourControlsComponent from './colour_control_component.js'
 import SoundControlsComponent from './sound_control_component.js'
+import SimplifiedCommands from '../nxt/simplified_commands.js'
+import NXTCommands from '/../nxt/commands.js'
 
 export default {
   components: {
@@ -11,7 +13,7 @@ export default {
   setup() {
     return { }
   },
-  props: ['colourPort', 'commandsNXT', 'simpleCommands'],
+  props: {colourPort: Number, commandsNXT: {type: NXTCommands, required: true}, simpleCommands: {type: SimplifiedCommands, required: true}},
   template: `
 <DirectionControlsComponent :simpleCommands="simpleCommands" />
 

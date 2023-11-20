@@ -1,7 +1,7 @@
 //import NXTCommands from './commands.js'
 import NXTConstants from './config.js'
 
-export default class {
+export default class SimplifiedCommands {
 
   NXTCommands
 

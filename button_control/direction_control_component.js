@@ -1,12 +1,11 @@
 import NXTConstants from '../nxt/config.js'
-//import NxtCommands from '../nxt/simplified_commands.js'
 
 export default {
   
   setup() {
     return { NXTConstants }
   },
-  props: ['simpleCommands'],
+  props: {simpleCommands: SimplifiedCommands},
   methods: {
     async motorsForwards(motor1, motor2) {
         await this.simpleCommands.forwardMotor(motor1);

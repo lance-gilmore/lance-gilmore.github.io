@@ -31,7 +31,7 @@ export default {
 
     const simpleCommands = ref({})
 
-    let commandQueue = ref({})
+    const commandQueue = ref({})
     
     return { inputPorts, colourPort, deviceConnected, commandsNXT, simpleCommands, commandQueue }
   },
@@ -53,7 +53,7 @@ export default {
       this.simpleCommands = new NXTSimplifiedCommands(this.commandsNXT)
 
       this.commandQueue = new NXTCommandQueue(deviceReader)
-
+console.log('queue created')
 
       // TOOD: the stuff below on actual connect eventrunCom
 

@@ -1,4 +1,5 @@
 import NXTConstants from '../nxt/config.js'
+import SimplifiedCommands from '../nxt/simplified_commands.js'
 
 export default {
   

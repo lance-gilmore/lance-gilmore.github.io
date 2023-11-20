@@ -4,12 +4,12 @@ import NXTConstants from './config.js'
 export default class {
 
     #NXTConnection
-    #inst
+    inst
 
     constructor(connection) {
         this.#NXTConnection = connection
-        this.#inst = Math.random()
-        console.log('commands constructed '+this.#inst)
+        this.inst = Math.random()
+        console.log('commands constructed '+this.inst)
     }
 
     async initUltrasonicSensor(ultrasonicPort) {
@@ -126,7 +126,7 @@ export default class {
             lightColour,
             NXTConstants.sensorModes.RAW_MODE
         ];
-        console.log('setting colour '+this.#inst)
+        console.log('setting colour '+this.inst)
         await this.#NXTConnection.sendMessage(data);
     }
 

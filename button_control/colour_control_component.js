@@ -7,7 +7,6 @@ export default {
     const selectedColour = ref(NXTConstants.sensorTypes.COLOR_NONE)
     return { NXTConstants, selectedColour }
   },
-  props: {simpleCommands: {type: SimplifiedCommands, required: true}},
   props: {colourPort: int, commandsNXT: {type: NXTCommands, required: true}},
   methods: {
     async changeLight(colour) {

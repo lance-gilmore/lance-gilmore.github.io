@@ -126,7 +126,7 @@ export default {
   <div class="tab-content" id="controlTabsContent">
 
     <div id="remote-controls" class="tab-pane fade show active" role="tabpanel" aria-labelledby="remote-control-tabs">
-      <KeyControlComponent/>
+      <KeyControlComponent :simpleCommands="simpleCommands" />
     </div>
 
     <div id="button-controls" class="tab-pane fade" role="tabpanel" aria-labelledby="button-control-tabs">

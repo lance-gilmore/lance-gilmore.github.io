@@ -12,10 +12,10 @@ export default {
     const batteryLevelMillivolts = ref('')
     const batteryPercent = ref('')
 
-    commandQueue.addCommandToQueue(function() {
+    this.commandQueue.addCommandToQueue(function() {
         //devRes = NXTCommands.getInfoPromise();
         //deviceName = 'three';
-        commandsNXT.getInfo(async function(res) {
+        this.commandsNXT.getInfo(async function(res) {
           console.log(res)
           //deviceName = res.deviceName
           //console.log(deviceName)
@@ -23,15 +23,15 @@ export default {
           //return res
         });
       });
-      commandQueue.addCommandToQueue(function() {
-        commandsNXT.getVersion(async function(res) {
+      this.commandQueue.addCommandToQueue(function() {
+        this.commandsNXT.getVersion(async function(res) {
           console.log(res)
           //deviceInfo.firmwareVersion = res.firmwareVersion
           //deviceInfo.protocolVersion = res.protocolVersion
         });
       });
-      commandQueue.addCommandToQueue(function() {
-        commandsNXT.getBatteryLevel(async function(res) {
+      this.commandQueue.addCommandToQueue(function() {
+        this.commandsNXT.getBatteryLevel(async function(res) {
           console.log(res)
           //deviceInfo.batteryLevelMillivolts = res.batteryLevelMillivolts
           //deviceInfo.batteryPercent = res.batteryPercent

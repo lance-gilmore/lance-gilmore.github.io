@@ -11,8 +11,8 @@ export default class {
     }
 
     async #connectDevice() {
-      const port = await navigator.serial.requestPort();
-        this.NXTPort = port;
+        const port = await navigator.serial.requestPort();
+        
         await port.open({ 
             baudRate: 9600, 
             dataBits: 8, 
@@ -21,6 +21,7 @@ export default class {
             //  bufferSize: 
             flowControl: 'none'
         });
+        this.NXTPort = port;
         console.log('device connected')
     }
 

@@ -38,6 +38,7 @@ export default {
       let self = this
       let refreshIntervalId = setInterval(function(){
         if (connection.NXTPort !== undefined) {
+          console.log(connection.NXTPort)
           self.deviceConnected = true
           clearInterval(refreshIntervalId);
         }

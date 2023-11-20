@@ -22,7 +22,6 @@ export default class {
             flowControl: 'none'
         });
         this.NXTPort = port;
-        console.log('device connected')
     }
 
     async readThePort() {

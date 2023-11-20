@@ -53,7 +53,6 @@ export default {
       //NXTCommandQueue.runCommandQueue();
       //this.getAllInfo();
       //addInfoComponent()
-      //this.deviceConnected = true
     },
 
     async connectNxt2() {

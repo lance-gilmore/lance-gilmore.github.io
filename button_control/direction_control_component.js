@@ -6,7 +6,7 @@ export default {
   setup() {
     return { NXTConstants }
   },
-  props: {simpleCommands: SimplifiedCommands},
+  props: {simpleCommands: {type: SimplifiedCommands, required: true}},
   methods: {
     async motorsForwards(motor1, motor2) {
         await this.simpleCommands.forwardMotor(motor1);

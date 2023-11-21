@@ -12,7 +12,7 @@ export default {
 
     return { switch1, switch2, colour, ultrasonic }
   },
-  props: {commandsNXT: {type: NXTCommands, required: true}, commandQueue: {type: NXTCommandQueue, required: true}},
+  props: {inputPorts: {type: Object}, commandsNXT: {type: NXTCommands, required: true}, commandQueue: {type: NXTCommandQueue, required: true}},
   mounted() {
     this.pollSensors()
   },
@@ -25,19 +25,19 @@ export default {
         if (!polling) {
           polling = true;
           this.commandQueue.addCommandToQueue(function() {
-            that.commandsNXT.getInputValues(switch1Port,function(res){
+            that.commandsNXT.getInputValues(that.inputPorts.switch1Port,function(res){
               console.log(res);
               that.switch1 = res.pressed
             });
           });
           this.commandQueue.addCommandToQueue(function() {
-            that.commandsNXT.getInputValues(switch2Port,function(res){
+            that.commandsNXT.getInputValues(that.inputPorts.switch2Port,function(res){
               console.log(res);
               that.switch2 = res.pressed
             });
           });
           this.commandQueue.addCommandToQueue(function() {
-            that.commandsNXT.getInputValues(colourPort,function(res){
+            that.commandsNXT.getInputValues(that.inputPorts.colourPort,function(res){
               console.log(res);
               that.colour = res.colour
               

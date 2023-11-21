@@ -24,7 +24,7 @@ export default {
       <SensorConfigComponent :switch1Port="inputPorts.switch1Port" :switch2Port="inputPorts.switch2Port" :colourPort="inputPorts.colourPort" :ultrasonicPort="inputPorts.ultrasonicPort"  />
     </div>
     <div class="col">
-      <InputsComponent :commandsNXT="commandsNXT" :commandQueue="commandQueue" />
+      <InputsComponent :commandsNXT="commandsNXT" :commandQueue="commandQueue" :inputPorts="inputPorts" />
     </div>
   </div>
   `

@@ -3,11 +3,11 @@ import NXTConstants from './config.js'
 
 export default class {
 
-    NXTConnection
+    #NXTConnection
     reader
 
     constructor(connection, reader) {
-        this.NXTConnection = connection
+        this.#NXTConnection = connection
         this.reader = reader
     }
 
@@ -205,7 +205,7 @@ export default class {
         const lengthBits = this.getLengthBits(messageArray);
         const fullMessage = lengthBits.concat(messageArray);
         
-        await this.NXTConnection.writeCommand(Uint8Array.from(fullMessage));
+        await this.#NXTConnection.writeCommand(Uint8Array.from(fullMessage));
       }
 
       getLengthBits(messageArray) {

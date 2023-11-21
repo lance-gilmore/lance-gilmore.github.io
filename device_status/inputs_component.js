@@ -14,9 +14,29 @@ export default {
   },
   props: {inputPorts: {type: Object}, commandsNXT: {type: NXTCommands, required: true}, commandQueue: {type: NXTCommandQueue, required: true}},
   mounted() {
-    this.pollSensors()
+    //this.pollSensors()
   },
   methods: {
+    async addListeners() {
+      let that = this
+      this.NXTCommands.addSwitchListener(function(){
+        console.log('switch callback')
+        console.log(res);
+        that.switch1 = res.pressed
+        that.switch2 = res.pressed
+      })
+      this.NXTCommands.addColourListener(function(){
+        console.log('colour callback')
+        console.log(res);
+        that.colour = res.colour
+      })
+    },
+    async sendPolling() {
+      let that = this
+      this.commandQueue.addCommandToQueue(function() {
+        that.commandsNXT.getInputValues(that.inputPorts.switch1Port)
+      })
+    },
     async pollSensors() {
       let that = this
       let polling = false;
@@ -73,6 +93,9 @@ export default {
     Colour sensor: {{ colour }}
     <br>
     Ultrasonic: {{ ultrasonic }}
+
+    <button type="button" @click="addListeners()">add listeners</button>
+    <button type="button" @click="sendPolling()">Polling</button>
   </div>
   `
 }

@@ -1,18 +1,18 @@
 
 export default class {
-    commandQueue = []
-    deviceReader
+    #commandQueue = []
+    #deviceReader
 
     constructor(reader) {
-        this.deviceReader = reader
-        this.runCommandQueue()
+        this.#deviceReader = reader
+        this.#runCommandQueue()
     }
     
     async addCommandToQueue(command) {
       this.commandQueue.push(command);
     }
     
-    async runCommandQueue() {
+    async #runCommandQueue() {
       let free = true;
       while (true) {
         if (free && this.commandQueue.length > 0) {
@@ -23,11 +23,11 @@ export default class {
           });
           await command();
         }
-        await this.sleep(10);
+        await this.#sleep(10);
       }
     }
 
-    sleep(ms) {
+    #sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
     }
 

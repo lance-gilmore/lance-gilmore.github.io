@@ -139,7 +139,7 @@ export default class {
           const colour = NXTConstants.sensorFullColours[scaledValue];
           console.log('colour: '+colour);
           reply.colour = colour;
-          #triggerColourEvents(reply)
+          this.#triggerColourEvents(reply)
           break;
         }
     }

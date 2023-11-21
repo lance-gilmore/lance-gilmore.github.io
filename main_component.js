@@ -48,6 +48,7 @@ export default {
           that.simpleCommands = new NXTSimplifiedCommands(that.commandsNXT)
 
           that.commandQueue = new NXTCommandQueue(deviceReader)
+          
           that.deviceConnected = true
 
           clearInterval(refreshIntervalId);

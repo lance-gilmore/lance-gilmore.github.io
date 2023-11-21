@@ -23,11 +23,11 @@ export default class {
           });
           await command();
         }
-        await this.#sleep(10);
+        await this.sleep(10);
       }
     }
 
-    #sleep(ms) {
+    sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
     }
 

@@ -5,7 +5,7 @@ import NXTCommandQueue from '/../nxt/command_queue.js'
 
 export default {
   setup(props) {
-    const deviceName = ref('')
+    let deviceName = ref('')
     const bluetoothAddress = ref('')
     const firmwareVersion = ref('')
     const protocolVersion = ref('')
@@ -16,7 +16,7 @@ export default {
         //devRes = NXTCommands.getInfoPromise();
         deviceName = 'three';
         props.commandsNXT.getInfo(async function(res) {
-          console.log(res)
+          //console.log(res)
           deviceName = 'four';
           //deviceName = res.deviceName
           //console.log(deviceName)
@@ -26,14 +26,14 @@ export default {
       });
       props.commandQueue.addCommandToQueue(function() {
         props.commandsNXT.getVersion(async function(res) {
-          console.log(res)
+          //console.log(res)
           //deviceInfo.firmwareVersion = res.firmwareVersion
           //deviceInfo.protocolVersion = res.protocolVersion
         });
       });
       props.commandQueue.addCommandToQueue(function() {
         props.commandsNXT.getBatteryLevel(async function(res) {
-          console.log(res)
+          //console.log(res)
           //deviceInfo.batteryLevelMillivolts = res.batteryLevelMillivolts
           //deviceInfo.batteryPercent = res.batteryPercent
         });

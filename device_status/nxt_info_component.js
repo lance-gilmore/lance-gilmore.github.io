@@ -4,21 +4,18 @@ import NXTCommandQueue from '/../nxt/command_queue.js'
 
 
 export default {
-  setup() {
+  setup(props) {
     const deviceName = ref('')
     const bluetoothAddress = ref('')
     const firmwareVersion = ref('')
     const protocolVersion = ref('')
     const batteryLevelMillivolts = ref('')
     const batteryPercent = ref('')
-    console.log(this.commandQueue)
-    console.log('here')
-    return;
 
-    this.commandQueue.addCommandToQueue(function() {
+    props.commandQueue.addCommandToQueue(function() {
         //devRes = NXTCommands.getInfoPromise();
         //deviceName = 'three';
-        this.commandsNXT.getInfo(async function(res) {
+        props.commandsNXT.getInfo(async function(res) {
           console.log(res)
           //deviceName = res.deviceName
           //console.log(deviceName)
@@ -26,15 +23,15 @@ export default {
           //return res
         });
       });
-      this.commandQueue.addCommandToQueue(function() {
-        this.commandsNXT.getVersion(async function(res) {
+      props.commandQueue.addCommandToQueue(function() {
+        props.commandsNXT.getVersion(async function(res) {
           console.log(res)
           //deviceInfo.firmwareVersion = res.firmwareVersion
           //deviceInfo.protocolVersion = res.protocolVersion
         });
       });
-      this.commandQueue.addCommandToQueue(function() {
-        this.commandsNXT.getBatteryLevel(async function(res) {
+      props.commandQueue.addCommandToQueue(function() {
+        props.commandsNXT.getBatteryLevel(async function(res) {
           console.log(res)
           //deviceInfo.batteryLevelMillivolts = res.batteryLevelMillivolts
           //deviceInfo.batteryPercent = res.batteryPercent

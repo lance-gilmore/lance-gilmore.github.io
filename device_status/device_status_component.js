@@ -11,12 +11,12 @@ export default {
         NxtInfoComponent,
         InputsComponent
       },
-  setup() {
+  setup(props) {
     const switch1 = ref('')
     const switch2 = ref('')
     const colour = ref('')
     const ultrasonic = ref('')
-    console.log(this.commandQueue)
+    console.log(props.commandQueue)
 
     return { switch1, switch2, colour, ultrasonic }
   },

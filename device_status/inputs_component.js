@@ -45,7 +45,7 @@ export default {
             });
           });
         }
-        await commandQueue.sleep(1000);
+        await this.commandQueue.sleep(1000);
       }
     }
   },

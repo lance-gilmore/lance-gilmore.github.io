@@ -5,6 +5,7 @@ export default class {
 
     constructor(reader) {
         this.deviceReader = reader
+        this.runCommandQueue()
     }
     
     async addCommandToQueue(command) {

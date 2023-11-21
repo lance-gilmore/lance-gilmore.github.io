@@ -231,4 +231,12 @@ export default class {
         }
         return parts;
       }
+
+      addSwitchListener(func) {
+        this.#reader.addSwitchListener(func)
+      }
+
+      addColourListener(func) {
+        this.#reader.addColourListener(func)
+      }
 }

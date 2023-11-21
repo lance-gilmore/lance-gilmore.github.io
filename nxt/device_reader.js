@@ -162,7 +162,7 @@ export default class {
         }
     }
     
-    addSwitchListener(func) {
+    addColourListener(func) {
         this.#continuousColourListeners.push(func);
     }
 

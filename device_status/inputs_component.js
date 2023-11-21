@@ -20,28 +20,41 @@ export default {
     async pollSensors() {
       let that = this
       let polling = false;
+
+      this.NXTCommands.addSwitchListener(function(){
+        console.log('switch callback')
+        console.log(res);
+        that.switch1 = res.pressed
+        that.switch2 = res.pressed
+      })
+
       console.log('start polling');
       while (true) {
         if (!polling) {
           polling = true;
+
           this.commandQueue.addCommandToQueue(function() {
-            that.commandsNXT.getInputValues(that.inputPorts.switch1Port,function(res){
-              console.log(res);
-              that.switch1 = res.pressed
-            });
+            that.commandsNXT.getInputValues(that.inputPorts.switch1Port
+             // ,function(res){
+             // console.log(res);
+             // that.switch1 = res.pressed
+            //}
+            );
           });
           this.commandQueue.addCommandToQueue(function() {
-            that.commandsNXT.getInputValues(that.inputPorts.switch2Port,function(res){
-              console.log(res);
-              that.switch2 = res.pressed
-            });
+            that.commandsNXT.getInputValues(that.inputPorts.switch2Port
+              //,function(res){
+              //console.log(res);
+              //that.switch2 = res.pressed
+            //}
+            );
           });
           this.commandQueue.addCommandToQueue(function() {
             that.commandsNXT.getInputValues(that.inputPorts.colourPort,function(res){
               console.log(res);
               that.colour = res.colour
               
-              //polling = false;
+              polling = false;
             });
           });
         }

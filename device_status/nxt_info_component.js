@@ -2,9 +2,8 @@ import { ref } from 'vue'
 import NXTCommands from '/../nxt/commands.js'
 import NXTCommandQueue from '/../nxt/command_queue.js'
 
-
 export default {
-  setup(props) {
+  setup() {
     const deviceName = ref('')
     const bluetoothAddress = ref('')
     const firmwareVersion = ref('')

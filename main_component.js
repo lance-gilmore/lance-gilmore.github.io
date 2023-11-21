@@ -26,11 +26,8 @@ export default {
     const inputPorts = {'switch1Port':switch1Port, 'switch2Port':switch2Port, 'colourPort':colourPort, 'ultrasonicPort':ultrasonicPort}
 
     const deviceConnected  = ref(false)
-
     const commandsNXT = {}
-
     const simpleCommands = {}
-
     const commandQueue = {}
     
     return { inputPorts, colourPort, deviceConnected, commandsNXT, simpleCommands, commandQueue }

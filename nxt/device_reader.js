@@ -9,7 +9,7 @@ export default class {
     }
 
     async #readThePort() {
-        while (this.#connection.NXTPort.readable) {
+      while (this.#connection.NXTPort.readable) {
         const reader = this.#connection.NXTPort.readable.getReader();
   
         try {
@@ -32,6 +32,7 @@ export default class {
           // TODO: Handle non-fatal read error.
         }
       }
+      console.log('not reading...')
     }
 
     async #processResponse(message) {

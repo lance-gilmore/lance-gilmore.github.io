@@ -42,67 +42,22 @@ export default {
       let refreshIntervalId = setInterval(function(){
         if (connection.NXTPort !== undefined) {
           const deviceReader = new NXTDeviceReader(connection)
-
           that.commandsNXT = new NXTCommands(connection, deviceReader);
-      
           that.simpleCommands = new NXTSimplifiedCommands(that.commandsNXT)
-
           that.commandQueue = new NXTCommandQueue(deviceReader)
-          
           that.deviceConnected = true
-
+          that.initSensors()
           clearInterval(refreshIntervalId);
         }
       },100);
 
-      
-
-      // TOOD: the stuff below on actual connect eventrunCom
-
-      //NXTCommandQueue.runCommandQueue();
-      //this.getAllInfo();
-      //addInfoComponent()
     },
 
-    async connectNxt2() {
-      await NXT.connectDeviceSerial();
-      // TOOD: the stuff below on actual connect eventrunCom
-
-      NXTCommandQueue.runCommandQueue();
-      //this.getAllInfo();
-      //addInfoComponent()
-      this.deviceConnected = true
-    },
-
-    async getAllInfo() {
-      //deviceName = 'two';
-      NXTCommandQueue.addCommandToQueue(function() {
-        //deviceName = 'three';
-        NXTCommands.getInfo(async function(res) {
-          //deviceName = res.deviceName
-          //console.log(deviceName)
-          //deviceInfo.bluetoothAddress = res.bluetoothAddress
-        });
-      });
-      NXTCommandQueue.addCommandToQueue(function() {
-        NXTCommands.getVersion(async function(res) {
-          //deviceInfo.firmwareVersion = res.firmwareVersion
-          //deviceInfo.protocolVersion = res.protocolVersion
-        });
-      });
-      NXTCommandQueue.addCommandToQueue(function() {
-        NXTCommands.getBatteryLevel(async function(res) {
-          //deviceInfo.batteryLevelMillivolts = res.batteryLevelMillivolts
-          //deviceInfo.batteryPercent = res.batteryPercent
-          //this.initSensors();
-        });
-      });
-    },
     async initSensors() {
-      await NXT.setInputModeColour(NXTConstants.sensorTypes.COLOR_NONE,this.colourPort);
-      await NXT.setInputModeSwitch(this.switch1Port);
-      await NXT.setInputModeSwitch(this.switch2Port);
-      await NXT.initUltrasonicSensor(this.ultrasonicPort);
+      await this.setInputModeColour(NXTConstants.sensorTypes.COLOR_NONE,this.colourPort);
+      await this.setInputModeSwitch(this.switch1Port);
+      await this.setInputModeSwitch(this.switch2Port);
+      await this.initUltrasonicSensor(this.ultrasonicPort);
     }
   },
 

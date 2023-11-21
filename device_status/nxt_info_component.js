@@ -18,24 +18,18 @@ export default {
     let that = this
     this.commandQueue.addCommandToQueue(function() {
       that.commandsNXT.getInfo(async function(res) {
-        //console.log(res)
         that.deviceName = res.deviceName;
-        //deviceName = res.deviceName
-        //console.log(deviceName)
         that.bluetoothAddress = res.bluetoothAddress
-        //return res
       });
     });
     this.commandQueue.addCommandToQueue(function() {
       that.commandsNXT.getVersion(async function(res) {
-        //console.log(res)
         that.firmwareVersion = res.firmwareVersion
         that.protocolVersion = res.protocolVersion
       });
     });
     this.commandQueue.addCommandToQueue(function() {
       that.commandsNXT.getBatteryLevel(async function(res) {
-        //console.log(res)
         that.batteryLevelMillivolts = res.batteryLevelMillivolts
         that.batteryPercent = res.batteryPercent
       });

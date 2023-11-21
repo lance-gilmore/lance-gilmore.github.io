@@ -24,32 +24,6 @@ export default class {
         this.NXTPort = port;
     }
 
-    async readThePort() {
-        while (this.NXTPort.readable) {
-        const reader = this.NXTPort.readable.getReader();
-  
-        try {
-          while (true) {
-            const { value, done } = await reader.read();
-            if (done) {
-              console.log('reader done');
-              // Allow the serial port to be closed later.
-              reader.releaseLock();
-              break;
-            }
-            if (value) {
-              console.log('received:');
-              console.log(value);
-              processResponse(value);
-            }
-          }
-        } catch (error) {
-            console.log('caught error');
-          // TODO: Handle non-fatal read error.
-        }
-      }
-    }
-
     async writeCommand(command) {
         console.log('sending:');
         console.log(command);

@@ -14,9 +14,10 @@ export default {
 
     props.commandQueue.addCommandToQueue(function() {
         //devRes = NXTCommands.getInfoPromise();
-        //deviceName = 'three';
+        deviceName = 'three';
         props.commandsNXT.getInfo(async function(res) {
           console.log(res)
+          deviceName = 'four';
           //deviceName = res.deviceName
           //console.log(deviceName)
           //deviceInfo.bluetoothAddress = res.bluetoothAddress

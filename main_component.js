@@ -31,7 +31,7 @@ export default {
 
     const simpleCommands = ref({})
 
-    const commandQueue = ref({})
+    const commandQueue = {}
     
     return { inputPorts, colourPort, deviceConnected, commandsNXT, simpleCommands, commandQueue }
   },

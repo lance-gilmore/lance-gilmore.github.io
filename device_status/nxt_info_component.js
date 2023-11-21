@@ -17,7 +17,7 @@ export default {
     return { deviceName, bluetoothAddress, firmwareVersion, protocolVersion, batteryLevelMillivolts, batteryPercent }
   },
   mounted() {
-    deviceName = 'onez'
+    this.deviceName = 'onez'
     this.commandQueue.addCommandToQueue(function() {
       //devRes = NXTCommands.getInfoPromise();
       this.deviceName = 'three';

@@ -1,4 +1,3 @@
-import { ref } from 'vue'
 import NxtInfoComponent from './nxt_info_component.js'
 import InputsComponent from './inputs_component.js'
 import SensorConfigComponent from './sensor_config_component.js'
@@ -12,12 +11,7 @@ export default {
         InputsComponent
       },
   setup() {
-    const switch1 = ref('')
-    const switch2 = ref('')
-    const colour = ref('')
-    const ultrasonic = ref('')
-
-    return { switch1, switch2, colour, ultrasonic }
+    return {  }
   },
   props: {inputPorts: Object, commandsNXT: {type: NXTCommands, required: true}, commandQueue: {type: NXTCommandQueue, required: true}},
  

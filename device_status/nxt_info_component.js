@@ -18,12 +18,13 @@ export default {
   },
   mounted() {
     this.deviceName = 'onez'
+    let that = this
     this.commandQueue.addCommandToQueue(function() {
       //devRes = NXTCommands.getInfoPromise();
-      this.deviceName = 'three';
+      that.deviceName = 'three';
       this.commandsNXT.getInfo(async function(res) {
         //console.log(res)
-        deviceName = 'four';
+        that.deviceName = 'four';
         //deviceName = res.deviceName
         //console.log(deviceName)
         //deviceInfo.bluetoothAddress = res.bluetoothAddress

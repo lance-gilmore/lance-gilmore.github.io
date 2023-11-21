@@ -65,6 +65,7 @@ export default class {
         this.#triggerReplyEvents(reply);
     }
 
+
     #replyListeners = []
     #triggerReplyEvents(reply) {
         const listeners = this.#replyListeners;
@@ -132,13 +133,37 @@ export default class {
           const pressed = (scaledValue === 0) ? false : true;
           console.log('switch '+inputPort+' '+pressed);
           reply.pressed = pressed;
+          this.triggerSwitchEvents(reply)
           break;
           case 'COLOR_FULL':
           const colour = NXTConstants.sensorFullColours[scaledValue];
           console.log('colour: '+colour);
           reply.colour = colour;
+          #triggerColourEvents(reply)
           break;
         }
+    }
+
+    #continuousSwitchListeners = []
+    #triggerSwitchEvents(reply) {
+        if (this.#continuousSwitchListeners.length > 0) {
+            this.#continuousSwitchListeners.forEach(replyListener => replyListener(reply));
+        }
+    }
+    
+    addSwitchListener(func) {
+        this.#continuousSwitchListeners.push(func);
+    }
+
+    #continuousColourListeners = []
+    #triggerColourEvents(reply) {
+        if (this.#continuousColourListeners.length > 0) {
+            this.#continuousColourListeners.forEach(replyListener => replyListener(reply));
+        }
+    }
+    
+    addSwitchListener(func) {
+        this.#continuousColourListeners.push(func);
     }
 
 }

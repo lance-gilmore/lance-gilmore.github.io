@@ -12,6 +12,7 @@ export default {
     const batteryLevelMillivolts = ref('')
     const batteryPercent = ref('')
     console.log(this.commandQueue)
+    console.log('here')
 
     this.commandQueue.addCommandToQueue(function() {
         //devRes = NXTCommands.getInfoPromise();

@@ -10,8 +10,6 @@ export default {
     const colour = ref('')
     const ultrasonic = ref('')
 
-    
-
     return { switch1, switch2, colour, ultrasonic }
   },
   props: {commandsNXT: {type: NXTCommands, required: true}, commandQueue: {type: NXTCommandQueue, required: true}},

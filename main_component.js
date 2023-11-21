@@ -54,10 +54,10 @@ export default {
     },
 
     async initSensors() {
-      await this.setInputModeColour(NXTConstants.sensorTypes.COLOR_NONE,this.colourPort);
-      await this.setInputModeSwitch(this.switch1Port);
-      await this.setInputModeSwitch(this.switch2Port);
-      await this.initUltrasonicSensor(this.ultrasonicPort);
+      await this.commandsNXT.setInputModeColour(NXTConstants.sensorTypes.COLOR_NONE,this.colourPort);
+      await this.commandsNXT.setInputModeSwitch(this.switch1Port);
+      await this.commandsNXT.setInputModeSwitch(this.switch2Port);
+      await this.commandsNXT.initUltrasonicSensor(this.ultrasonicPort);
     }
   },
 

@@ -9,16 +9,16 @@ export default class {
     }
     
     async addCommandToQueue(command) {
-      this.commandQueue.push(command);
+      this.#commandQueue.push(command);
     }
     
     async #runCommandQueue() {
       let free = true;
       while (true) {
-        if (free && this.commandQueue.length > 0) {
+        if (free && this.#commandQueue.length > 0) {
           free = false;
-          const command = this.commandQueue.shift();
-          this.deviceReader.addReplyListener(function(){
+          const command = this.#commandQueue.shift();
+          this.#deviceReader.addReplyListener(function(){
             free = true;
           });
           await command();

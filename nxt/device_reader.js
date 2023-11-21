@@ -64,17 +64,17 @@ export default class {
         this.#triggerReplyEvents(reply);
     }
 
-    replyListeners = []
+    #replyListeners = []
     #triggerReplyEvents(reply) {
-        const listeners = replyListeners;
-        this.replyListeners = [];
+        const listeners = this.#replyListeners;
+        this.#replyListeners = [];
         if (listeners.length > 0) {
           listeners.forEach(replyListener => replyListener(reply));
         }
     }
     
     addReplyListener(func) {
-        this.replyListeners.push(func);
+        this.#replyListeners.push(func);
     }
 
     #binArrayToVal(binArray) {

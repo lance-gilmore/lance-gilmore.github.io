@@ -11,7 +11,7 @@ export default {
     const protocolVersion = ref('')
     const batteryLevelMillivolts = ref('')
     const batteryPercent = ref('')
-
+deviceName = 'two'
     props.commandQueue.addCommandToQueue(function() {
         //devRes = NXTCommands.getInfoPromise();
         deviceName = 'three';

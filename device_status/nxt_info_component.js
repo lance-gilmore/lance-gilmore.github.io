@@ -22,7 +22,7 @@ export default {
     this.commandQueue.addCommandToQueue(function() {
       //devRes = NXTCommands.getInfoPromise();
       that.deviceName = 'three';
-      this.commandsNXT.getInfo(async function(res) {
+      that.commandsNXT.getInfo(async function(res) {
         //console.log(res)
         that.deviceName = 'four';
         //deviceName = res.deviceName
@@ -32,14 +32,14 @@ export default {
       });
     });
     this.commandQueue.addCommandToQueue(function() {
-      this.commandsNXT.getVersion(async function(res) {
+      that.commandsNXT.getVersion(async function(res) {
         //console.log(res)
         //deviceInfo.firmwareVersion = res.firmwareVersion
         //deviceInfo.protocolVersion = res.protocolVersion
       });
     });
     this.commandQueue.addCommandToQueue(function() {
-      this.commandsNXT.getBatteryLevel(async function(res) {
+      that.commandsNXT.getBatteryLevel(async function(res) {
         //console.log(res)
         //deviceInfo.batteryLevelMillivolts = res.batteryLevelMillivolts
         //deviceInfo.batteryPercent = res.batteryPercent

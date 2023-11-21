@@ -38,17 +38,17 @@ export default {
   methods: {
     async connectNxt() {
       const connection = await new NXTConnection;
-      let self = this
+      let that = this
       let refreshIntervalId = setInterval(function(){
         if (connection.NXTPort !== undefined) {
           const deviceReader = new NXTDeviceReader(connection)
 
-      this.commandsNXT = new NXTCommands(connection, deviceReader);
+          that.commandsNXT = new NXTCommands(connection, deviceReader);
       
-      this.simpleCommands = new NXTSimplifiedCommands(this.commandsNXT)
+          that.simpleCommands = new NXTSimplifiedCommands(that.commandsNXT)
 
-      this.commandQueue = new NXTCommandQueue(deviceReader)
-          self.deviceConnected = true
+          that.commandQueue = new NXTCommandQueue(deviceReader)
+          that.deviceConnected = true
 
           clearInterval(refreshIntervalId);
         }

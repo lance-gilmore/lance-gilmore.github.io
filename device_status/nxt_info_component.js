@@ -45,7 +45,7 @@ export default {
   <div class="p-2 info">
     <b>Device Info</b>
     <br>
-    NXT name: {{ ddeviceName }} 
+    NXT name: {{ deviceName }} 
     <br>
     Bluetooth address: {{ bluetoothAddress }}
     <br>

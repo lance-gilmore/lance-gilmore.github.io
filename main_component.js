@@ -41,18 +41,20 @@ export default {
       let self = this
       let refreshIntervalId = setInterval(function(){
         if (connection.NXTPort !== undefined) {
-          self.deviceConnected = true
-          clearInterval(refreshIntervalId);
-        }
-      },100);
-
-      const deviceReader = new NXTDeviceReader(connection)
+          const deviceReader = new NXTDeviceReader(connection)
 
       this.commandsNXT = new NXTCommands(connection, deviceReader);
       
       this.simpleCommands = new NXTSimplifiedCommands(this.commandsNXT)
 
       this.commandQueue = new NXTCommandQueue(deviceReader)
+          self.deviceConnected = true
+
+          clearInterval(refreshIntervalId);
+        }
+      },100);
+
+      
 
       // TOOD: the stuff below on actual connect eventrunCom
 

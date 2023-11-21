@@ -57,7 +57,7 @@ export default {
       await this.commandsNXT.setInputModeColour(NXTConstants.sensorTypes.COLOR_NONE,this.colourPort);
       await this.commandsNXT.setInputModeSwitch(this.switch1Port);
       await this.commandsNXT.setInputModeSwitch(this.switch2Port);
-      await this.commandsNXT.initUltrasonicSensor(this.ultrasonicPort);
+      //await this.commandsNXT.initUltrasonicSensor(this.ultrasonicPort);
     }
   },
 

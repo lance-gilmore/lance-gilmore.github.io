@@ -1,16 +1,16 @@
 import NXTConstants from './config.js'
 
 export default class {
-    NXTPort
+    #connection
 
-    constructor(port) {
-        this.NXTPort = port
+    constructor(connection) {
+        this.#connection = connection
         this.#readThePort()
     }
 
     async #readThePort() {
-        while (this.NXTPort.readable) {
-        const reader = this.NXTPort.readable.getReader();
+        while (this.#connection.NXTPort.readable) {
+        const reader = this.#connection.NXTPort.readable.getReader();
   
         try {
           while (true) {

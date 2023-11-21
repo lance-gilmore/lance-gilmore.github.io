@@ -3,9 +3,14 @@ import { ref } from 'vue'
 export default {
   setup() {
 
-    return {  }
+    const switch1 = ref('')
+    const switch2 = ref('')
+    const colour = ref('')
+    const ultrasonic = ref('')
+
+    return { switch1, switch2, colour, ultrasonic }
   },
-  props: ['switch1', 'switch2', 'colour', 'ultrasonic'],
+  props: {commandsNXT: {type: NXTCommands, required: true}, commandQueue: {type: NXTCommandQueue, required: true}},
 
   template: `
   <div class="p-2 info">

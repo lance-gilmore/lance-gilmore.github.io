@@ -12,7 +12,7 @@ export default class {
     }
 
     async initUltrasonicSensor(ultrasonicPort) {
-        await setInputModeUltrasonic(ultrasonicPort,async function(res){
+        await this.setInputModeUltrasonic(ultrasonicPort,async function(res){
           let data = [
           0,
           15,

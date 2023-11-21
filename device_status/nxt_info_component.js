@@ -12,37 +12,32 @@ export default {
     const batteryLevelMillivolts = ref('')
     const batteryPercent = ref('')
 
-
-
     return { deviceName, bluetoothAddress, firmwareVersion, protocolVersion, batteryLevelMillivolts, batteryPercent }
   },
   mounted() {
-    this.deviceName = 'onez'
     let that = this
     this.commandQueue.addCommandToQueue(function() {
-      //devRes = NXTCommands.getInfoPromise();
-      that.deviceName = 'three';
       that.commandsNXT.getInfo(async function(res) {
         //console.log(res)
-        that.deviceName = 'four';
+        that.deviceName = res.deviceName;
         //deviceName = res.deviceName
         //console.log(deviceName)
-        //deviceInfo.bluetoothAddress = res.bluetoothAddress
+        that.bluetoothAddress = res.bluetoothAddress
         //return res
       });
     });
     this.commandQueue.addCommandToQueue(function() {
       that.commandsNXT.getVersion(async function(res) {
         //console.log(res)
-        //deviceInfo.firmwareVersion = res.firmwareVersion
-        //deviceInfo.protocolVersion = res.protocolVersion
+        that.firmwareVersion = res.firmwareVersion
+        that.protocolVersion = res.protocolVersion
       });
     });
     this.commandQueue.addCommandToQueue(function() {
       that.commandsNXT.getBatteryLevel(async function(res) {
         //console.log(res)
-        //deviceInfo.batteryLevelMillivolts = res.batteryLevelMillivolts
-        //deviceInfo.batteryPercent = res.batteryPercent
+        that.batteryLevelMillivolts = res.batteryLevelMillivolts
+        that.batteryPercent = res.batteryPercent
       });
     });
   },

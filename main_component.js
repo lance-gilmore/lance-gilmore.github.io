@@ -27,9 +27,9 @@ export default {
 
     const deviceConnected  = ref(false)
 
-    const commandsNXT = ref({})
+    const commandsNXT = {}
 
-    const simpleCommands = ref({})
+    const simpleCommands = {}
 
     const commandQueue = {}
     

@@ -133,7 +133,7 @@ export default class {
           const pressed = (scaledValue === 0) ? false : true;
           console.log('switch '+inputPort+' '+pressed);
           reply.pressed = pressed;
-          this.triggerSwitchEvents(reply)
+          this.#triggerSwitchEvents(reply)
           break;
           case 'COLOR_FULL':
           const colour = NXTConstants.sensorFullColours[scaledValue];

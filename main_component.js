@@ -51,6 +51,7 @@ export default {
     },
 
     async initSensors() {
+      console.log('setting inputs: cou:'+this.colourPort+' s1'+this.switch1Port+' s2'+this.switch2Port )
       await this.commandsNXT.setInputModeColour(NXTConstants.sensorTypes.COLOR_NONE,this.colourPort);
       await this.commandsNXT.setInputModeSwitch(this.switch1Port);
       await this.commandsNXT.setInputModeSwitch(this.switch2Port);

@@ -21,8 +21,6 @@ export default {
     async addListeners() {
       let that = this
       this.commandsNXT.addSwitchListener(function(res){
-        console.log('switch callback')
-        console.log(res);
         if (res.port === that.inputPorts.switch1Port) {
           that.switch1 = res.pressed
         } else {

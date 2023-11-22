@@ -22,8 +22,11 @@ export default {
       this.commandsNXT.addSwitchListener(function(res){
         console.log('switch callback')
         console.log(res);
-        that.switch1 = res.pressed
-        that.switch2 = res.pressed
+        if (res.port === that.inputPorts.switch1Port) {
+          that.switch1 = res.pressed
+        } else {
+          that.switch2 = res.pressed
+        }
       })
       this.commandsNXT.addColourListener(function(res){
         console.log('colour callback')
@@ -36,6 +39,9 @@ export default {
       this.commandQueue.addCommandToQueue(function() {
         that.commandsNXT.getInputValues(that.inputPorts.switch1Port)
       })
+      this.commandQueue.addCommandToQueue(function() {
+        that.commandsNXT.getInputValues(that.inputPorts.switch2Port)
+      })
     },
     async pollSensors() {
       let that = this
@@ -44,8 +50,11 @@ export default {
       this.commandsNXT.addSwitchListener(function(res){
         console.log('switch callback')
         console.log(res);
-        that.switch1 = res.pressed
-        that.switch2 = res.pressed
+        if (res.port === that.inputPorts.switch1Port) {
+          that.switch1 = res.pressed
+        } else {
+          that.switch2 = res.pressed
+        }
       })
 
       console.log('start polling');

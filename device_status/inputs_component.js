@@ -14,6 +14,7 @@ export default {
   },
   props: {inputPorts: {type: Object}, commandsNXT: {type: NXTCommands, required: true}, commandQueue: {type: NXTCommandQueue, required: true}},
   mounted() {
+    this.addListeners()
     //this.pollSensors()
   },
   methods: {
@@ -103,7 +104,6 @@ export default {
     <br>
     Ultrasonic: {{ ultrasonic }}
 
-    <button class="btn btn-danger" type="button" @click="addListeners()">add listeners</button>
     <button class="btn btn-danger" type="button" @click="sendPolling()">Polling</button>
   </div>
   `

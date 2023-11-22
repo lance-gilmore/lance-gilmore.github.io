@@ -19,13 +19,13 @@ export default {
   methods: {
     async addListeners() {
       let that = this
-      this.NXTCommands.addSwitchListener(function(){
+      this.commandsNXT.addSwitchListener(function(){
         console.log('switch callback')
         console.log(res);
         that.switch1 = res.pressed
         that.switch2 = res.pressed
       })
-      this.NXTCommands.addColourListener(function(){
+      this.commandsNXT.addColourListener(function(){
         console.log('colour callback')
         console.log(res);
         that.colour = res.colour
@@ -41,7 +41,7 @@ export default {
       let that = this
       let polling = false;
 
-      this.NXTCommands.addSwitchListener(function(){
+      this.commandsNXT.addSwitchListener(function(){
         console.log('switch callback')
         console.log(res);
         that.switch1 = res.pressed
@@ -94,8 +94,8 @@ export default {
     <br>
     Ultrasonic: {{ ultrasonic }}
 
-    <button type="button" @click="addListeners()">add listeners</button>
-    <button type="button" @click="sendPolling()">Polling</button>
+    <button class="btn btn-danger" type="button" @click="addListeners()">add listeners</button>
+    <button class="btn btn-danger" type="button" @click="sendPolling()">Polling</button>
   </div>
   `
 }

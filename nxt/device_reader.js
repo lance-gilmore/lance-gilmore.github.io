@@ -76,7 +76,9 @@ export default class {
     }
     
     addReplyListener(func) {
-        this.#replyListeners.push(func);
+        if (typeof func === 'function') {
+            this.#replyListeners.push(func);
+        }
     }
 
     #binArrayToVal(binArray) {

@@ -43,6 +43,9 @@ export default {
       this.commandQueue.addCommandToQueue(function() {
         that.commandsNXT.getInputValues(that.inputPorts.switch2Port)
       })
+      this.commandQueue.addCommandToQueue(function() {
+        that.commandsNXT.getInputValues(that.inputPorts.colourPort)
+      })
     },
     async pollSensors() {
       let that = this

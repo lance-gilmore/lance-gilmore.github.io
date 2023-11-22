@@ -19,13 +19,13 @@ export default {
   methods: {
     async addListeners() {
       let that = this
-      this.commandsNXT.addSwitchListener(function(){
+      this.commandsNXT.addSwitchListener(function(res){
         console.log('switch callback')
         console.log(res);
         that.switch1 = res.pressed
         that.switch2 = res.pressed
       })
-      this.commandsNXT.addColourListener(function(){
+      this.commandsNXT.addColourListener(function(res){
         console.log('colour callback')
         console.log(res);
         that.colour = res.colour
@@ -41,7 +41,7 @@ export default {
       let that = this
       let polling = false;
 
-      this.commandsNXT.addSwitchListener(function(){
+      this.commandsNXT.addSwitchListener(function(res){
         console.log('switch callback')
         console.log(res);
         that.switch1 = res.pressed

@@ -12,7 +12,7 @@ export default {
 
     return { switch1, switch2, colour, ultrasonic }
   },
-  props: {inputPorts: {type: Object}, commandsNXT: {type: NXTCommands, required: true}, commandQueue: {type: NXTCommandQueue, required: true}},
+  props: {sensorReadings: {type: Object}, inputPorts: {type: Object}, commandsNXT: {type: NXTCommands, required: true}, commandQueue: {type: NXTCommandQueue, required: true}},
   mounted() {
     this.addListeners()
     //this.pollSensors()

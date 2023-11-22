@@ -10,6 +10,7 @@ import NXTCommandQueue from './nxt/command_queue.js'
 import NXTConnection from './nxt/device_connection.js'
 import NXTSimplifiedCommands from './nxt/simplified_commands.js'
 import NXTDeviceReader from './nxt/device_reader.js'
+import SensorReadings from './nxt/sensor_readings.js'
 
 export default {
     components: {
@@ -29,8 +30,9 @@ export default {
     const commandsNXT = {}
     const simpleCommands = {}
     const commandQueue = {}
+    const sensorReadings = ref(SensorReadings)
     
-    return { inputPorts, colourPort, deviceConnected, commandsNXT, simpleCommands, commandQueue }
+    return { inputPorts, colourPort, deviceConnected, commandsNXT, simpleCommands, commandQueue, sensorReadings }
   },
   methods: {
     async connectNxt() {
@@ -38,7 +40,7 @@ export default {
       let that = this
       let refreshIntervalId = setInterval(function(){
         if (connection.NXTPort !== undefined) {
-          const deviceReader = new NXTDeviceReader(connection)
+          const deviceReader = new NXTDeviceReader(connection, that.sensorReadings)
           that.commandsNXT = new NXTCommands(connection, deviceReader);
           that.simpleCommands = new NXTSimplifiedCommands(that.commandsNXT)
           that.commandQueue = new NXTCommandQueue(deviceReader)
@@ -76,7 +78,7 @@ export default {
 
 <div v-if="deviceConnected">
   <div ref="status_display"></div>
-  <DeviceStatusComponent :inputPorts="inputPorts" :commandsNXT="commandsNXT" :commandQueue="commandQueue" />
+  <DeviceStatusComponent :inputPorts="inputPorts" :commandsNXT="commandsNXT" :commandQueue="commandQueue" :sensorReadings="sensorReadings" />
   
 
   <ul class="nav nav-tabs mt-4" id="controlTabs" role="tablist">

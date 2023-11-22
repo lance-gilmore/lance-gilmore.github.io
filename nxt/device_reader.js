@@ -2,9 +2,11 @@ import NXTConstants from './config.js'
 
 export default class {
     #connection
+    #sensorReadings
 
-    constructor(connection) {
+    constructor(connection, sensorReadings) {
         this.#connection = connection
+        this.#sensorReadings = sensorReadings
         this.#readThePort()
     }
 
@@ -149,6 +151,12 @@ export default class {
 
     #continuousSwitchListeners = []
     #triggerSwitchEvents(reply) {
+        if (res.port === 0) {
+            this.#sensorReadings.switch1 = reply.pressed
+        } else {
+            this.#sensorReadings.switch2 = reply.pressed
+        }
+
         if (this.#continuousSwitchListeners.length > 0) {
             this.#continuousSwitchListeners.forEach(replyListener => replyListener(reply));
         }
@@ -160,6 +168,8 @@ export default class {
 
     #continuousColourListeners = []
     #triggerColourEvents(reply) {
+        this.#sensorReadings.colour = reply
+
         if (this.#continuousColourListeners.length > 0) {
             this.#continuousColourListeners.forEach(replyListener => replyListener(reply));
         }

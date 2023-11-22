@@ -13,7 +13,7 @@ export default {
   setup() {
     return {  }
   },
-  props: {inputPorts: Object, commandsNXT: {type: NXTCommands, required: true}, commandQueue: {type: NXTCommandQueue, required: true}},
+  props: {sensorReadings: {type: Object}, inputPorts: Object, commandsNXT: {type: NXTCommands, required: true}, commandQueue: {type: NXTCommandQueue, required: true}},
  
   template: `
   <div class="row">
@@ -24,7 +24,7 @@ export default {
       <SensorConfigComponent :switch1Port="inputPorts.switch1Port" :switch2Port="inputPorts.switch2Port" :colourPort="inputPorts.colourPort" :ultrasonicPort="inputPorts.ultrasonicPort"  />
     </div>
     <div class="col">
-      <InputsComponent :commandsNXT="commandsNXT" :commandQueue="commandQueue" :inputPorts="inputPorts" />
+      <InputsComponent :sensorReadings="sensorReadings" :commandsNXT="commandsNXT" :commandQueue="commandQueue" :inputPorts="inputPorts" />
     </div>
   </div>
   `

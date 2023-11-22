@@ -138,6 +138,7 @@ export default class {
           this.#triggerSwitchEvents(reply)
           break;
           case 'COLOR_FULL':
+          case 'COLOR_NONE':
           const colour = NXTConstants.sensorFullColours[scaledValue];
           console.log('colour: '+colour);
           reply.colour = colour;

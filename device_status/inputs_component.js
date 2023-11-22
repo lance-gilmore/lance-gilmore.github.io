@@ -97,7 +97,7 @@ export default {
   <div class="p-2 info">
     <b>Inputs</b>
     <br>
-    Switch 1: {{ switch1 }}
+    Switch 1: {{ sensorReadings.switch1 }}
     <br>
     Switch 2: {{ switch2 }}
     <br>

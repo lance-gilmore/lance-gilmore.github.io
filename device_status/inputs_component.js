@@ -30,7 +30,7 @@ export default {
       this.commandsNXT.addColourListener(function(res){
         console.log('colour callback')
         console.log(res);
-        that.colour = res.colour
+        that.colour = res.colour+' ('+res.scaledValue+')'
       })
     },
     async sendPolling() {

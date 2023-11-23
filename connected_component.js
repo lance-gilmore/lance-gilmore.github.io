@@ -32,9 +32,7 @@ export default {
     const simpleCommands = new NXTSimplifiedCommands(commandsNXT)
     const commandQueue = new NXTCommandQueue(deviceReader)
           
-    
-    
-    return { inputPorts, colourPort, deviceConnected, commandsNXT, simpleCommands, commandQueue, sensorReadings }
+    return { inputPorts, colourPort, commandsNXT, simpleCommands, commandQueue, sensorReadings }
   },
 
   props: {connection: {type: NXTConnection, required: true}},

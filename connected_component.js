@@ -32,7 +32,7 @@ console.log(sensorReadings)
     const commandsNXT = new NXTCommands(props.connection, deviceReader);
     const simpleCommands = new NXTSimplifiedCommands(commandsNXT)
     const commandQueue = new NXTCommandQueue(deviceReader)
-          
+    console.log(sensorReadings)  
     return { inputPorts, colourPort, commandsNXT, simpleCommands, commandQueue, sensorReadings }
   },
 

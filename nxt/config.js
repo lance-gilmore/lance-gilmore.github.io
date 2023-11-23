@@ -41,11 +41,11 @@ export default {
       LOWSPEED:10,
       LOWSPEED_9V:11,
       NO_OF_SENSOR_TYPES:12,//HIGHSPEED
-      COLOR_FULL: 13,
+      COLOR_FULL: 13, // returns sensorFullColours value
       COLOR_RED: 14,
       COLOR_GREEN: 15,
       COLOR_BLUE: 16,
-      COLOR_NONE: 17
+      COLOR_NONE: 17 // measures light level? 0 - 1023
     },
     sensorModes: {
       RAW_MODE:0,

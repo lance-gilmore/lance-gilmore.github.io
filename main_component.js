@@ -11,6 +11,7 @@ import NXTConnection from './nxt/device_connection.js'
 import NXTSimplifiedCommands from './nxt/simplified_commands.js'
 import NXTDeviceReader from './nxt/device_reader.js'
 import SensorReadings from './nxt/sensor_readings.js'
+import ConnectedComponent from './connected_component.js'
 
 export default {
     components: {
@@ -31,21 +32,22 @@ export default {
     const simpleCommands = {}
     const commandQueue = {}
     const sensorReadings = ref(SensorReadings)
+    const connection = {}
     
-    return { inputPorts, colourPort, deviceConnected, commandsNXT, simpleCommands, commandQueue, sensorReadings }
+    return { inputPorts, colourPort, deviceConnected, commandsNXT, simpleCommands, commandQueue, sensorReadings, connection }
   },
   methods: {
     async connectNxt() {
-      const connection = await new NXTConnection;
+      this.connection = await new NXTConnection;
       let that = this
       let refreshIntervalId = setInterval(function(){
-        if (connection.NXTPort !== undefined) {
-          const deviceReader = new NXTDeviceReader(connection, that.sensorReadings)
-          that.commandsNXT = new NXTCommands(connection, deviceReader);
-          that.simpleCommands = new NXTSimplifiedCommands(that.commandsNXT)
-          that.commandQueue = new NXTCommandQueue(deviceReader)
+        if (that.connection.NXTPort !== undefined) {
+          //const deviceReader = new NXTDeviceReader(that.connection, that.sensorReadings)
+          //that.commandsNXT = new NXTCommands(that.connection, deviceReader);
+          //that.simpleCommands = new NXTSimplifiedCommands(that.commandsNXT)
+          //that.commandQueue = new NXTCommandQueue(deviceReader)
           that.deviceConnected = true
-          that.initSensors()
+          //that.initSensors()
           clearInterval(refreshIntervalId);
         }
       },100);
@@ -77,38 +79,7 @@ export default {
   </div>
 
 <div v-if="deviceConnected">
-  <div ref="status_display"></div>
-  <DeviceStatusComponent :inputPorts="inputPorts" :commandsNXT="commandsNXT" :commandQueue="commandQueue" :sensorReadings="sensorReadings" />
-  
-
-  <ul class="nav nav-tabs mt-4" id="controlTabs" role="tablist">
-    <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="remote-control-tabs" data-bs-toggle="tab" data-bs-target="#remote-controls" type="button" role="tab" aria-controls="remote-controls" aria-selected="true">Key Control</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="button-control-tabs" data-bs-toggle="tab" data-bs-target="#button-controls" type="button" role="tab" aria-controls="button-controls" aria-selected="false">Button Control</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="code-control-tasb" data-bs-toggle="tab" data-bs-target="#code-controls" type="button" role="tab" aria-controls="code-controls" aria-selected="false">Code Control</button>
-    </li>
-  </ul>
-
-  <div class="tab-content" id="controlTabsContent">
-
-    <div id="remote-controls" class="tab-pane fade show active" role="tabpanel" aria-labelledby="remote-control-tabs">
-      <KeyControlComponent :simpleCommands="simpleCommands" />
-    </div>
-
-    <div id="button-controls" class="tab-pane fade" role="tabpanel" aria-labelledby="button-control-tabs">
-      <ButtonControlComponent :colourPort="colourPort" :commandsNXT="commandsNXT" :simpleCommands="simpleCommands" />
-    </div>
-
-    <div class="tab-pane fade" id="code-controls" role="tabpanel" aria-labelledby="code-control-tabs">
-      <CodeControlComponent/>
-    </div>
-
-  </div>
-
+  <ConnectedComponent :connection="connection" />
 </div>
   `
 }

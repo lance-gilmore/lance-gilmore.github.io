@@ -26,7 +26,7 @@ export default {
     const inputPorts = {'switch1Port':switch1Port, 'switch2Port':switch2Port, 'colourPort':colourPort, 'ultrasonicPort':ultrasonicPort}
 
     const sensorReadings = ref({})
-    sensorReadings = new SensorReadings
+    sensorReadings = new SensorReadings()
     sensorReadings.rand = Math.random()
 
     const deviceReader = new NXTDeviceReader(props.connection, sensorReadings)

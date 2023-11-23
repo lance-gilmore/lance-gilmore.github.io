@@ -14,6 +14,7 @@ export default {
   },
   props: {sensorReadings: {type: Object}, inputPorts: {type: Object}, commandsNXT: {type: NXTCommands, required: true}, commandQueue: {type: NXTCommandQueue, required: true}},
   mounted() {
+    console.log(this.sensorReadings)
     //this.addListeners()
     //this.pollSensors()
   },

@@ -32,12 +32,16 @@ export default {
     const simpleCommands = new NXTSimplifiedCommands(commandsNXT)
     const commandQueue = new NXTCommandQueue(deviceReader)
           
-    this.initSensors(commandsNXT, inputPorts)
+    
     
     return { inputPorts, colourPort, deviceConnected, commandsNXT, simpleCommands, commandQueue, sensorReadings }
   },
 
   props: {connection: {type: NXTConnection, required: true}},
+
+  mounted() {
+    this.initSensors(this.commandsNXT, this.inputPorts)
+  },
 
   methods: {
     async initSensors(commandsNXT, inputPorts) {

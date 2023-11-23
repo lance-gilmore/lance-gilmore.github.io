@@ -101,7 +101,7 @@ export default {
     <br>
     Switch 2: {{ sensorReadings.switch2 }}
     <br>
-    Colour sensor: {{ sensorReadings.colour.colour }} ( {{ res.colour.scaledValue }} )
+    Colour sensor: {{ sensorReadings.colour.colour }} ( {{ sensorReadings.colour.scaledValue }} )
     <br>
     Ultrasonic: {{ ultrasonic }}
 

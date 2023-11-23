@@ -14,7 +14,7 @@ export default {
   },
   props: {sensorReadings: {type: Object}, inputPorts: {type: Object}, commandsNXT: {type: NXTCommands, required: true}, commandQueue: {type: NXTCommandQueue, required: true}},
   mounted() {
-    this.addListeners()
+    //this.addListeners()
     //this.pollSensors()
   },
   methods: {
@@ -99,9 +99,9 @@ export default {
     <br>
     Switch 1: {{ sensorReadings.switch1 }}
     <br>
-    Switch 2: {{ switch2 }}
+    Switch 2: {{ sensorReadings.switch2 }}
     <br>
-    Colour sensor: {{ colour }}
+    Colour sensor: {{ sensorReadings.colour.colour }} ( {{ res.colour.scaledValue }} )
     <br>
     Ultrasonic: {{ ultrasonic }}
 

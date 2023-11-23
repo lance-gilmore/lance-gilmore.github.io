@@ -1,24 +1,9 @@
 import { ref } from 'vue'
-import ButtonControlComponent from './button_control/button_control_component.js'
-import KeyControlComponent from './key_control/key_control_component.js'
-import CodeControlComponent from './code_control/code_control_component.js'
-import DeviceStatusComponent from './device_status/device_status_component.js'
-import NXTConstants from './nxt/config.js'
-import NXT from './nxt/nxt.js'
-import NXTCommands from './nxt/commands.js'
-import NXTCommandQueue from './nxt/command_queue.js'
 import NXTConnection from './nxt/device_connection.js'
-import NXTSimplifiedCommands from './nxt/simplified_commands.js'
-import NXTDeviceReader from './nxt/device_reader.js'
-import SensorReadings from './nxt/sensor_readings.js'
 import ConnectedComponent from './connected_component.js'
 
 export default {
     components: {
-        ButtonControlComponent,
-        KeyControlComponent,
-        CodeControlComponent,
-        DeviceStatusComponent,
         ConnectedComponent
       },
   setup() {

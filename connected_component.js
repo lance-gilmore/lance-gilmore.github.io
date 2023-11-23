@@ -25,14 +25,15 @@ export default {
     const ultrasonicPort = NXTConstants.sensors.PORT_4;
     const inputPorts = {'switch1Port':switch1Port, 'switch2Port':switch2Port, 'colourPort':colourPort, 'ultrasonicPort':ultrasonicPort}
 
-    const sensorReadings = ref({})
-    sensorReadings = new SensorReadings()
-    sensorReadings.rand = Math.random()
+    
+    let sensorReadingsInit = new SensorReadings()
+    sensorReadingsInit.rand = Math.random()
 
-    const deviceReader = new NXTDeviceReader(props.connection, sensorReadings)
+    const deviceReader = new NXTDeviceReader(props.connection, sensorReadingsInit)
     const commandsNXT = new NXTCommands(props.connection, deviceReader);
     const simpleCommands = new NXTSimplifiedCommands(commandsNXT)
     const commandQueue = new NXTCommandQueue(deviceReader)
+    let sensorReadings = ref(sensorReadingsInit)
     console.log(sensorReadings)  
     return { inputPorts, colourPort, commandsNXT, simpleCommands, commandQueue, sensorReadings }
   },

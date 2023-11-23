@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref, reactive } from 'vue'
 import ButtonControlComponent from './button_control/button_control_component.js'
 import KeyControlComponent from './key_control/key_control_component.js'
 import CodeControlComponent from './code_control/code_control_component.js'

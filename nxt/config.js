@@ -45,7 +45,7 @@ export default {
       COLOR_RED: 14,
       COLOR_GREEN: 15,
       COLOR_BLUE: 16,
-      COLOR_NONE: 17 // measures light level? 0 - 1023
+      COLOR_NONE: 17 // measures light level 0 - 1023 (0=dark, 1023=light)
     },
     sensorModes: {
       RAW_MODE:0,

@@ -22,20 +22,10 @@ export default {
         ConnectedComponent
       },
   setup() {
-    const switch1Port = NXTConstants.sensors.PORT_1;
-    const switch2Port = NXTConstants.sensors.PORT_2;
-    const colourPort = NXTConstants.sensors.PORT_3;
-    const ultrasonicPort = NXTConstants.sensors.PORT_4;
-    const inputPorts = {'switch1Port':switch1Port, 'switch2Port':switch2Port, 'colourPort':colourPort, 'ultrasonicPort':ultrasonicPort}
-
     const deviceConnected  = ref(false)
-    const commandsNXT = {}
-    const simpleCommands = {}
-    const commandQueue = {}
-    const sensorReadings = ref(SensorReadings)
     const connection = {}
     
-    return { inputPorts, colourPort, deviceConnected, commandsNXT, simpleCommands, commandQueue, sensorReadings, connection }
+    return { deviceConnected, connection }
   },
   methods: {
     async connectNxt() {
@@ -43,23 +33,11 @@ export default {
       let that = this
       let refreshIntervalId = setInterval(function(){
         if (that.connection.NXTPort !== undefined) {
-          //const deviceReader = new NXTDeviceReader(that.connection, that.sensorReadings)
-          //that.commandsNXT = new NXTCommands(that.connection, deviceReader);
-          //that.simpleCommands = new NXTSimplifiedCommands(that.commandsNXT)
-          //that.commandQueue = new NXTCommandQueue(deviceReader)
           that.deviceConnected = true
-          //that.initSensors()
           clearInterval(refreshIntervalId);
         }
       },100);
 
-    },
-
-    async initSensors() {
-      await this.commandsNXT.setInputModeColour(NXTConstants.sensorTypes.COLOR_NONE,this.inputPorts.colourPort);
-      await this.commandsNXT.setInputModeSwitch(this.inputPorts.switch1Port);
-      await this.commandsNXT.setInputModeSwitch(this.inputPorts.switch2Port);
-      //await this.commandsNXT.initUltrasonicSensor(this.inputPorts.ultrasonicPort);
     }
   },
 

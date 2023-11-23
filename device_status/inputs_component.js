@@ -9,8 +9,9 @@ export default {
     const switch2 = ref('')
     const colour = ref('')
     const ultrasonic = ref('')
+    const refreshIntervalId = ref(0)
 
-    return { switch1, switch2, colour, ultrasonic }
+    return { switch1, switch2, colour, ultrasonic, refreshIntervalId }
   },
   props: {sensorReadings: {type: Object}, inputPorts: {type: Object}, commandsNXT: {type: NXTCommands, required: true}, commandQueue: {type: NXTCommandQueue, required: true}},
   mounted() {
@@ -19,46 +20,26 @@ export default {
     //this.pollSensors()
   },
   methods: {
-    async addListeners() {
-      let that = this
-      this.commandsNXT.addSwitchListener(function(res){
-        if (res.port === that.inputPorts.switch1Port) {
-          that.switch1 = res.pressed
-        } else {
-          that.switch2 = res.pressed
-        }
-      })
-      this.commandsNXT.addColourListener(function(res){
-        console.log('colour callback')
-        console.log(res);
-        that.colour = res.colour+' ('+res.scaledValue+')'
-      })
-    },
     async sendPolling() {
       let that = this
-      this.commandQueue.addCommandToQueue(function() {
-        that.commandsNXT.getInputValues(that.inputPorts.switch1Port)
-      })
-      this.commandQueue.addCommandToQueue(function() {
-        that.commandsNXT.getInputValues(that.inputPorts.switch2Port)
-      })
-      this.commandQueue.addCommandToQueue(function() {
-        that.commandsNXT.getInputValues(that.inputPorts.colourPort)
-      })
+      that.refreshIntervalId = setInterval(function(){
+        that.commandQueue.addCommandToQueue(function() {
+          that.commandsNXT.getInputValues(that.inputPorts.switch1Port)
+        })
+        that.commandQueue.addCommandToQueue(function() {
+          that.commandsNXT.getInputValues(that.inputPorts.switch2Port)
+        })
+        that.commandQueue.addCommandToQueue(function() {
+          that.commandsNXT.getInputValues(that.inputPorts.colourPort)
+        })
+      },100)
+    },
+    stopPolling() {
+      clearInterval(this.refreshIntervalId);
     },
     async pollSensors() {
       let that = this
       let polling = false;
-
-      this.commandsNXT.addSwitchListener(function(res){
-        console.log('switch callback')
-        console.log(res);
-        if (res.port === that.inputPorts.switch1Port) {
-          that.switch1 = res.pressed
-        } else {
-          that.switch2 = res.pressed
-        }
-      })
 
       console.log('start polling');
       while (true) {
@@ -107,6 +88,7 @@ export default {
     Ultrasonic: {{ ultrasonic }}
 
     <button class="btn btn-danger" type="button" @click="sendPolling()">Polling</button>
+    <button class="btn btn-danger" type="button" @click="stopPolling()">stop Polling</button>
   </div>
   `
 }

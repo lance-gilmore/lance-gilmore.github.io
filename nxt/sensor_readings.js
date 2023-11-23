@@ -3,5 +3,4 @@ export default class {
     switch2= false
     colour= {}
     ultrasonic= {}
-    rand= 0
 }

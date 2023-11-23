@@ -1,6 +1,9 @@
+import { ref } from 'vue'
+
 export default {
   setup() {
-    return { }
+    let editorCode = ref('')
+    return { editorCode }
   },
   mounted() {
     const codeInput = document.querySelector('#code-input');
@@ -42,7 +45,7 @@ export default {
 
   template: `
 <fieldset class="editor">
-    <textarea id="code-input" aria-controls="code-highlighter" class="input" autocapitalize="off" spellcheck="false"></textarea>
+    <textarea v-model="editorCode" id="code-input" aria-controls="code-highlighter" class="input" autocapitalize="off" spellcheck="false"></textarea>
     <output id="code-output" role="status" class="highlighted-output javascript"></output>
 </fieldset>
   `

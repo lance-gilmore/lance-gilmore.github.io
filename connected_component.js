@@ -81,7 +81,7 @@ export default {
     </div>
 
     <div class="tab-pane fade" id="code-controls" role="tabpanel" aria-labelledby="code-control-tabs">
-      <CodeControlComponent/>
+      <CodeControlComponent :simpleCommands="simpleCommands" :sensorReadings="sensorReadings" :commandQueue="commandQueue" />
     </div>
 
   </div>

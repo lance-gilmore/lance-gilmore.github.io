@@ -54,7 +54,6 @@ export default {
   <div ref="status_display"></div>
   <DeviceStatusComponent :inputPorts="inputPorts" :commandsNXT="commandsNXT" :commandQueue="commandQueue" :sensorReadings="sensorReadings" />
   
-
   <ul class="nav nav-tabs mt-4" id="controlTabs" role="tablist">
     <li class="nav-item" role="presentation">
       <button class="nav-link active" id="remote-control-tabs" data-bs-toggle="tab" data-bs-target="#remote-controls" type="button" role="tab" aria-controls="remote-controls" aria-selected="true">Key Control</button>

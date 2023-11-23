@@ -151,7 +151,7 @@ export default class {
 
     #continuousSwitchListeners = []
     #triggerSwitchEvents(reply) {
-        if (res.port === 0) {
+        if (reply.port === 0) {
             this.#sensorReadings.switch1 = reply.pressed
         } else {
             this.#sensorReadings.switch2 = reply.pressed

@@ -18,7 +18,8 @@ export default {
         ButtonControlComponent,
         KeyControlComponent,
         CodeControlComponent,
-        DeviceStatusComponent
+        DeviceStatusComponent,
+        ConnectedComponent
       },
   setup() {
     const switch1Port = NXTConstants.sensors.PORT_1;

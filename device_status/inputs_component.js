@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 import NXTCommands from '/../nxt/commands.js'
 import NXTCommandQueue from '/../nxt/command_queue.js'
-import SensorReadings from './nxt/sensor_readings.js'
+import SensorReadings from '/.../nxt/sensor_readings.js'
 
 export default {
   setup() {

@@ -26,31 +26,22 @@ export default {
     const inputPorts = {'switch1Port':switch1Port, 'switch2Port':switch2Port, 'colourPort':colourPort, 'ultrasonicPort':ultrasonicPort}
 
     
-    const sensorReadings = ref({})
-  
+    let sensorReadingsInit = new SensorReadings()
+    const sensorReadings = reactive(sensorReadingsInit)
+    sensorReadings.rand = Math.random()
 
-    const deviceReader = ref({})
-    const commandsNXT = ref({})
-    const simpleCommands = ref({})
-    const commandQueue = ref({})
+    const deviceReader = new NXTDeviceReader(props.connection, sensorReadings)
+    const commandsNXT = new NXTCommands(props.connection, deviceReader);
+    const simpleCommands = new NXTSimplifiedCommands(commandsNXT)
+    const commandQueue = new NXTCommandQueue(deviceReader)
     
-    
+    console.log(sensorReadings)  
     return { inputPorts, colourPort, commandsNXT, simpleCommands, commandQueue, sensorReadings }
   },
 
   props: {connection: {type: NXTConnection, required: true}},
 
   mounted() {
-    this.sensorReadings = new SensorReadings()
-    this.sensorReadings.rand = Math.random()
-
-    console.log(this.sensorReadings)  
-
-    this.deviceReader = new NXTDeviceReader(this.connection, this.sensorReadings)
-    this.commandsNXT = new NXTCommands(this.connection, this.deviceReader);
-    this.simpleCommands = new NXTSimplifiedCommands(this.commandsNXT)
-    this.commandQueue = new NXTCommandQueue(this.deviceReader)
-
     this.initSensors(this.commandsNXT, this.inputPorts)
   },
 

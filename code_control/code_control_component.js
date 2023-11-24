@@ -26,7 +26,7 @@ export default {
         eval(code);
         this.running = false
       },
-      
+
       stopCode() {
         this.running = false
       }
@@ -40,5 +40,34 @@ export default {
 
   <button v-if="!running" type="btn" class="btn btn-primary" @click="runCode">run</button>
   <button v-if="running" type="btn" class="btn btn-primary" @click="stopCode">stop</button>
+
+  <h3>Examples</h3>
+  <div class="row" style="white-space: pre-wrap;">
+    <b>Beep when switch1 is pressed</b>
+
+    <p>
+    if (this.sensorReadings.switch1) {
+      this.simpleCommands.simpleBeep()
+    }
+    </p>
+
+    
+    <b>Drive motors BC with buttons</b>
+
+    <p>
+    while(running) {
+      if (this.sensorReadings.switch1) {
+        await this.simpleCommands.forwardMotor(NXTConstants.motors.PORT_B);
+      } else {
+        await this.simpleCommands.stopMotor(NXTConstants.motors.PORT_B);
+      }
+      if (this.sensorReadings.switch2) {
+        await this.simpleCommands.forwardMotor(NXTConstants.motors.PORT_C);
+      } else {
+        await this.simpleCommands.stopMotor(NXTConstants.motors.PORT_C);
+      }
+    }
+    </p>
+  </div>
   `
 }

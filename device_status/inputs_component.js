@@ -31,7 +31,7 @@ export default {
         })
       },200)
     },
-    stopPolling() {
+    async stopPolling() {
       this.polling = false
       clearInterval(this.refreshIntervalId);
       await this.commandsNXT.setInputModeColour(NXTConstants.sensorTypes.COLOR_NONE,this.inputPorts.colourPort);

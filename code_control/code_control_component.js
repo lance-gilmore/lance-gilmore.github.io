@@ -26,7 +26,7 @@ export default {
 
   template: `
   <p>Code to execute</p>
-  <div class="row">
+  <div class="row mb-1">
       <CodeEditor ref="codeEditor" />
   </div>
 

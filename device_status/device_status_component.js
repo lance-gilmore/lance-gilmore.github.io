@@ -18,7 +18,7 @@ export default {
   template: `
   <div class="row">
     <div class="col">
-      <NxtInfoComponent v-if="false" :commandsNXT="commandsNXT" :commandQueue="commandQueue" />
+      <NxtInfoComponent :commandsNXT="commandsNXT" :commandQueue="commandQueue" />
     </div>
     <div class="col">
       <SensorConfigComponent :switch1Port="inputPorts.switch1Port" :switch2Port="inputPorts.switch2Port" :colourPort="inputPorts.colourPort" :ultrasonicPort="inputPorts.ultrasonicPort"  />

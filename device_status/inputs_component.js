@@ -43,7 +43,7 @@ export default {
     <br>
     Ultrasonic: {{ sensorReadings.ultrasonic }}
 
-    <button class="btn btn-danger" type="button" @click="startPolling()">start Polling</button>
+    <button class="btn btn-danger" type="button" @click="startPolling()">&#xF4F5;</button>
     <button class="btn btn-danger" type="button" @click="stopPolling()">stop Polling</button>
   </div>
   `

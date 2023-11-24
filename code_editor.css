@@ -1,9 +1,8 @@
 .editor {
     position: relative;
-    height: 30rem;
+    height: 50vw;
     padding: 0;
     border: none;
-    margin: 2rem 0;
   }
   
   .editor .input,
@@ -11,7 +10,7 @@
     box-sizing: border-box;
     position: absolute;
     height: 100%;
-    width: 90%;
+    width:100%;
     padding: 0.5em;
     border: 1px solid black;
     font-size: 1rem;

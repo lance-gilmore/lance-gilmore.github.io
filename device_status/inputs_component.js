@@ -6,14 +6,16 @@ import SensorReadings from '/../nxt/sensor_readings.js'
 export default {
   setup() {
     const refreshIntervalId = ref(0)
+    const polling = ref(false)
 
-    return { refreshIntervalId }
+    return { refreshIntervalId, polling }
   },
 
   props: {sensorReadings: {type: SensorReadings}, inputPorts: {type: Object}, commandsNXT: {type: NXTCommands, required: true}, commandQueue: {type: NXTCommandQueue, required: true}},
 
   methods: {
     async startPolling() {
+      this.polling = true
       let that = this
       that.refreshIntervalId = setInterval(function(){
         that.commandQueue.addCommandToQueue(function() {
@@ -28,6 +30,7 @@ export default {
       },200)
     },
     stopPolling() {
+      this.polling = false
       clearInterval(this.refreshIntervalId);
     }
   },
@@ -42,9 +45,10 @@ export default {
     Colour sensor: {{ sensorReadings.colour.colour }} ( {{ sensorReadings.colour.scaledValue }} )
     <br>
     Ultrasonic: {{ sensorReadings.ultrasonic }}
+    <br>
 
-    <button class="btn btn-danger" type="button" @click="startPolling()">&#xF4F5;</button>
-    <button class="btn btn-danger" type="button" @click="stopPolling()">stop Polling</button>
+    <button v-if="!polling" class="btn btn-primary" type="button" @click="startPolling()">go</button>
+    <button v-if="polling" class="btn btn-primary" type="button" @click="stopPolling()">stop</button>
   </div>
   `
 }

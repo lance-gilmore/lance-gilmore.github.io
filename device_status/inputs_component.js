@@ -2,6 +2,7 @@ import { ref } from 'vue'
 import NXTCommands from '/../nxt/commands.js'
 import NXTCommandQueue from '/../nxt/command_queue.js'
 import SensorReadings from '/../nxt/sensor_readings.js'
+import NXTConstants from './nxt/config.js'
 
 export default {
   setup() {
@@ -17,6 +18,7 @@ export default {
     async startPolling() {
       this.polling = true
       let that = this
+      await this.commandsNXT.setInputModeColour(NXTConstants.sensorTypes.COLOR_FULL,this.inputPorts.colourPort);
       that.refreshIntervalId = setInterval(function(){
         that.commandQueue.addCommandToQueue(function() {
           that.commandsNXT.getInputValues(that.inputPorts.switch1Port)
@@ -32,6 +34,7 @@ export default {
     stopPolling() {
       this.polling = false
       clearInterval(this.refreshIntervalId);
+      await this.commandsNXT.setInputModeColour(NXTConstants.sensorTypes.COLOR_NONE,this.inputPorts.colourPort);
     }
   },
   template: `

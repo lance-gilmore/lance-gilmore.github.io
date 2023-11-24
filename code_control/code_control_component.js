@@ -26,6 +26,7 @@ export default {
         eval(code);
         this.running = false
       },
+      
       stopCode() {
         this.running = false
       }

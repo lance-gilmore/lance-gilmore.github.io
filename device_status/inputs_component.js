@@ -47,8 +47,8 @@ export default {
     Ultrasonic: {{ sensorReadings.ultrasonic }}
     <br>
 
-    <button v-if="!polling" class="btn btn-primary" type="button" @click="startPolling()">go</button>
-    <button v-if="polling" class="btn btn-primary" type="button" @click="stopPolling()">stop</button>
+    <button v-if="!polling" class="btn btn-sm btn-primary" type="button" @click="startPolling()">poll</button>
+    <button v-if="polling" class="btn btn-sm btn-primary" type="button" @click="stopPolling()">stop</button>
   </div>
   `
 }

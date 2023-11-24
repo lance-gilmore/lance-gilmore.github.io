@@ -12,16 +12,23 @@ export default {
   },
 
   setup() {
-    return { NXTConstants }
+    const running = ref(false)
+
+    return { NXTConstants, running }
   },
 
   props: {sensorReadings: {type: SensorReadings}, simpleCommands: {type: NXTCommands, required: true}, commandQueue: {type: NXTCommandQueue, required: true}},
 
   methods: {
-      runCode() {
+      async runCode() {
+        this.running = true
         let code = this.$refs.codeEditor.editorCode
         eval(code);
-    }
+        this.running = false
+      },
+      stopCode() {
+        this.running = false
+      }
   },
 
   template: `
@@ -30,6 +37,7 @@ export default {
       <CodeEditor ref="codeEditor" />
   </div>
 
-  <button type="btn" class="btn btn-primary" @click="runCode">run</button>
+  <button v-if="!running" type="btn" class="btn btn-primary" @click="runCode">run</button>
+  <button v-if="running" type="btn" class="btn btn-primary" @click="stopCode">stop</button>
   `
 }

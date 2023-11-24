@@ -15,7 +15,7 @@ export default {
     return { NXTConstants }
   },
 
-  props: {sensorReadings: {type: SensorReadings}, commandsNXT: {type: NXTCommands, required: true}, commandQueue: {type: NXTCommandQueue, required: true}},
+  props: {sensorReadings: {type: SensorReadings}, simpleCommands: {type: NXTCommands, required: true}, commandQueue: {type: NXTCommandQueue, required: true}},
 
   methods: {
       runCode() {

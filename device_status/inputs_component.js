@@ -25,7 +25,7 @@ export default {
         that.commandQueue.addCommandToQueue(function() {
           that.commandsNXT.getInputValues(that.inputPorts.colourPort)
         })
-      },100)
+      },200)
     },
     stopPolling() {
       clearInterval(this.refreshIntervalId);

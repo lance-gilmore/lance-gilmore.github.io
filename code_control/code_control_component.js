@@ -144,7 +144,7 @@ export default {
     <b>Drive motors BC with buttons</b>
 
     <p>
-    while(running) {
+    while(this.running) {
       if (sensorReadings.switch1) {
         motorBForward()
       } else {

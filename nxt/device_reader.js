@@ -18,14 +18,14 @@ export default class {
           while (true) {
             const { value, done } = await reader.read();
             if (done) {
-              console.log('reader done');
+              //console.log('reader done');
               // Allow the serial port to be closed later.
               reader.releaseLock();
               break;
             }
             if (value) {
-              console.log('received:');
-              console.log(value);
+              //console.log('received:');
+              //console.log(value);
               this.#processResponse(value);
             }
           }
@@ -42,7 +42,7 @@ export default class {
         const getReply = this.#getPropertyFromVal(NXTConstants.getReply,message[2]);
         const commandReceived = this.#getPropertyFromVal(NXTConstants.commandTypes,message[3]);
         const status = NXTConstants.reply.errors[message[4]];
-        console.log('message processed: length: '+length+' getReply: '+getReply+' commandReceived: '+commandReceived+' status: '+status);
+        //console.log('message processed: length: '+length+' getReply: '+getReply+' commandReceived: '+commandReceived+' status: '+status);
         let reply = {'length':length,'commandReceived':commandReceived,'status':status};
         switch(commandReceived) {
           case 'GET_BATTERY_LEVEL':
@@ -128,21 +128,21 @@ export default class {
         const normalizedValue = this.#binArrayToVal(message.slice(12,13));
         const scaledValue = this.#binArrayToVal(message.slice(14,15));
         const calibratedValue = this.#binArrayToVal(message.slice(16,17));
-        console.log('input value: port: '+inputPort+' valid: '+valid+' calibrated: '+calibrated+' sensorType: '+sensorType+
-          ' mode: '+sensorMode+' raw: '+rawValue+' normalized: '+normalizedValue+' scaled: '+scaledValue+' calibrated: '+calibratedValue);
+        //console.log('input value: port: '+inputPort+' valid: '+valid+' calibrated: '+calibrated+' sensorType: '+sensorType+
+        //  ' mode: '+sensorMode+' raw: '+rawValue+' normalized: '+normalizedValue+' scaled: '+scaledValue+' calibrated: '+calibratedValue);
         let reply = {'port':inputPort,'valid':valid,'calibrated':calibrated,'sensorType':sensorType,'sensorMode':sensorMode,
           'rawValue':rawValue,'scaledValue':scaledValue,'calibratedValue':calibratedValue};
         switch (sensorType) {
           case 'SWITCH':
           const pressed = (scaledValue === 0) ? false : true;
-          console.log('switch '+inputPort+' '+pressed);
+          //console.log('switch '+inputPort+' '+pressed);
           reply.pressed = pressed;
           this.#triggerSwitchEvents(reply)
           break;
           case 'COLOR_FULL':
           case 'COLOR_NONE':
           const colour = NXTConstants.sensorFullColours[scaledValue];
-          console.log('colour: '+colour);
+          //console.log('colour: '+colour);
           reply.colour = colour;
           this.#triggerColourEvents(reply)
           break;

@@ -21,6 +21,7 @@ export default {
 
   methods: {
       async runCode() {
+        let that = this
         let motorAMoving = false
         function motorAForward() {
           if (motorAMoving !== 'forward') {
@@ -85,7 +86,7 @@ export default {
         function beep() {
           if (!beeping) {
             beeping = true
-            this.simpleCommands.simpleBeep()
+            that.simpleCommands.simpleBeep()
             setTimeout(function(){beeping = false},1000)
           }
         }

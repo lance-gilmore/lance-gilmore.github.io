@@ -25,8 +25,8 @@ export default class {
     }
 
     async writeCommand(command) {
-        console.log('sending:');
-        console.log(command);
+        //console.log('sending:');
+        //console.log(command);
         const writer = this.NXTPort.writable.getWriter();
         await writer.write(command);
         // Allow the serial port to be closed later.

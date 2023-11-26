@@ -126,8 +126,8 @@ export default {
     <li>beep()</li>
     <li>sensorReadings.switch1</li>
     <li>sensorReadings.switch2</li>
-    <li>sensorReadings.colour.colour <i>black, blue, green, yellow, red, white</i></li>
-    <li>sensorReadings.colour.scaledValue <i>0=dark, 1023=light</i></li>
+    <li>sensorReadings.colour.colour <i>(black, blue, green, yellow, red, white)</i></li>
+    <li>sensorReadings.colour.scaledValue <i>(0=dark, 1023=light)</i></li>
   </ul>
 
   <h3>Examples</h3>

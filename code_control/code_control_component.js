@@ -131,7 +131,7 @@ export default {
   </ul>
 
   <h3>Examples</h3>
-  <div class="row" style="white-space: pre-wrap;">
+  <div class="row" style="white-space: pre-line;">
     <b>Beep when switch1 is pressed</b>
 
     <p>

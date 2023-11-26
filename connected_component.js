@@ -28,14 +28,12 @@ export default {
     
     let sensorReadingsInit = new SensorReadings()
     const sensorReadings = reactive(sensorReadingsInit)
-    sensorReadings.rand = Math.random()
 
     const deviceReader = new NXTDeviceReader(props.connection, sensorReadings)
     const commandsNXT = new NXTCommands(props.connection, deviceReader);
     const simpleCommands = new NXTSimplifiedCommands(commandsNXT)
     const commandQueue = new NXTCommandQueue(deviceReader)
-    
-    console.log(sensorReadings)  
+     
     return { inputPorts, colourPort, commandsNXT, simpleCommands, commandQueue, sensorReadings }
   },
 

@@ -26,19 +26,19 @@ export default {
         function motorAForward() {
           if (motorAMoving !== 'forward') {
             motorAMoving = 'forward'
-            this.simpleCommands.forwardMotor(NXTConstants.motors.PORT_A)
+            that.simpleCommands.forwardMotor(NXTConstants.motors.PORT_A)
           }
         }
         function motorABackward() {
           if (motorAMoving !== 'backward') {
             motorAMoving = 'backward'
-            this.simpleCommands.backwardMotor(NXTConstants.motors.PORT_A)
+            that.simpleCommands.backwardMotor(NXTConstants.motors.PORT_A)
           }
         }
         function motorAStop() {
           if (motorAMoving !== false) {
             motorAMoving = false
-            this.simpleCommands.stopMotor(NXTConstants.motors.PORT_A)
+            that.simpleCommands.stopMotor(NXTConstants.motors.PORT_A)
           }
         }
 
@@ -46,19 +46,19 @@ export default {
         function motorBForward() {
           if (motorBMoving !== 'forward') {
             motorBMoving = 'forward'
-            this.simpleCommands.forwardMotor(NXTConstants.motors.PORT_B)
+            that.simpleCommands.forwardMotor(NXTConstants.motors.PORT_B)
           }
         }
         function motorBBackward() {
           if (motorBMoving !== 'backward') {
             motorBMoving = 'backward'
-            this.simpleCommands.backwardMotor(NXTConstants.motors.PORT_B)
+            that.simpleCommands.backwardMotor(NXTConstants.motors.PORT_B)
           }
         }
         function motorBStop() {
           if (motorBMoving !== false) {
             motorBMoving = false
-            this.simpleCommands.stopMotor(NXTConstants.motors.PORT_B)
+            that.simpleCommands.stopMotor(NXTConstants.motors.PORT_B)
           }
         }
 
@@ -66,19 +66,19 @@ export default {
         function motorCForward() {
           if (motorCMoving !== 'forward') {
             motorCMoving = 'forward'
-            this.simpleCommands.forwardMotor(NXTConstants.motors.PORT_V)
+            that.simpleCommands.forwardMotor(NXTConstants.motors.PORT_V)
           }
         }
         function motorCBackward() {
           if (motorCMoving !== 'backward') {
             motorCMoving = 'backward'
-            this.simpleCommands.backwardMotor(NXTConstants.motors.PORT_C)
+            that.simpleCommands.backwardMotor(NXTConstants.motors.PORT_C)
           }
         }
         function motorCStop() {
           if (motorCMoving !== false) {
             motorCMoving = false
-            this.simpleCommands.stopMotor(NXTConstants.motors.PORT_C)
+            that.simpleCommands.stopMotor(NXTConstants.motors.PORT_C)
           }
         }
 
